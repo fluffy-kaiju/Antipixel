@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// #########################################################################
+// #                                                                       #
+// #                            User Model                                 #
+// #                                                                       #
+// #########################################################################
+
+enum EUserAccountStatus {
+  NOOB
+  PRO
+  ADMIN
+  SYSTEM
+}
+
+model User {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  status          EUserAccountStatus @default(NOOB)
+  statusUpdatedAt DateTime           @default(now())
+
+  accountHistory  UserStatusHistory[] @relation("AccountHistory")
+  changesMade     UserStatusHistory[] @relation("ChangesMadeBy")
+
+  antipixels      Antipixel[]
+  tag             Tag[]
+  tagOnAntipixel  TagOnAntipixel[]
+}
+
+model UserStatusHistory {
+  id Int @id @default(autoincrement())
+
+  user   User @relation("AccountHistory", fields: [userId], references: [id])
+  userId Int
+
+  changeMadeBy       User @relation("ChangesMadeBy", fields: [changeMadeByUserId], references: [id])
+  changeMadeByUserId Int
+
+  status EUserAccountStatus
+
+  changeMadeAt DateTime @default(now())
+  reason       String
+}
+
+// #########################################################################
+// #                                                                       #
+// #                            Tag Model                                  #
+// #                                                                       #
+// #########################################################################
+
+//TODO
+enum ETagsStatus {
+  PENDING
+  ACTIVE
+  DELETED
+  FLAGGED
+}
+
+//TODO history created, edited, status change
+model Tag {
+  name String @id @unique
+
+  description String
+
+  antipixels TagOnAntipixel[]
+
+  createdBy User @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+//TODO history assigned, status change
+model TagOnAntipixel {
+  tag     Tag    @relation(fields: [tagName], references: [name])
+  tagName String
+
+  antipixel   Antipixel @relation(fields: [antipixelId], references: [id])
+  antipixelId Int
+
+  assignedAt DateTime @default(now())
+
+  assignedBy User @relation(fields: [userId], references: [id])
+  userId     Int
+
+  @@id([tagName, antipixelId])
+}
+
+// #########################################################################
+// #                                                                       #
+// #                            Antipixel Model                            #
+// #                                                                       #
+// #########################################################################
+
+model HashToAntipixel {
+  id         Int         @id @default(autoincrement())
+  hash       String      @unique
+  antipixels Antipixel[]
+}
+
+//TODO history created, edited, status change
+model Antipixel {
+  id Int @id @default(autoincrement())
+
+  name String
+  path String
+
+  createdBy User @relation(fields: [userId], references: [id])
+  userId   Int
+
+  createdAt DateTime @default(now())
+
+  tags TagOnAntipixel[]
+
+  hashToAntipixel   HashToAntipixel @relation(fields: [hashToAntipixelId], references: [id])
+  hashToAntipixelId Int
+}

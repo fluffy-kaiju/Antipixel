@@ -1,0 +1,64 @@
+services:
+  anti-backend-dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workplaces:cached
+    ports:
+      - 3000:3000
+      - 4040:4040
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    depends_on:
+      - dbgate
+      - postgres
+      - seaweedfs
+    networks:
+      - dev
+
+  postgres:
+    image: postgres:18
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=test
+      - POSTGRES_DB=test
+    networks:
+      - dev
+    ports:
+      - 5432:5432
+
+  seaweedfs:
+    image: chrislusf/seaweedfs:latest
+    restart: unless-stopped
+    command: "mini -s3.config=/etc/seaweedfs/s3.json"
+    volumes:
+      - ./s3.json:/etc/seaweedfs/s3.json:ro
+    ports:
+      - 9333:9333 # Master UI:
+      - 9340:9340 # Volume Server
+      - 8888:8888 # Filer UI
+      - 8333:8333 # S3 Endpoint
+      - 7333:7333 # WebDAV
+      - 23646:23646 # Admin UI
+    networks:
+      - dev
+
+  dbgate:
+    image: dbgate/dbgate
+    restart: always
+    ports:
+      - 4000:3000
+    environment:
+      connections: postgres
+      label_postgres: postgres
+      server_postgres: postgres
+      user_postgres: test
+      password_postgres: test
+      port_postgres: 5432
+      engine_postgres: postgres@dbgate-plugin-postgres
+    networks:
+      - dev
+
+networks:
+  dev:

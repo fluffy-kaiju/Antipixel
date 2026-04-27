@@ -1,0 +1,8 @@
+{
+    "name": "Backend",
+    "service": "anti-backend-dev",
+    "workspaceFolder": "/workplaces",
+    "dockerComposeFile": "docker-compose.yml",
+    "customizations": {},
+    "postStartCommand": "/workplaces/.devcontainer/init-project.sh"
+}
