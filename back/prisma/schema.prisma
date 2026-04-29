@@ -2,12 +2,47 @@
 
 generator client {
   provider     = "prisma-client"
-  output       = "../src/generated/prisma"
+  output       = "./generated/"
   moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// #########################################################################
+// #                                                                       #
+// #                    Permssion and roles                                #
+// #                                                                       #
+// #########################################################################
+
+model Permission {
+  id Int @id @default(autoincrement())
+
+  name String @unique
+
+  roles PermissionOnRole[]
+}
+
+model PermissionOnRole {
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  permissionId Int
+
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int
+
+  @@id([permissionId, roleId])
+}
+
+model Role {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  createdBy       User @relation(fields: [createdByUserId], references: [id])
+  createdByUserId Int
+
+  permissions PermissionOnRole[]
 }
 
 // #########################################################################
@@ -23,19 +58,20 @@ enum EUserAccountStatus {
   SYSTEM
 }
 
+//TODO create permissions and allow to create roles
 model User {
-  id   Int    @id @default(autoincrement())
-  name String @unique
+  id       Int    @id @default(autoincrement())
+  userName String @unique
 
-  status          EUserAccountStatus @default(NOOB)
-  statusUpdatedAt DateTime           @default(now())
+  status         EUserAccountStatus  @default(NOOB)
+  accountHistory UserStatusHistory[] @relation("AccountHistory")
 
-  accountHistory  UserStatusHistory[] @relation("AccountHistory")
-  changesMade     UserStatusHistory[] @relation("ChangesMadeBy")
-
-  antipixels      Antipixel[]
-  tag             Tag[]
-  tagOnAntipixel  TagOnAntipixel[]
+  rolesCreated           Role[]
+  antipixelsSubmitted    Antipixel[]
+  UserStatusUpdated      UserStatusHistory[] @relation("ChangesMadeBy")
+  tagCreated             Tag[]
+  tagOnAntipixelAssigned TagOnAntipixel[]
+  tagsStatusUpdated      TagsStatusHistory[]
 }
 
 model UserStatusHistory {
@@ -44,13 +80,14 @@ model UserStatusHistory {
   user   User @relation("AccountHistory", fields: [userId], references: [id])
   userId Int
 
+  status EUserAccountStatus
+
+  reason String
+
   changeMadeBy       User @relation("ChangesMadeBy", fields: [changeMadeByUserId], references: [id])
   changeMadeByUserId Int
 
-  status EUserAccountStatus
-
   changeMadeAt DateTime @default(now())
-  reason       String
 }
 
 // #########################################################################
@@ -59,7 +96,6 @@ model UserStatusHistory {
 // #                                                                       #
 // #########################################################################
 
-//TODO
 enum ETagsStatus {
   PENDING
   ACTIVE
@@ -67,11 +103,14 @@ enum ETagsStatus {
   FLAGGED
 }
 
-//TODO history created, edited, status change
 model Tag {
-  name String @id @unique
+  id Int @id @default(autoincrement())
 
+  name        String
   description String
+
+  status        ETagsStatus         @default(PENDING)
+  statusHistory TagsStatusHistory[]
 
   antipixels TagOnAntipixel[]
 
@@ -79,10 +118,24 @@ model Tag {
   userId    Int
 }
 
-//TODO history assigned, status change
+model TagsStatusHistory {
+  id Int @id @default(autoincrement())
+
+  tag   Tag @relation(fields: [tagId], references: [id])
+  tagId Int
+
+  changeMadeBy       User @relation(fields: [changeMadeByUserId], references: [id])
+  changeMadeByUserId Int
+
+  status ETagsStatus
+
+  changeMadeAt DateTime @default(now())
+  reason       String
+}
+
 model TagOnAntipixel {
-  tag     Tag    @relation(fields: [tagName], references: [name])
-  tagName String
+  tag   Tag @relation(fields: [tagId], references: [id])
+  tagId Int
 
   antipixel   Antipixel @relation(fields: [antipixelId], references: [id])
   antipixelId Int
@@ -92,7 +145,7 @@ model TagOnAntipixel {
   assignedBy User @relation(fields: [userId], references: [id])
   userId     Int
 
-  @@id([tagName, antipixelId])
+  @@id([tagId, antipixelId])
 }
 
 // #########################################################################
@@ -107,6 +160,25 @@ model HashToAntipixel {
   antipixels Antipixel[]
 }
 
+enum EVirusScanStatus {
+  PENDING
+  SCANNING
+  SAFE
+  UNSAFE
+}
+
+// model UserAntipixelHistory {
+//   id Int @id @default(autoincrement())
+
+//   changeMadeBy       User @relation(fields: [changeMadeByUserId], references: [id])
+//   changeMadeByUserId Int
+
+//   status EUserAccountStatus
+
+//   changeMadeAt DateTime @default(now())
+//   reason       String
+// }
+
 //TODO history created, edited, status change
 model Antipixel {
   id Int @id @default(autoincrement())
@@ -114,8 +186,8 @@ model Antipixel {
   name String
   path String
 
-  createdBy User @relation(fields: [userId], references: [id])
-  userId   Int
+  submittedBy User @relation(fields: [userId], references: [id])
+  userId      Int
 
   createdAt DateTime @default(now())
 

@@ -27,31 +27,33 @@ export type AggregateTagOnAntipixel = {
 }
 
 export type TagOnAntipixelAvgAggregateOutputType = {
+  tagId: number | null
   antipixelId: number | null
   userId: number | null
 }
 
 export type TagOnAntipixelSumAggregateOutputType = {
+  tagId: number | null
   antipixelId: number | null
   userId: number | null
 }
 
 export type TagOnAntipixelMinAggregateOutputType = {
-  tagName: string | null
+  tagId: number | null
   antipixelId: number | null
   assignedAt: Date | null
   userId: number | null
 }
 
 export type TagOnAntipixelMaxAggregateOutputType = {
-  tagName: string | null
+  tagId: number | null
   antipixelId: number | null
   assignedAt: Date | null
   userId: number | null
 }
 
 export type TagOnAntipixelCountAggregateOutputType = {
-  tagName: number
+  tagId: number
   antipixelId: number
   assignedAt: number
   userId: number
@@ -60,31 +62,33 @@ export type TagOnAntipixelCountAggregateOutputType = {
 
 
 export type TagOnAntipixelAvgAggregateInputType = {
+  tagId?: true
   antipixelId?: true
   userId?: true
 }
 
 export type TagOnAntipixelSumAggregateInputType = {
+  tagId?: true
   antipixelId?: true
   userId?: true
 }
 
 export type TagOnAntipixelMinAggregateInputType = {
-  tagName?: true
+  tagId?: true
   antipixelId?: true
   assignedAt?: true
   userId?: true
 }
 
 export type TagOnAntipixelMaxAggregateInputType = {
-  tagName?: true
+  tagId?: true
   antipixelId?: true
   assignedAt?: true
   userId?: true
 }
 
 export type TagOnAntipixelCountAggregateInputType = {
-  tagName?: true
+  tagId?: true
   antipixelId?: true
   assignedAt?: true
   userId?: true
@@ -178,7 +182,7 @@ export type TagOnAntipixelGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 export type TagOnAntipixelGroupByOutputType = {
-  tagName: string
+  tagId: number
   antipixelId: number
   assignedAt: Date
   userId: number
@@ -208,7 +212,7 @@ export type TagOnAntipixelWhereInput = {
   AND?: Prisma.TagOnAntipixelWhereInput | Prisma.TagOnAntipixelWhereInput[]
   OR?: Prisma.TagOnAntipixelWhereInput[]
   NOT?: Prisma.TagOnAntipixelWhereInput | Prisma.TagOnAntipixelWhereInput[]
-  tagName?: Prisma.StringFilter<"TagOnAntipixel"> | string
+  tagId?: Prisma.IntFilter<"TagOnAntipixel"> | number
   antipixelId?: Prisma.IntFilter<"TagOnAntipixel"> | number
   assignedAt?: Prisma.DateTimeFilter<"TagOnAntipixel"> | Date | string
   userId?: Prisma.IntFilter<"TagOnAntipixel"> | number
@@ -218,7 +222,7 @@ export type TagOnAntipixelWhereInput = {
 }
 
 export type TagOnAntipixelOrderByWithRelationInput = {
-  tagName?: Prisma.SortOrder
+  tagId?: Prisma.SortOrder
   antipixelId?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -228,21 +232,21 @@ export type TagOnAntipixelOrderByWithRelationInput = {
 }
 
 export type TagOnAntipixelWhereUniqueInput = Prisma.AtLeast<{
-  tagName_antipixelId?: Prisma.TagOnAntipixelTagNameAntipixelIdCompoundUniqueInput
+  tagId_antipixelId?: Prisma.TagOnAntipixelTagIdAntipixelIdCompoundUniqueInput
   AND?: Prisma.TagOnAntipixelWhereInput | Prisma.TagOnAntipixelWhereInput[]
   OR?: Prisma.TagOnAntipixelWhereInput[]
   NOT?: Prisma.TagOnAntipixelWhereInput | Prisma.TagOnAntipixelWhereInput[]
-  tagName?: Prisma.StringFilter<"TagOnAntipixel"> | string
+  tagId?: Prisma.IntFilter<"TagOnAntipixel"> | number
   antipixelId?: Prisma.IntFilter<"TagOnAntipixel"> | number
   assignedAt?: Prisma.DateTimeFilter<"TagOnAntipixel"> | Date | string
   userId?: Prisma.IntFilter<"TagOnAntipixel"> | number
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
   antipixel?: Prisma.XOR<Prisma.AntipixelScalarRelationFilter, Prisma.AntipixelWhereInput>
   assignedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "tagName_antipixelId">
+}, "tagId_antipixelId">
 
 export type TagOnAntipixelOrderByWithAggregationInput = {
-  tagName?: Prisma.SortOrder
+  tagId?: Prisma.SortOrder
   antipixelId?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -257,7 +261,7 @@ export type TagOnAntipixelScalarWhereWithAggregatesInput = {
   AND?: Prisma.TagOnAntipixelScalarWhereWithAggregatesInput | Prisma.TagOnAntipixelScalarWhereWithAggregatesInput[]
   OR?: Prisma.TagOnAntipixelScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TagOnAntipixelScalarWhereWithAggregatesInput | Prisma.TagOnAntipixelScalarWhereWithAggregatesInput[]
-  tagName?: Prisma.StringWithAggregatesFilter<"TagOnAntipixel"> | string
+  tagId?: Prisma.IntWithAggregatesFilter<"TagOnAntipixel"> | number
   antipixelId?: Prisma.IntWithAggregatesFilter<"TagOnAntipixel"> | number
   assignedAt?: Prisma.DateTimeWithAggregatesFilter<"TagOnAntipixel"> | Date | string
   userId?: Prisma.IntWithAggregatesFilter<"TagOnAntipixel"> | number
@@ -267,11 +271,11 @@ export type TagOnAntipixelCreateInput = {
   assignedAt?: Date | string
   tag: Prisma.TagCreateNestedOneWithoutAntipixelsInput
   antipixel: Prisma.AntipixelCreateNestedOneWithoutTagsInput
-  assignedBy: Prisma.UserCreateNestedOneWithoutTagOnAntipixelInput
+  assignedBy: Prisma.UserCreateNestedOneWithoutTagOnAntipixelAssignedInput
 }
 
 export type TagOnAntipixelUncheckedCreateInput = {
-  tagName: string
+  tagId: number
   antipixelId: number
   assignedAt?: Date | string
   userId: number
@@ -281,18 +285,18 @@ export type TagOnAntipixelUpdateInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tag?: Prisma.TagUpdateOneRequiredWithoutAntipixelsNestedInput
   antipixel?: Prisma.AntipixelUpdateOneRequiredWithoutTagsNestedInput
-  assignedBy?: Prisma.UserUpdateOneRequiredWithoutTagOnAntipixelNestedInput
+  assignedBy?: Prisma.UserUpdateOneRequiredWithoutTagOnAntipixelAssignedNestedInput
 }
 
 export type TagOnAntipixelUncheckedUpdateInput = {
-  tagName?: Prisma.StringFieldUpdateOperationsInput | string
+  tagId?: Prisma.IntFieldUpdateOperationsInput | number
   antipixelId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TagOnAntipixelCreateManyInput = {
-  tagName: string
+  tagId: number
   antipixelId: number
   assignedAt?: Date | string
   userId: number
@@ -303,7 +307,7 @@ export type TagOnAntipixelUpdateManyMutationInput = {
 }
 
 export type TagOnAntipixelUncheckedUpdateManyInput = {
-  tagName?: Prisma.StringFieldUpdateOperationsInput | string
+  tagId?: Prisma.IntFieldUpdateOperationsInput | number
   antipixelId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -319,38 +323,40 @@ export type TagOnAntipixelOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type TagOnAntipixelTagNameAntipixelIdCompoundUniqueInput = {
-  tagName: string
+export type TagOnAntipixelTagIdAntipixelIdCompoundUniqueInput = {
+  tagId: number
   antipixelId: number
 }
 
 export type TagOnAntipixelCountOrderByAggregateInput = {
-  tagName?: Prisma.SortOrder
+  tagId?: Prisma.SortOrder
   antipixelId?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagOnAntipixelAvgOrderByAggregateInput = {
+  tagId?: Prisma.SortOrder
   antipixelId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagOnAntipixelMaxOrderByAggregateInput = {
-  tagName?: Prisma.SortOrder
+  tagId?: Prisma.SortOrder
   antipixelId?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagOnAntipixelMinOrderByAggregateInput = {
-  tagName?: Prisma.SortOrder
+  tagId?: Prisma.SortOrder
   antipixelId?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagOnAntipixelSumOrderByAggregateInput = {
+  tagId?: Prisma.SortOrder
   antipixelId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
@@ -488,7 +494,7 @@ export type TagOnAntipixelCreateWithoutAssignedByInput = {
 }
 
 export type TagOnAntipixelUncheckedCreateWithoutAssignedByInput = {
-  tagName: string
+  tagId: number
   antipixelId: number
   assignedAt?: Date | string
 }
@@ -523,7 +529,7 @@ export type TagOnAntipixelScalarWhereInput = {
   AND?: Prisma.TagOnAntipixelScalarWhereInput | Prisma.TagOnAntipixelScalarWhereInput[]
   OR?: Prisma.TagOnAntipixelScalarWhereInput[]
   NOT?: Prisma.TagOnAntipixelScalarWhereInput | Prisma.TagOnAntipixelScalarWhereInput[]
-  tagName?: Prisma.StringFilter<"TagOnAntipixel"> | string
+  tagId?: Prisma.IntFilter<"TagOnAntipixel"> | number
   antipixelId?: Prisma.IntFilter<"TagOnAntipixel"> | number
   assignedAt?: Prisma.DateTimeFilter<"TagOnAntipixel"> | Date | string
   userId?: Prisma.IntFilter<"TagOnAntipixel"> | number
@@ -532,7 +538,7 @@ export type TagOnAntipixelScalarWhereInput = {
 export type TagOnAntipixelCreateWithoutTagInput = {
   assignedAt?: Date | string
   antipixel: Prisma.AntipixelCreateNestedOneWithoutTagsInput
-  assignedBy: Prisma.UserCreateNestedOneWithoutTagOnAntipixelInput
+  assignedBy: Prisma.UserCreateNestedOneWithoutTagOnAntipixelAssignedInput
 }
 
 export type TagOnAntipixelUncheckedCreateWithoutTagInput = {
@@ -570,11 +576,11 @@ export type TagOnAntipixelUpdateManyWithWhereWithoutTagInput = {
 export type TagOnAntipixelCreateWithoutAntipixelInput = {
   assignedAt?: Date | string
   tag: Prisma.TagCreateNestedOneWithoutAntipixelsInput
-  assignedBy: Prisma.UserCreateNestedOneWithoutTagOnAntipixelInput
+  assignedBy: Prisma.UserCreateNestedOneWithoutTagOnAntipixelAssignedInput
 }
 
 export type TagOnAntipixelUncheckedCreateWithoutAntipixelInput = {
-  tagName: string
+  tagId: number
   assignedAt?: Date | string
   userId: number
 }
@@ -606,7 +612,7 @@ export type TagOnAntipixelUpdateManyWithWhereWithoutAntipixelInput = {
 }
 
 export type TagOnAntipixelCreateManyAssignedByInput = {
-  tagName: string
+  tagId: number
   antipixelId: number
   assignedAt?: Date | string
 }
@@ -618,13 +624,13 @@ export type TagOnAntipixelUpdateWithoutAssignedByInput = {
 }
 
 export type TagOnAntipixelUncheckedUpdateWithoutAssignedByInput = {
-  tagName?: Prisma.StringFieldUpdateOperationsInput | string
+  tagId?: Prisma.IntFieldUpdateOperationsInput | number
   antipixelId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TagOnAntipixelUncheckedUpdateManyWithoutAssignedByInput = {
-  tagName?: Prisma.StringFieldUpdateOperationsInput | string
+  tagId?: Prisma.IntFieldUpdateOperationsInput | number
   antipixelId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -638,7 +644,7 @@ export type TagOnAntipixelCreateManyTagInput = {
 export type TagOnAntipixelUpdateWithoutTagInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   antipixel?: Prisma.AntipixelUpdateOneRequiredWithoutTagsNestedInput
-  assignedBy?: Prisma.UserUpdateOneRequiredWithoutTagOnAntipixelNestedInput
+  assignedBy?: Prisma.UserUpdateOneRequiredWithoutTagOnAntipixelAssignedNestedInput
 }
 
 export type TagOnAntipixelUncheckedUpdateWithoutTagInput = {
@@ -654,7 +660,7 @@ export type TagOnAntipixelUncheckedUpdateManyWithoutTagInput = {
 }
 
 export type TagOnAntipixelCreateManyAntipixelInput = {
-  tagName: string
+  tagId: number
   assignedAt?: Date | string
   userId: number
 }
@@ -662,17 +668,17 @@ export type TagOnAntipixelCreateManyAntipixelInput = {
 export type TagOnAntipixelUpdateWithoutAntipixelInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tag?: Prisma.TagUpdateOneRequiredWithoutAntipixelsNestedInput
-  assignedBy?: Prisma.UserUpdateOneRequiredWithoutTagOnAntipixelNestedInput
+  assignedBy?: Prisma.UserUpdateOneRequiredWithoutTagOnAntipixelAssignedNestedInput
 }
 
 export type TagOnAntipixelUncheckedUpdateWithoutAntipixelInput = {
-  tagName?: Prisma.StringFieldUpdateOperationsInput | string
+  tagId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TagOnAntipixelUncheckedUpdateManyWithoutAntipixelInput = {
-  tagName?: Prisma.StringFieldUpdateOperationsInput | string
+  tagId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -680,7 +686,7 @@ export type TagOnAntipixelUncheckedUpdateManyWithoutAntipixelInput = {
 
 
 export type TagOnAntipixelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  tagName?: boolean
+  tagId?: boolean
   antipixelId?: boolean
   assignedAt?: boolean
   userId?: boolean
@@ -690,7 +696,7 @@ export type TagOnAntipixelSelect<ExtArgs extends runtime.Types.Extensions.Intern
 }, ExtArgs["result"]["tagOnAntipixel"]>
 
 export type TagOnAntipixelSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  tagName?: boolean
+  tagId?: boolean
   antipixelId?: boolean
   assignedAt?: boolean
   userId?: boolean
@@ -700,7 +706,7 @@ export type TagOnAntipixelSelectCreateManyAndReturn<ExtArgs extends runtime.Type
 }, ExtArgs["result"]["tagOnAntipixel"]>
 
 export type TagOnAntipixelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  tagName?: boolean
+  tagId?: boolean
   antipixelId?: boolean
   assignedAt?: boolean
   userId?: boolean
@@ -710,13 +716,13 @@ export type TagOnAntipixelSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
 }, ExtArgs["result"]["tagOnAntipixel"]>
 
 export type TagOnAntipixelSelectScalar = {
-  tagName?: boolean
+  tagId?: boolean
   antipixelId?: boolean
   assignedAt?: boolean
   userId?: boolean
 }
 
-export type TagOnAntipixelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"tagName" | "antipixelId" | "assignedAt" | "userId", ExtArgs["result"]["tagOnAntipixel"]>
+export type TagOnAntipixelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"tagId" | "antipixelId" | "assignedAt" | "userId", ExtArgs["result"]["tagOnAntipixel"]>
 export type TagOnAntipixelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
   antipixel?: boolean | Prisma.AntipixelDefaultArgs<ExtArgs>
@@ -741,7 +747,7 @@ export type $TagOnAntipixelPayload<ExtArgs extends runtime.Types.Extensions.Inte
     assignedBy: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    tagName: string
+    tagId: number
     antipixelId: number
     assignedAt: Date
     userId: number
@@ -828,8 +834,8 @@ export interface TagOnAntipixelDelegate<ExtArgs extends runtime.Types.Extensions
    * // Get first 10 TagOnAntipixels
    * const tagOnAntipixels = await prisma.tagOnAntipixel.findMany({ take: 10 })
    * 
-   * // Only select the `tagName`
-   * const tagOnAntipixelWithTagNameOnly = await prisma.tagOnAntipixel.findMany({ select: { tagName: true } })
+   * // Only select the `tagId`
+   * const tagOnAntipixelWithTagIdOnly = await prisma.tagOnAntipixel.findMany({ select: { tagId: true } })
    * 
    */
   findMany<T extends TagOnAntipixelFindManyArgs>(args?: Prisma.SelectSubset<T, TagOnAntipixelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagOnAntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -873,9 +879,9 @@ export interface TagOnAntipixelDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Create many TagOnAntipixels and only return the `tagName`
-   * const tagOnAntipixelWithTagNameOnly = await prisma.tagOnAntipixel.createManyAndReturn({
-   *   select: { tagName: true },
+   * // Create many TagOnAntipixels and only return the `tagId`
+   * const tagOnAntipixelWithTagIdOnly = await prisma.tagOnAntipixel.createManyAndReturn({
+   *   select: { tagId: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -964,9 +970,9 @@ export interface TagOnAntipixelDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Update zero or more TagOnAntipixels and only return the `tagName`
-   * const tagOnAntipixelWithTagNameOnly = await prisma.tagOnAntipixel.updateManyAndReturn({
-   *   select: { tagName: true },
+   * // Update zero or more TagOnAntipixels and only return the `tagId`
+   * const tagOnAntipixelWithTagIdOnly = await prisma.tagOnAntipixel.updateManyAndReturn({
+   *   select: { tagId: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1171,7 +1177,7 @@ export interface Prisma__TagOnAntipixelClient<T, Null = never, ExtArgs extends r
  * Fields of the TagOnAntipixel model
  */
 export interface TagOnAntipixelFieldRefs {
-  readonly tagName: Prisma.FieldRef<"TagOnAntipixel", 'String'>
+  readonly tagId: Prisma.FieldRef<"TagOnAntipixel", 'Int'>
   readonly antipixelId: Prisma.FieldRef<"TagOnAntipixel", 'Int'>
   readonly assignedAt: Prisma.FieldRef<"TagOnAntipixel", 'DateTime'>
   readonly userId: Prisma.FieldRef<"TagOnAntipixel", 'Int'>

@@ -51,9 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Permission: 'Permission',
+  PermissionOnRole: 'PermissionOnRole',
+  Role: 'Role',
   User: 'User',
   UserStatusHistory: 'UserStatusHistory',
   Tag: 'Tag',
+  TagsStatusHistory: 'TagsStatusHistory',
   TagOnAntipixel: 'TagOnAntipixel',
   HashToAntipixel: 'HashToAntipixel',
   Antipixel: 'Antipixel'
@@ -75,11 +79,35 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UserScalarFieldEnum = {
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const PermissionOnRoleScalarFieldEnum = {
+  permissionId: 'permissionId',
+  roleId: 'roleId'
+} as const
+
+export type PermissionOnRoleScalarFieldEnum = (typeof PermissionOnRoleScalarFieldEnum)[keyof typeof PermissionOnRoleScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  status: 'status',
-  statusUpdatedAt: 'statusUpdatedAt'
+  createdByUserId: 'createdByUserId'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  userName: 'userName',
+  status: 'status'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -88,26 +116,40 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const UserStatusHistoryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  changeMadeByUserId: 'changeMadeByUserId',
   status: 'status',
-  changeMadeAt: 'changeMadeAt',
-  reason: 'reason'
+  reason: 'reason',
+  changeMadeByUserId: 'changeMadeByUserId',
+  changeMadeAt: 'changeMadeAt'
 } as const
 
 export type UserStatusHistoryScalarFieldEnum = (typeof UserStatusHistoryScalarFieldEnum)[keyof typeof UserStatusHistoryScalarFieldEnum]
 
 
 export const TagScalarFieldEnum = {
+  id: 'id',
   name: 'name',
   description: 'description',
+  status: 'status',
   userId: 'userId'
 } as const
 
 export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
+export const TagsStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  tagId: 'tagId',
+  changeMadeByUserId: 'changeMadeByUserId',
+  status: 'status',
+  changeMadeAt: 'changeMadeAt',
+  reason: 'reason'
+} as const
+
+export type TagsStatusHistoryScalarFieldEnum = (typeof TagsStatusHistoryScalarFieldEnum)[keyof typeof TagsStatusHistoryScalarFieldEnum]
+
+
 export const TagOnAntipixelScalarFieldEnum = {
-  tagName: 'tagName',
+  tagId: 'tagId',
   antipixelId: 'antipixelId',
   assignedAt: 'assignedAt',
   userId: 'userId'

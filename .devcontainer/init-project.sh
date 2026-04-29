@@ -8,4 +8,6 @@ nvm i --lts v24
 
 pnpm i --global --save-dev @prisma/language-server
 
-sudo ln -s $(where prisma-language-server) /usr/bin/prisma-language-server
+if [ ! -e /usr/bin/prisma-language-server ]; then
+  sudo ln -s "$(command -v prisma-language-server)" /usr/bin/prisma-language-server
+fi

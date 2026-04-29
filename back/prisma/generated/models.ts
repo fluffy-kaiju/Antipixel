@@ -8,9 +8,13 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Permission.js'
+export type * from './models/PermissionOnRole.js'
+export type * from './models/Role.js'
 export type * from './models/User.js'
 export type * from './models/UserStatusHistory.js'
 export type * from './models/Tag.js'
+export type * from './models/TagsStatusHistory.js'
 export type * from './models/TagOnAntipixel.js'
 export type * from './models/HashToAntipixel.js'
 export type * from './models/Antipixel.js'

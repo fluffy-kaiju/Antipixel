@@ -36,23 +36,20 @@ export type UserSumAggregateOutputType = {
 
 export type UserMinAggregateOutputType = {
   id: number | null
-  name: string | null
+  userName: string | null
   status: $Enums.EUserAccountStatus | null
-  statusUpdatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: number | null
-  name: string | null
+  userName: string | null
   status: $Enums.EUserAccountStatus | null
-  statusUpdatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
-  name: number
+  userName: number
   status: number
-  statusUpdatedAt: number
   _all: number
 }
 
@@ -67,23 +64,20 @@ export type UserSumAggregateInputType = {
 
 export type UserMinAggregateInputType = {
   id?: true
-  name?: true
+  userName?: true
   status?: true
-  statusUpdatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
-  name?: true
+  userName?: true
   status?: true
-  statusUpdatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
-  name?: true
+  userName?: true
   status?: true
-  statusUpdatedAt?: true
   _all?: true
 }
 
@@ -175,9 +169,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type UserGroupByOutputType = {
   id: number
-  name: string
+  userName: string
   status: $Enums.EUserAccountStatus
-  statusUpdatedAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -205,48 +198,50 @@ export type UserWhereInput = {
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.IntFilter<"User"> | number
-  name?: Prisma.StringFilter<"User"> | string
+  userName?: Prisma.StringFilter<"User"> | string
   status?: Prisma.EnumEUserAccountStatusFilter<"User"> | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accountHistory?: Prisma.UserStatusHistoryListRelationFilter
-  changesMade?: Prisma.UserStatusHistoryListRelationFilter
-  antipixels?: Prisma.AntipixelListRelationFilter
-  tag?: Prisma.TagListRelationFilter
-  tagOnAntipixel?: Prisma.TagOnAntipixelListRelationFilter
+  rolesCreated?: Prisma.RoleListRelationFilter
+  antipixelsSubmitted?: Prisma.AntipixelListRelationFilter
+  UserStatusUpdated?: Prisma.UserStatusHistoryListRelationFilter
+  tagCreated?: Prisma.TagListRelationFilter
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelListRelationFilter
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  statusUpdatedAt?: Prisma.SortOrder
   accountHistory?: Prisma.UserStatusHistoryOrderByRelationAggregateInput
-  changesMade?: Prisma.UserStatusHistoryOrderByRelationAggregateInput
-  antipixels?: Prisma.AntipixelOrderByRelationAggregateInput
-  tag?: Prisma.TagOrderByRelationAggregateInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelOrderByRelationAggregateInput
+  rolesCreated?: Prisma.RoleOrderByRelationAggregateInput
+  antipixelsSubmitted?: Prisma.AntipixelOrderByRelationAggregateInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryOrderByRelationAggregateInput
+  tagCreated?: Prisma.TagOrderByRelationAggregateInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelOrderByRelationAggregateInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  name?: string
+  userName?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   status?: Prisma.EnumEUserAccountStatusFilter<"User"> | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   accountHistory?: Prisma.UserStatusHistoryListRelationFilter
-  changesMade?: Prisma.UserStatusHistoryListRelationFilter
-  antipixels?: Prisma.AntipixelListRelationFilter
-  tag?: Prisma.TagListRelationFilter
-  tagOnAntipixel?: Prisma.TagOnAntipixelListRelationFilter
-}, "id" | "name">
+  rolesCreated?: Prisma.RoleListRelationFilter
+  antipixelsSubmitted?: Prisma.AntipixelListRelationFilter
+  UserStatusUpdated?: Prisma.UserStatusHistoryListRelationFilter
+  tagCreated?: Prisma.TagListRelationFilter
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelListRelationFilter
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryListRelationFilter
+}, "id" | "userName">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  statusUpdatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -259,82 +254,86 @@ export type UserScalarWhereWithAggregatesInput = {
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
-  name?: Prisma.StringWithAggregatesFilter<"User"> | string
+  userName?: Prisma.StringWithAggregatesFilter<"User"> | string
   status?: Prisma.EnumEUserAccountStatusWithAggregatesFilter<"User"> | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: number
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelUncheckedCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUpdateInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUncheckedUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: number
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  statusUpdatedAt?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -343,45 +342,36 @@ export type UserAvgOrderByAggregateInput = {
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  statusUpdatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  statusUpdatedAt?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
+export type UserCreateNestedOneWithoutRolesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRolesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type UserUpdateOneRequiredWithoutRolesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRolesCreatedInput
+  upsert?: Prisma.UserUpsertWithoutRolesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRolesCreatedInput, Prisma.UserUpdateWithoutRolesCreatedInput>, Prisma.UserUncheckedUpdateWithoutRolesCreatedInput>
 }
 
 export type EnumEUserAccountStatusFieldUpdateOperationsInput = {
   set?: $Enums.EUserAccountStatus
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type UserCreateNestedOneWithoutAccountHistoryInput = {
@@ -390,9 +380,9 @@ export type UserCreateNestedOneWithoutAccountHistoryInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserCreateNestedOneWithoutChangesMadeInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutChangesMadeInput, Prisma.UserUncheckedCreateWithoutChangesMadeInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChangesMadeInput
+export type UserCreateNestedOneWithoutUserStatusUpdatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutUserStatusUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserStatusUpdatedInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
@@ -404,75 +394,153 @@ export type UserUpdateOneRequiredWithoutAccountHistoryNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountHistoryInput, Prisma.UserUpdateWithoutAccountHistoryInput>, Prisma.UserUncheckedUpdateWithoutAccountHistoryInput>
 }
 
-export type UserUpdateOneRequiredWithoutChangesMadeNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutChangesMadeInput, Prisma.UserUncheckedCreateWithoutChangesMadeInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChangesMadeInput
-  upsert?: Prisma.UserUpsertWithoutChangesMadeInput
+export type UserUpdateOneRequiredWithoutUserStatusUpdatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutUserStatusUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserStatusUpdatedInput
+  upsert?: Prisma.UserUpsertWithoutUserStatusUpdatedInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChangesMadeInput, Prisma.UserUpdateWithoutChangesMadeInput>, Prisma.UserUncheckedUpdateWithoutChangesMadeInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserStatusUpdatedInput, Prisma.UserUpdateWithoutUserStatusUpdatedInput>, Prisma.UserUncheckedUpdateWithoutUserStatusUpdatedInput>
 }
 
-export type UserCreateNestedOneWithoutTagInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTagInput, Prisma.UserUncheckedCreateWithoutTagInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutTagNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTagInput, Prisma.UserUncheckedCreateWithoutTagInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagInput
-  upsert?: Prisma.UserUpsertWithoutTagInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTagInput, Prisma.UserUpdateWithoutTagInput>, Prisma.UserUncheckedUpdateWithoutTagInput>
-}
-
-export type UserCreateNestedOneWithoutTagOnAntipixelInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagOnAntipixelInput
+export type UserCreateNestedOneWithoutTagCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagCreatedInput, Prisma.UserUncheckedCreateWithoutTagCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagCreatedInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutTagOnAntipixelNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagOnAntipixelInput
-  upsert?: Prisma.UserUpsertWithoutTagOnAntipixelInput
+export type UserUpdateOneRequiredWithoutTagCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagCreatedInput, Prisma.UserUncheckedCreateWithoutTagCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagCreatedInput
+  upsert?: Prisma.UserUpsertWithoutTagCreatedInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTagOnAntipixelInput, Prisma.UserUpdateWithoutTagOnAntipixelInput>, Prisma.UserUncheckedUpdateWithoutTagOnAntipixelInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTagCreatedInput, Prisma.UserUpdateWithoutTagCreatedInput>, Prisma.UserUncheckedUpdateWithoutTagCreatedInput>
 }
 
-export type UserCreateNestedOneWithoutAntipixelsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsInput, Prisma.UserUncheckedCreateWithoutAntipixelsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAntipixelsInput
+export type UserCreateNestedOneWithoutTagsStatusUpdatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagsStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutTagsStatusUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagsStatusUpdatedInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutAntipixelsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsInput, Prisma.UserUncheckedCreateWithoutAntipixelsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAntipixelsInput
-  upsert?: Prisma.UserUpsertWithoutAntipixelsInput
+export type UserUpdateOneRequiredWithoutTagsStatusUpdatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagsStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutTagsStatusUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagsStatusUpdatedInput
+  upsert?: Prisma.UserUpsertWithoutTagsStatusUpdatedInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAntipixelsInput, Prisma.UserUpdateWithoutAntipixelsInput>, Prisma.UserUncheckedUpdateWithoutAntipixelsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTagsStatusUpdatedInput, Prisma.UserUpdateWithoutTagsStatusUpdatedInput>, Prisma.UserUncheckedUpdateWithoutTagsStatusUpdatedInput>
+}
+
+export type UserCreateNestedOneWithoutTagOnAntipixelAssignedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelAssignedInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelAssignedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagOnAntipixelAssignedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTagOnAntipixelAssignedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelAssignedInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelAssignedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagOnAntipixelAssignedInput
+  upsert?: Prisma.UserUpsertWithoutTagOnAntipixelAssignedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTagOnAntipixelAssignedInput, Prisma.UserUpdateWithoutTagOnAntipixelAssignedInput>, Prisma.UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput>
+}
+
+export type UserCreateNestedOneWithoutAntipixelsSubmittedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsSubmittedInput, Prisma.UserUncheckedCreateWithoutAntipixelsSubmittedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAntipixelsSubmittedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsSubmittedInput, Prisma.UserUncheckedCreateWithoutAntipixelsSubmittedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAntipixelsSubmittedInput
+  upsert?: Prisma.UserUpsertWithoutAntipixelsSubmittedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAntipixelsSubmittedInput, Prisma.UserUpdateWithoutAntipixelsSubmittedInput>, Prisma.UserUncheckedUpdateWithoutAntipixelsSubmittedInput>
+}
+
+export type UserCreateWithoutRolesCreatedInput = {
+  userName: string
+  status?: $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+}
+
+export type UserUncheckedCreateWithoutRolesCreatedInput = {
+  id?: number
+  userName: string
+  status?: $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+}
+
+export type UserCreateOrConnectWithoutRolesCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
+}
+
+export type UserUpsertWithoutRolesCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRolesCreatedInput, Prisma.UserUncheckedUpdateWithoutRolesCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRolesCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRolesCreatedInput, Prisma.UserUncheckedUpdateWithoutRolesCreatedInput>
+}
+
+export type UserUpdateWithoutRolesCreatedInput = {
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRolesCreatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutAccountHistoryInput = {
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
-  changesMade?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutAccountHistoryInput = {
   id?: number
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
-  changesMade?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelUncheckedCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutAccountHistoryInput = {
@@ -480,30 +548,32 @@ export type UserCreateOrConnectWithoutAccountHistoryInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutAccountHistoryInput, Prisma.UserUncheckedCreateWithoutAccountHistoryInput>
 }
 
-export type UserCreateWithoutChangesMadeInput = {
-  name: string
+export type UserCreateWithoutUserStatusUpdatedInput = {
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
-  antipixels?: Prisma.AntipixelCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
-export type UserUncheckedCreateWithoutChangesMadeInput = {
+export type UserUncheckedCreateWithoutUserStatusUpdatedInput = {
   id?: number
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
-  antipixels?: Prisma.AntipixelUncheckedCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
-export type UserCreateOrConnectWithoutChangesMadeInput = {
+export type UserCreateOrConnectWithoutUserStatusUpdatedInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutChangesMadeInput, Prisma.UserUncheckedCreateWithoutChangesMadeInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutUserStatusUpdatedInput>
 }
 
 export type UserUpsertWithoutAccountHistoryInput = {
@@ -518,230 +588,308 @@ export type UserUpdateToOneWithWhereWithoutAccountHistoryInput = {
 }
 
 export type UserUpdateWithoutAccountHistoryInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  changesMade?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountHistoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  changesMade?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUncheckedUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
-export type UserUpsertWithoutChangesMadeInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutChangesMadeInput, Prisma.UserUncheckedUpdateWithoutChangesMadeInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutChangesMadeInput, Prisma.UserUncheckedCreateWithoutChangesMadeInput>
+export type UserUpsertWithoutUserStatusUpdatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUserStatusUpdatedInput, Prisma.UserUncheckedUpdateWithoutUserStatusUpdatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutUserStatusUpdatedInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutChangesMadeInput = {
+export type UserUpdateToOneWithWhereWithoutUserStatusUpdatedInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutChangesMadeInput, Prisma.UserUncheckedUpdateWithoutChangesMadeInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUserStatusUpdatedInput, Prisma.UserUncheckedUpdateWithoutUserStatusUpdatedInput>
 }
 
-export type UserUpdateWithoutChangesMadeInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+export type UserUpdateWithoutUserStatusUpdatedInput = {
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
-  antipixels?: Prisma.AntipixelUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutChangesMadeInput = {
+export type UserUncheckedUpdateWithoutUserStatusUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
-  antipixels?: Prisma.AntipixelUncheckedUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
-export type UserCreateWithoutTagInput = {
-  name: string
+export type UserCreateWithoutTagCreatedInput = {
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
-export type UserUncheckedCreateWithoutTagInput = {
+export type UserUncheckedCreateWithoutTagCreatedInput = {
   id?: number
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelUncheckedCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
-export type UserCreateOrConnectWithoutTagInput = {
+export type UserCreateOrConnectWithoutTagCreatedInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutTagInput, Prisma.UserUncheckedCreateWithoutTagInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagCreatedInput, Prisma.UserUncheckedCreateWithoutTagCreatedInput>
 }
 
-export type UserUpsertWithoutTagInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutTagInput, Prisma.UserUncheckedUpdateWithoutTagInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutTagInput, Prisma.UserUncheckedCreateWithoutTagInput>
+export type UserUpsertWithoutTagCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTagCreatedInput, Prisma.UserUncheckedUpdateWithoutTagCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagCreatedInput, Prisma.UserUncheckedCreateWithoutTagCreatedInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutTagInput = {
+export type UserUpdateToOneWithWhereWithoutTagCreatedInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutTagInput, Prisma.UserUncheckedUpdateWithoutTagInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTagCreatedInput, Prisma.UserUncheckedUpdateWithoutTagCreatedInput>
 }
 
-export type UserUpdateWithoutTagInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+export type UserUpdateWithoutTagCreatedInput = {
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutTagInput = {
+export type UserUncheckedUpdateWithoutTagCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUncheckedUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
-export type UserCreateWithoutTagOnAntipixelInput = {
-  name: string
+export type UserCreateWithoutTagsStatusUpdatedInput = {
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
 }
 
-export type UserUncheckedCreateWithoutTagOnAntipixelInput = {
+export type UserUncheckedCreateWithoutTagsStatusUpdatedInput = {
   id?: number
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-  antipixels?: Prisma.AntipixelUncheckedCreateNestedManyWithoutCreatedByInput
-  tag?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
 }
 
-export type UserCreateOrConnectWithoutTagOnAntipixelInput = {
+export type UserCreateOrConnectWithoutTagsStatusUpdatedInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagsStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutTagsStatusUpdatedInput>
 }
 
-export type UserUpsertWithoutTagOnAntipixelInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutTagOnAntipixelInput, Prisma.UserUncheckedUpdateWithoutTagOnAntipixelInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelInput>
+export type UserUpsertWithoutTagsStatusUpdatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTagsStatusUpdatedInput, Prisma.UserUncheckedUpdateWithoutTagsStatusUpdatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagsStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutTagsStatusUpdatedInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutTagOnAntipixelInput = {
+export type UserUpdateToOneWithWhereWithoutTagsStatusUpdatedInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutTagOnAntipixelInput, Prisma.UserUncheckedUpdateWithoutTagOnAntipixelInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTagsStatusUpdatedInput, Prisma.UserUncheckedUpdateWithoutTagsStatusUpdatedInput>
 }
 
-export type UserUpdateWithoutTagOnAntipixelInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+export type UserUpdateWithoutTagsStatusUpdatedInput = {
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutTagOnAntipixelInput = {
+export type UserUncheckedUpdateWithoutTagsStatusUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-  antipixels?: Prisma.AntipixelUncheckedUpdateManyWithoutCreatedByNestedInput
-  tag?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
 }
 
-export type UserCreateWithoutAntipixelsInput = {
-  name: string
+export type UserCreateWithoutTagOnAntipixelAssignedInput = {
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-  tag?: Prisma.TagCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
-export type UserUncheckedCreateWithoutAntipixelsInput = {
+export type UserUncheckedCreateWithoutTagOnAntipixelAssignedInput = {
   id?: number
-  name: string
+  userName: string
   status?: $Enums.EUserAccountStatus
-  statusUpdatedAt?: Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-  tag?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
-export type UserCreateOrConnectWithoutAntipixelsInput = {
+export type UserCreateOrConnectWithoutTagOnAntipixelAssignedInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsInput, Prisma.UserUncheckedCreateWithoutAntipixelsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelAssignedInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelAssignedInput>
 }
 
-export type UserUpsertWithoutAntipixelsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAntipixelsInput, Prisma.UserUncheckedUpdateWithoutAntipixelsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsInput, Prisma.UserUncheckedCreateWithoutAntipixelsInput>
+export type UserUpsertWithoutTagOnAntipixelAssignedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTagOnAntipixelAssignedInput, Prisma.UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagOnAntipixelAssignedInput, Prisma.UserUncheckedCreateWithoutTagOnAntipixelAssignedInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutAntipixelsInput = {
+export type UserUpdateToOneWithWhereWithoutTagOnAntipixelAssignedInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAntipixelsInput, Prisma.UserUncheckedUpdateWithoutAntipixelsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTagOnAntipixelAssignedInput, Prisma.UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput>
 }
 
-export type UserUpdateWithoutAntipixelsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+export type UserUpdateWithoutTagOnAntipixelAssignedInput = {
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-  tag?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutAntipixelsInput = {
+export type UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  statusUpdatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
-  changesMade?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-  tag?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixel?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+}
+
+export type UserCreateWithoutAntipixelsSubmittedInput = {
+  userName: string
+  status?: $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+}
+
+export type UserUncheckedCreateWithoutAntipixelsSubmittedInput = {
+  id?: number
+  userName: string
+  status?: $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+}
+
+export type UserCreateOrConnectWithoutAntipixelsSubmittedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsSubmittedInput, Prisma.UserUncheckedCreateWithoutAntipixelsSubmittedInput>
+}
+
+export type UserUpsertWithoutAntipixelsSubmittedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAntipixelsSubmittedInput, Prisma.UserUncheckedUpdateWithoutAntipixelsSubmittedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsSubmittedInput, Prisma.UserUncheckedCreateWithoutAntipixelsSubmittedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAntipixelsSubmittedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAntipixelsSubmittedInput, Prisma.UserUncheckedUpdateWithoutAntipixelsSubmittedInput>
+}
+
+export type UserUpdateWithoutAntipixelsSubmittedInput = {
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAntipixelsSubmittedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 
@@ -751,18 +899,22 @@ export type UserUncheckedUpdateWithoutAntipixelsInput = {
 
 export type UserCountOutputType = {
   accountHistory: number
-  changesMade: number
-  antipixels: number
-  tag: number
-  tagOnAntipixel: number
+  rolesCreated: number
+  antipixelsSubmitted: number
+  UserStatusUpdated: number
+  tagCreated: number
+  tagOnAntipixelAssigned: number
+  tagsStatusUpdated: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accountHistory?: boolean | UserCountOutputTypeCountAccountHistoryArgs
-  changesMade?: boolean | UserCountOutputTypeCountChangesMadeArgs
-  antipixels?: boolean | UserCountOutputTypeCountAntipixelsArgs
-  tag?: boolean | UserCountOutputTypeCountTagArgs
-  tagOnAntipixel?: boolean | UserCountOutputTypeCountTagOnAntipixelArgs
+  rolesCreated?: boolean | UserCountOutputTypeCountRolesCreatedArgs
+  antipixelsSubmitted?: boolean | UserCountOutputTypeCountAntipixelsSubmittedArgs
+  UserStatusUpdated?: boolean | UserCountOutputTypeCountUserStatusUpdatedArgs
+  tagCreated?: boolean | UserCountOutputTypeCountTagCreatedArgs
+  tagOnAntipixelAssigned?: boolean | UserCountOutputTypeCountTagOnAntipixelAssignedArgs
+  tagsStatusUpdated?: boolean | UserCountOutputTypeCountTagsStatusUpdatedArgs
 }
 
 /**
@@ -785,73 +937,87 @@ export type UserCountOutputTypeCountAccountHistoryArgs<ExtArgs extends runtime.T
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountChangesMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserStatusHistoryWhereInput
+export type UserCountOutputTypeCountRolesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoleWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAntipixelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountAntipixelsSubmittedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AntipixelWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountTagArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountUserStatusUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserStatusHistoryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTagCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TagWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountTagOnAntipixelArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountTagOnAntipixelAssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TagOnAntipixelWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTagsStatusUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TagsStatusHistoryWhereInput
 }
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
+  userName?: boolean
   status?: boolean
-  statusUpdatedAt?: boolean
   accountHistory?: boolean | Prisma.User$accountHistoryArgs<ExtArgs>
-  changesMade?: boolean | Prisma.User$changesMadeArgs<ExtArgs>
-  antipixels?: boolean | Prisma.User$antipixelsArgs<ExtArgs>
-  tag?: boolean | Prisma.User$tagArgs<ExtArgs>
-  tagOnAntipixel?: boolean | Prisma.User$tagOnAntipixelArgs<ExtArgs>
+  rolesCreated?: boolean | Prisma.User$rolesCreatedArgs<ExtArgs>
+  antipixelsSubmitted?: boolean | Prisma.User$antipixelsSubmittedArgs<ExtArgs>
+  UserStatusUpdated?: boolean | Prisma.User$UserStatusUpdatedArgs<ExtArgs>
+  tagCreated?: boolean | Prisma.User$tagCreatedArgs<ExtArgs>
+  tagOnAntipixelAssigned?: boolean | Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs>
+  tagsStatusUpdated?: boolean | Prisma.User$tagsStatusUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
+  userName?: boolean
   status?: boolean
-  statusUpdatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
+  userName?: boolean
   status?: boolean
-  statusUpdatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
-  name?: boolean
+  userName?: boolean
   status?: boolean
-  statusUpdatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "status" | "statusUpdatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userName" | "status", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accountHistory?: boolean | Prisma.User$accountHistoryArgs<ExtArgs>
-  changesMade?: boolean | Prisma.User$changesMadeArgs<ExtArgs>
-  antipixels?: boolean | Prisma.User$antipixelsArgs<ExtArgs>
-  tag?: boolean | Prisma.User$tagArgs<ExtArgs>
-  tagOnAntipixel?: boolean | Prisma.User$tagOnAntipixelArgs<ExtArgs>
+  rolesCreated?: boolean | Prisma.User$rolesCreatedArgs<ExtArgs>
+  antipixelsSubmitted?: boolean | Prisma.User$antipixelsSubmittedArgs<ExtArgs>
+  UserStatusUpdated?: boolean | Prisma.User$UserStatusUpdatedArgs<ExtArgs>
+  tagCreated?: boolean | Prisma.User$tagCreatedArgs<ExtArgs>
+  tagOnAntipixelAssigned?: boolean | Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs>
+  tagsStatusUpdated?: boolean | Prisma.User$tagsStatusUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -861,16 +1027,17 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     accountHistory: Prisma.$UserStatusHistoryPayload<ExtArgs>[]
-    changesMade: Prisma.$UserStatusHistoryPayload<ExtArgs>[]
-    antipixels: Prisma.$AntipixelPayload<ExtArgs>[]
-    tag: Prisma.$TagPayload<ExtArgs>[]
-    tagOnAntipixel: Prisma.$TagOnAntipixelPayload<ExtArgs>[]
+    rolesCreated: Prisma.$RolePayload<ExtArgs>[]
+    antipixelsSubmitted: Prisma.$AntipixelPayload<ExtArgs>[]
+    UserStatusUpdated: Prisma.$UserStatusHistoryPayload<ExtArgs>[]
+    tagCreated: Prisma.$TagPayload<ExtArgs>[]
+    tagOnAntipixelAssigned: Prisma.$TagOnAntipixelPayload<ExtArgs>[]
+    tagsStatusUpdated: Prisma.$TagsStatusHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    name: string
+    userName: string
     status: $Enums.EUserAccountStatus
-    statusUpdatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1266,10 +1433,12 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   accountHistory<T extends Prisma.User$accountHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  changesMade<T extends Prisma.User$changesMadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$changesMadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  antipixels<T extends Prisma.User$antipixelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$antipixelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  tag<T extends Prisma.User$tagArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  tagOnAntipixel<T extends Prisma.User$tagOnAntipixelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagOnAntipixelArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagOnAntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rolesCreated<T extends Prisma.User$rolesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rolesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  antipixelsSubmitted<T extends Prisma.User$antipixelsSubmittedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$antipixelsSubmittedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  UserStatusUpdated<T extends Prisma.User$UserStatusUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$UserStatusUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tagCreated<T extends Prisma.User$tagCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tagOnAntipixelAssigned<T extends Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagOnAntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tagsStatusUpdated<T extends Prisma.User$tagsStatusUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagsStatusUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagsStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1300,9 +1469,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'Int'>
-  readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly userName: Prisma.FieldRef<"User", 'String'>
   readonly status: Prisma.FieldRef<"User", 'EUserAccountStatus'>
-  readonly statusUpdatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -1720,33 +1888,33 @@ export type User$accountHistoryArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * User.changesMade
+ * User.rolesCreated
  */
-export type User$changesMadeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$rolesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the UserStatusHistory
+   * Select specific fields to fetch from the Role
    */
-  select?: Prisma.UserStatusHistorySelect<ExtArgs> | null
+  select?: Prisma.RoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the UserStatusHistory
+   * Omit specific fields from the Role
    */
-  omit?: Prisma.UserStatusHistoryOmit<ExtArgs> | null
+  omit?: Prisma.RoleOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserStatusHistoryInclude<ExtArgs> | null
-  where?: Prisma.UserStatusHistoryWhereInput
-  orderBy?: Prisma.UserStatusHistoryOrderByWithRelationInput | Prisma.UserStatusHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.UserStatusHistoryWhereUniqueInput
+  include?: Prisma.RoleInclude<ExtArgs> | null
+  where?: Prisma.RoleWhereInput
+  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
+  cursor?: Prisma.RoleWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserStatusHistoryScalarFieldEnum | Prisma.UserStatusHistoryScalarFieldEnum[]
+  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
 }
 
 /**
- * User.antipixels
+ * User.antipixelsSubmitted
  */
-export type User$antipixelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$antipixelsSubmittedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Antipixel
    */
@@ -1768,9 +1936,33 @@ export type User$antipixelsArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * User.tag
+ * User.UserStatusUpdated
  */
-export type User$tagArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$UserStatusUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserStatusHistory
+   */
+  select?: Prisma.UserStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserStatusHistory
+   */
+  omit?: Prisma.UserStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.UserStatusHistoryWhereInput
+  orderBy?: Prisma.UserStatusHistoryOrderByWithRelationInput | Prisma.UserStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.UserStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserStatusHistoryScalarFieldEnum | Prisma.UserStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * User.tagCreated
+ */
+export type User$tagCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Tag
    */
@@ -1792,9 +1984,9 @@ export type User$tagArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 }
 
 /**
- * User.tagOnAntipixel
+ * User.tagOnAntipixelAssigned
  */
-export type User$tagOnAntipixelArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$tagOnAntipixelAssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TagOnAntipixel
    */
@@ -1813,6 +2005,30 @@ export type User$tagOnAntipixelArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.TagOnAntipixelScalarFieldEnum | Prisma.TagOnAntipixelScalarFieldEnum[]
+}
+
+/**
+ * User.tagsStatusUpdated
+ */
+export type User$tagsStatusUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TagsStatusHistory
+   */
+  select?: Prisma.TagsStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TagsStatusHistory
+   */
+  omit?: Prisma.TagsStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TagsStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.TagsStatusHistoryWhereInput
+  orderBy?: Prisma.TagsStatusHistoryOrderByWithRelationInput | Prisma.TagsStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.TagsStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TagsStatusHistoryScalarFieldEnum | Prisma.TagsStatusHistoryScalarFieldEnum[]
 }
 
 /**

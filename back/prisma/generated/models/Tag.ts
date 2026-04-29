@@ -27,56 +27,72 @@ export type AggregateTag = {
 }
 
 export type TagAvgAggregateOutputType = {
+  id: number | null
   userId: number | null
 }
 
 export type TagSumAggregateOutputType = {
+  id: number | null
   userId: number | null
 }
 
 export type TagMinAggregateOutputType = {
+  id: number | null
   name: string | null
   description: string | null
+  status: $Enums.ETagsStatus | null
   userId: number | null
 }
 
 export type TagMaxAggregateOutputType = {
+  id: number | null
   name: string | null
   description: string | null
+  status: $Enums.ETagsStatus | null
   userId: number | null
 }
 
 export type TagCountAggregateOutputType = {
+  id: number
   name: number
   description: number
+  status: number
   userId: number
   _all: number
 }
 
 
 export type TagAvgAggregateInputType = {
+  id?: true
   userId?: true
 }
 
 export type TagSumAggregateInputType = {
+  id?: true
   userId?: true
 }
 
 export type TagMinAggregateInputType = {
+  id?: true
   name?: true
   description?: true
+  status?: true
   userId?: true
 }
 
 export type TagMaxAggregateInputType = {
+  id?: true
   name?: true
   description?: true
+  status?: true
   userId?: true
 }
 
 export type TagCountAggregateInputType = {
+  id?: true
   name?: true
   description?: true
+  status?: true
   userId?: true
   _all?: true
 }
@@ -168,8 +184,10 @@ export type TagGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 export type TagGroupByOutputType = {
+  id: number
   name: string
   description: string
+  status: $Enums.ETagsStatus
   userId: number
   _count: TagCountAggregateOutputType | null
   _avg: TagAvgAggregateOutputType | null
@@ -197,35 +215,46 @@ export type TagWhereInput = {
   AND?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
   OR?: Prisma.TagWhereInput[]
   NOT?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
+  id?: Prisma.IntFilter<"Tag"> | number
   name?: Prisma.StringFilter<"Tag"> | string
   description?: Prisma.StringFilter<"Tag"> | string
+  status?: Prisma.EnumETagsStatusFilter<"Tag"> | $Enums.ETagsStatus
   userId?: Prisma.IntFilter<"Tag"> | number
+  statusHistory?: Prisma.TagsStatusHistoryListRelationFilter
   antipixels?: Prisma.TagOnAntipixelListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type TagOrderByWithRelationInput = {
+  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  statusHistory?: Prisma.TagsStatusHistoryOrderByRelationAggregateInput
   antipixels?: Prisma.TagOnAntipixelOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
 }
 
 export type TagWhereUniqueInput = Prisma.AtLeast<{
-  name?: string
+  id?: number
   AND?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
   OR?: Prisma.TagWhereInput[]
   NOT?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
+  name?: Prisma.StringFilter<"Tag"> | string
   description?: Prisma.StringFilter<"Tag"> | string
+  status?: Prisma.EnumETagsStatusFilter<"Tag"> | $Enums.ETagsStatus
   userId?: Prisma.IntFilter<"Tag"> | number
+  statusHistory?: Prisma.TagsStatusHistoryListRelationFilter
   antipixels?: Prisma.TagOnAntipixelListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "name" | "name">
+}, "id">
 
 export type TagOrderByWithAggregationInput = {
+  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.TagCountOrderByAggregateInput
   _avg?: Prisma.TagAvgOrderByAggregateInput
@@ -238,53 +267,70 @@ export type TagScalarWhereWithAggregatesInput = {
   AND?: Prisma.TagScalarWhereWithAggregatesInput | Prisma.TagScalarWhereWithAggregatesInput[]
   OR?: Prisma.TagScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TagScalarWhereWithAggregatesInput | Prisma.TagScalarWhereWithAggregatesInput[]
+  id?: Prisma.IntWithAggregatesFilter<"Tag"> | number
   name?: Prisma.StringWithAggregatesFilter<"Tag"> | string
   description?: Prisma.StringWithAggregatesFilter<"Tag"> | string
+  status?: Prisma.EnumETagsStatusWithAggregatesFilter<"Tag"> | $Enums.ETagsStatus
   userId?: Prisma.IntWithAggregatesFilter<"Tag"> | number
 }
 
 export type TagCreateInput = {
   name: string
   description: string
+  status?: $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryCreateNestedManyWithoutTagInput
   antipixels?: Prisma.TagOnAntipixelCreateNestedManyWithoutTagInput
-  createdBy: Prisma.UserCreateNestedOneWithoutTagInput
+  createdBy: Prisma.UserCreateNestedOneWithoutTagCreatedInput
 }
 
 export type TagUncheckedCreateInput = {
+  id?: number
   name: string
   description: string
+  status?: $Enums.ETagsStatus
   userId: number
+  statusHistory?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutTagInput
   antipixels?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutTagInput
 }
 
 export type TagUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryUpdateManyWithoutTagNestedInput
   antipixels?: Prisma.TagOnAntipixelUpdateManyWithoutTagNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutTagNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutTagCreatedNestedInput
 }
 
 export type TagUncheckedUpdateInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  statusHistory?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutTagNestedInput
   antipixels?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutTagNestedInput
 }
 
 export type TagCreateManyInput = {
+  id?: number
   name: string
   description: string
+  status?: $Enums.ETagsStatus
   userId: number
 }
 
 export type TagUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
 }
 
 export type TagUncheckedUpdateManyInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -299,28 +345,36 @@ export type TagOrderByRelationAggregateInput = {
 }
 
 export type TagCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type TagSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -371,6 +425,24 @@ export type TagUncheckedUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.TagScalarWhereInput | Prisma.TagScalarWhereInput[]
 }
 
+export type EnumETagsStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ETagsStatus
+}
+
+export type TagCreateNestedOneWithoutStatusHistoryInput = {
+  create?: Prisma.XOR<Prisma.TagCreateWithoutStatusHistoryInput, Prisma.TagUncheckedCreateWithoutStatusHistoryInput>
+  connectOrCreate?: Prisma.TagCreateOrConnectWithoutStatusHistoryInput
+  connect?: Prisma.TagWhereUniqueInput
+}
+
+export type TagUpdateOneRequiredWithoutStatusHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.TagCreateWithoutStatusHistoryInput, Prisma.TagUncheckedCreateWithoutStatusHistoryInput>
+  connectOrCreate?: Prisma.TagCreateOrConnectWithoutStatusHistoryInput
+  upsert?: Prisma.TagUpsertWithoutStatusHistoryInput
+  connect?: Prisma.TagWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TagUpdateToOneWithWhereWithoutStatusHistoryInput, Prisma.TagUpdateWithoutStatusHistoryInput>, Prisma.TagUncheckedUpdateWithoutStatusHistoryInput>
+}
+
 export type TagCreateNestedOneWithoutAntipixelsInput = {
   create?: Prisma.XOR<Prisma.TagCreateWithoutAntipixelsInput, Prisma.TagUncheckedCreateWithoutAntipixelsInput>
   connectOrCreate?: Prisma.TagCreateOrConnectWithoutAntipixelsInput
@@ -388,12 +460,17 @@ export type TagUpdateOneRequiredWithoutAntipixelsNestedInput = {
 export type TagCreateWithoutCreatedByInput = {
   name: string
   description: string
+  status?: $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryCreateNestedManyWithoutTagInput
   antipixels?: Prisma.TagOnAntipixelCreateNestedManyWithoutTagInput
 }
 
 export type TagUncheckedCreateWithoutCreatedByInput = {
+  id?: number
   name: string
   description: string
+  status?: $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutTagInput
   antipixels?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutTagInput
 }
 
@@ -427,21 +504,78 @@ export type TagScalarWhereInput = {
   AND?: Prisma.TagScalarWhereInput | Prisma.TagScalarWhereInput[]
   OR?: Prisma.TagScalarWhereInput[]
   NOT?: Prisma.TagScalarWhereInput | Prisma.TagScalarWhereInput[]
+  id?: Prisma.IntFilter<"Tag"> | number
   name?: Prisma.StringFilter<"Tag"> | string
   description?: Prisma.StringFilter<"Tag"> | string
+  status?: Prisma.EnumETagsStatusFilter<"Tag"> | $Enums.ETagsStatus
   userId?: Prisma.IntFilter<"Tag"> | number
+}
+
+export type TagCreateWithoutStatusHistoryInput = {
+  name: string
+  description: string
+  status?: $Enums.ETagsStatus
+  antipixels?: Prisma.TagOnAntipixelCreateNestedManyWithoutTagInput
+  createdBy: Prisma.UserCreateNestedOneWithoutTagCreatedInput
+}
+
+export type TagUncheckedCreateWithoutStatusHistoryInput = {
+  id?: number
+  name: string
+  description: string
+  status?: $Enums.ETagsStatus
+  userId: number
+  antipixels?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutTagInput
+}
+
+export type TagCreateOrConnectWithoutStatusHistoryInput = {
+  where: Prisma.TagWhereUniqueInput
+  create: Prisma.XOR<Prisma.TagCreateWithoutStatusHistoryInput, Prisma.TagUncheckedCreateWithoutStatusHistoryInput>
+}
+
+export type TagUpsertWithoutStatusHistoryInput = {
+  update: Prisma.XOR<Prisma.TagUpdateWithoutStatusHistoryInput, Prisma.TagUncheckedUpdateWithoutStatusHistoryInput>
+  create: Prisma.XOR<Prisma.TagCreateWithoutStatusHistoryInput, Prisma.TagUncheckedCreateWithoutStatusHistoryInput>
+  where?: Prisma.TagWhereInput
+}
+
+export type TagUpdateToOneWithWhereWithoutStatusHistoryInput = {
+  where?: Prisma.TagWhereInput
+  data: Prisma.XOR<Prisma.TagUpdateWithoutStatusHistoryInput, Prisma.TagUncheckedUpdateWithoutStatusHistoryInput>
+}
+
+export type TagUpdateWithoutStatusHistoryInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
+  antipixels?: Prisma.TagOnAntipixelUpdateManyWithoutTagNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutTagCreatedNestedInput
+}
+
+export type TagUncheckedUpdateWithoutStatusHistoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  antipixels?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutTagNestedInput
 }
 
 export type TagCreateWithoutAntipixelsInput = {
   name: string
   description: string
-  createdBy: Prisma.UserCreateNestedOneWithoutTagInput
+  status?: $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryCreateNestedManyWithoutTagInput
+  createdBy: Prisma.UserCreateNestedOneWithoutTagCreatedInput
 }
 
 export type TagUncheckedCreateWithoutAntipixelsInput = {
+  id?: number
   name: string
   description: string
+  status?: $Enums.ETagsStatus
   userId: number
+  statusHistory?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutTagInput
 }
 
 export type TagCreateOrConnectWithoutAntipixelsInput = {
@@ -463,35 +597,49 @@ export type TagUpdateToOneWithWhereWithoutAntipixelsInput = {
 export type TagUpdateWithoutAntipixelsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutTagNestedInput
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryUpdateManyWithoutTagNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutTagCreatedNestedInput
 }
 
 export type TagUncheckedUpdateWithoutAntipixelsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  statusHistory?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutTagNestedInput
 }
 
 export type TagCreateManyCreatedByInput = {
+  id?: number
   name: string
   description: string
+  status?: $Enums.ETagsStatus
 }
 
 export type TagUpdateWithoutCreatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryUpdateManyWithoutTagNestedInput
   antipixels?: Prisma.TagOnAntipixelUpdateManyWithoutTagNestedInput
 }
 
 export type TagUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
+  statusHistory?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutTagNestedInput
   antipixels?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutTagNestedInput
 }
 
 export type TagUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumETagsStatusFieldUpdateOperationsInput | $Enums.ETagsStatus
 }
 
 
@@ -500,10 +648,12 @@ export type TagUncheckedUpdateManyWithoutCreatedByInput = {
  */
 
 export type TagCountOutputType = {
+  statusHistory: number
   antipixels: number
 }
 
 export type TagCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  statusHistory?: boolean | TagCountOutputTypeCountStatusHistoryArgs
   antipixels?: boolean | TagCountOutputTypeCountAntipixelsArgs
 }
 
@@ -520,42 +670,59 @@ export type TagCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensio
 /**
  * TagCountOutputType without action
  */
+export type TagCountOutputTypeCountStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TagsStatusHistoryWhereInput
+}
+
+/**
+ * TagCountOutputType without action
+ */
 export type TagCountOutputTypeCountAntipixelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TagOnAntipixelWhereInput
 }
 
 
 export type TagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   name?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
+  statusHistory?: boolean | Prisma.Tag$statusHistoryArgs<ExtArgs>
   antipixels?: boolean | Prisma.Tag$antipixelsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TagCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tag"]>
 
 export type TagSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   name?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tag"]>
 
 export type TagSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   name?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tag"]>
 
 export type TagSelectScalar = {
+  id?: boolean
   name?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
 }
 
-export type TagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"name" | "description" | "userId", ExtArgs["result"]["tag"]>
+export type TagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "status" | "userId", ExtArgs["result"]["tag"]>
 export type TagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  statusHistory?: boolean | Prisma.Tag$statusHistoryArgs<ExtArgs>
   antipixels?: boolean | Prisma.Tag$antipixelsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TagCountOutputTypeDefaultArgs<ExtArgs>
@@ -570,12 +737,15 @@ export type TagIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type $TagPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Tag"
   objects: {
+    statusHistory: Prisma.$TagsStatusHistoryPayload<ExtArgs>[]
     antipixels: Prisma.$TagOnAntipixelPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    id: number
     name: string
     description: string
+    status: $Enums.ETagsStatus
     userId: number
   }, ExtArgs["result"]["tag"]>
   composites: {}
@@ -660,8 +830,8 @@ export interface TagDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * // Get first 10 Tags
    * const tags = await prisma.tag.findMany({ take: 10 })
    * 
-   * // Only select the `name`
-   * const tagWithNameOnly = await prisma.tag.findMany({ select: { name: true } })
+   * // Only select the `id`
+   * const tagWithIdOnly = await prisma.tag.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends TagFindManyArgs>(args?: Prisma.SelectSubset<T, TagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -705,9 +875,9 @@ export interface TagDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   ]
    * })
    * 
-   * // Create many Tags and only return the `name`
-   * const tagWithNameOnly = await prisma.tag.createManyAndReturn({
-   *   select: { name: true },
+   * // Create many Tags and only return the `id`
+   * const tagWithIdOnly = await prisma.tag.createManyAndReturn({
+   *   select: { id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -796,9 +966,9 @@ export interface TagDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   ]
    * })
    * 
-   * // Update zero or more Tags and only return the `name`
-   * const tagWithNameOnly = await prisma.tag.updateManyAndReturn({
-   *   select: { name: true },
+   * // Update zero or more Tags and only return the `id`
+   * const tagWithIdOnly = await prisma.tag.updateManyAndReturn({
+   *   select: { id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -971,6 +1141,7 @@ readonly fields: TagFieldRefs;
  */
 export interface Prisma__TagClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  statusHistory<T extends Prisma.Tag$statusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tag$statusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagsStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   antipixels<T extends Prisma.Tag$antipixelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tag$antipixelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagOnAntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1002,8 +1173,10 @@ export interface Prisma__TagClient<T, Null = never, ExtArgs extends runtime.Type
  * Fields of the Tag model
  */
 export interface TagFieldRefs {
+  readonly id: Prisma.FieldRef<"Tag", 'Int'>
   readonly name: Prisma.FieldRef<"Tag", 'String'>
   readonly description: Prisma.FieldRef<"Tag", 'String'>
+  readonly status: Prisma.FieldRef<"Tag", 'ETagsStatus'>
   readonly userId: Prisma.FieldRef<"Tag", 'Int'>
 }
     
@@ -1403,6 +1576,30 @@ export type TagDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Limit how many Tags to delete.
    */
   limit?: number
+}
+
+/**
+ * Tag.statusHistory
+ */
+export type Tag$statusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TagsStatusHistory
+   */
+  select?: Prisma.TagsStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TagsStatusHistory
+   */
+  omit?: Prisma.TagsStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TagsStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.TagsStatusHistoryWhereInput
+  orderBy?: Prisma.TagsStatusHistoryOrderByWithRelationInput | Prisma.TagsStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.TagsStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TagsStatusHistoryScalarFieldEnum | Prisma.TagsStatusHistoryScalarFieldEnum[]
 }
 
 /**

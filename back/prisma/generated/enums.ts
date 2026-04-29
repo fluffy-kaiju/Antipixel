@@ -27,3 +27,13 @@ export const ETagsStatus = {
 } as const
 
 export type ETagsStatus = (typeof ETagsStatus)[keyof typeof ETagsStatus]
+
+
+export const EVirusScanStatus = {
+  PENDING: 'PENDING',
+  SCANNING: 'SCANNING',
+  SAFE: 'SAFE',
+  UNSAFE: 'UNSAFE'
+} as const
+
+export type EVirusScanStatus = (typeof EVirusScanStatus)[keyof typeof EVirusScanStatus]

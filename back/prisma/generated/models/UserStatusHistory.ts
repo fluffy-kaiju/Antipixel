@@ -41,28 +41,28 @@ export type UserStatusHistorySumAggregateOutputType = {
 export type UserStatusHistoryMinAggregateOutputType = {
   id: number | null
   userId: number | null
-  changeMadeByUserId: number | null
   status: $Enums.EUserAccountStatus | null
-  changeMadeAt: Date | null
   reason: string | null
+  changeMadeByUserId: number | null
+  changeMadeAt: Date | null
 }
 
 export type UserStatusHistoryMaxAggregateOutputType = {
   id: number | null
   userId: number | null
-  changeMadeByUserId: number | null
   status: $Enums.EUserAccountStatus | null
-  changeMadeAt: Date | null
   reason: string | null
+  changeMadeByUserId: number | null
+  changeMadeAt: Date | null
 }
 
 export type UserStatusHistoryCountAggregateOutputType = {
   id: number
   userId: number
-  changeMadeByUserId: number
   status: number
-  changeMadeAt: number
   reason: number
+  changeMadeByUserId: number
+  changeMadeAt: number
   _all: number
 }
 
@@ -82,28 +82,28 @@ export type UserStatusHistorySumAggregateInputType = {
 export type UserStatusHistoryMinAggregateInputType = {
   id?: true
   userId?: true
-  changeMadeByUserId?: true
   status?: true
-  changeMadeAt?: true
   reason?: true
+  changeMadeByUserId?: true
+  changeMadeAt?: true
 }
 
 export type UserStatusHistoryMaxAggregateInputType = {
   id?: true
   userId?: true
-  changeMadeByUserId?: true
   status?: true
-  changeMadeAt?: true
   reason?: true
+  changeMadeByUserId?: true
+  changeMadeAt?: true
 }
 
 export type UserStatusHistoryCountAggregateInputType = {
   id?: true
   userId?: true
-  changeMadeByUserId?: true
   status?: true
-  changeMadeAt?: true
   reason?: true
+  changeMadeByUserId?: true
+  changeMadeAt?: true
   _all?: true
 }
 
@@ -196,10 +196,10 @@ export type UserStatusHistoryGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type UserStatusHistoryGroupByOutputType = {
   id: number
   userId: number
-  changeMadeByUserId: number
   status: $Enums.EUserAccountStatus
-  changeMadeAt: Date
   reason: string
+  changeMadeByUserId: number
+  changeMadeAt: Date
   _count: UserStatusHistoryCountAggregateOutputType | null
   _avg: UserStatusHistoryAvgAggregateOutputType | null
   _sum: UserStatusHistorySumAggregateOutputType | null
@@ -228,10 +228,10 @@ export type UserStatusHistoryWhereInput = {
   NOT?: Prisma.UserStatusHistoryWhereInput | Prisma.UserStatusHistoryWhereInput[]
   id?: Prisma.IntFilter<"UserStatusHistory"> | number
   userId?: Prisma.IntFilter<"UserStatusHistory"> | number
-  changeMadeByUserId?: Prisma.IntFilter<"UserStatusHistory"> | number
   status?: Prisma.EnumEUserAccountStatusFilter<"UserStatusHistory"> | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFilter<"UserStatusHistory"> | Date | string
   reason?: Prisma.StringFilter<"UserStatusHistory"> | string
+  changeMadeByUserId?: Prisma.IntFilter<"UserStatusHistory"> | number
+  changeMadeAt?: Prisma.DateTimeFilter<"UserStatusHistory"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   changeMadeBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -239,10 +239,10 @@ export type UserStatusHistoryWhereInput = {
 export type UserStatusHistoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  changeMadeByUserId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  changeMadeAt?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  changeMadeByUserId?: Prisma.SortOrder
+  changeMadeAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   changeMadeBy?: Prisma.UserOrderByWithRelationInput
 }
@@ -253,10 +253,10 @@ export type UserStatusHistoryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserStatusHistoryWhereInput[]
   NOT?: Prisma.UserStatusHistoryWhereInput | Prisma.UserStatusHistoryWhereInput[]
   userId?: Prisma.IntFilter<"UserStatusHistory"> | number
-  changeMadeByUserId?: Prisma.IntFilter<"UserStatusHistory"> | number
   status?: Prisma.EnumEUserAccountStatusFilter<"UserStatusHistory"> | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFilter<"UserStatusHistory"> | Date | string
   reason?: Prisma.StringFilter<"UserStatusHistory"> | string
+  changeMadeByUserId?: Prisma.IntFilter<"UserStatusHistory"> | number
+  changeMadeAt?: Prisma.DateTimeFilter<"UserStatusHistory"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   changeMadeBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
@@ -264,10 +264,10 @@ export type UserStatusHistoryWhereUniqueInput = Prisma.AtLeast<{
 export type UserStatusHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  changeMadeByUserId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  changeMadeAt?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  changeMadeByUserId?: Prisma.SortOrder
+  changeMadeAt?: Prisma.SortOrder
   _count?: Prisma.UserStatusHistoryCountOrderByAggregateInput
   _avg?: Prisma.UserStatusHistoryAvgOrderByAggregateInput
   _max?: Prisma.UserStatusHistoryMaxOrderByAggregateInput
@@ -281,68 +281,68 @@ export type UserStatusHistoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserStatusHistoryScalarWhereWithAggregatesInput | Prisma.UserStatusHistoryScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"UserStatusHistory"> | number
   userId?: Prisma.IntWithAggregatesFilter<"UserStatusHistory"> | number
-  changeMadeByUserId?: Prisma.IntWithAggregatesFilter<"UserStatusHistory"> | number
   status?: Prisma.EnumEUserAccountStatusWithAggregatesFilter<"UserStatusHistory"> | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeWithAggregatesFilter<"UserStatusHistory"> | Date | string
   reason?: Prisma.StringWithAggregatesFilter<"UserStatusHistory"> | string
+  changeMadeByUserId?: Prisma.IntWithAggregatesFilter<"UserStatusHistory"> | number
+  changeMadeAt?: Prisma.DateTimeWithAggregatesFilter<"UserStatusHistory"> | Date | string
 }
 
 export type UserStatusHistoryCreateInput = {
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAccountHistoryInput
-  changeMadeBy: Prisma.UserCreateNestedOneWithoutChangesMadeInput
+  changeMadeBy: Prisma.UserCreateNestedOneWithoutUserStatusUpdatedInput
 }
 
 export type UserStatusHistoryUncheckedCreateInput = {
   id?: number
   userId: number
-  changeMadeByUserId: number
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeByUserId: number
+  changeMadeAt?: Date | string
 }
 
 export type UserStatusHistoryUpdateInput = {
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAccountHistoryNestedInput
-  changeMadeBy?: Prisma.UserUpdateOneRequiredWithoutChangesMadeNestedInput
+  changeMadeBy?: Prisma.UserUpdateOneRequiredWithoutUserStatusUpdatedNestedInput
 }
 
 export type UserStatusHistoryUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserStatusHistoryCreateManyInput = {
   id?: number
   userId: number
-  changeMadeByUserId: number
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeByUserId: number
+  changeMadeAt?: Date | string
 }
 
 export type UserStatusHistoryUpdateManyMutationInput = {
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserStatusHistoryUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserStatusHistoryListRelationFilter = {
@@ -358,10 +358,10 @@ export type UserStatusHistoryOrderByRelationAggregateInput = {
 export type UserStatusHistoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  changeMadeByUserId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  changeMadeAt?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  changeMadeByUserId?: Prisma.SortOrder
+  changeMadeAt?: Prisma.SortOrder
 }
 
 export type UserStatusHistoryAvgOrderByAggregateInput = {
@@ -373,19 +373,19 @@ export type UserStatusHistoryAvgOrderByAggregateInput = {
 export type UserStatusHistoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  changeMadeByUserId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  changeMadeAt?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  changeMadeByUserId?: Prisma.SortOrder
+  changeMadeAt?: Prisma.SortOrder
 }
 
 export type UserStatusHistoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  changeMadeByUserId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  changeMadeAt?: Prisma.SortOrder
   reason?: Prisma.SortOrder
+  changeMadeByUserId?: Prisma.SortOrder
+  changeMadeAt?: Prisma.SortOrder
 }
 
 export type UserStatusHistorySumOrderByAggregateInput = {
@@ -478,19 +478,23 @@ export type UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput =
   deleteMany?: Prisma.UserStatusHistoryScalarWhereInput | Prisma.UserStatusHistoryScalarWhereInput[]
 }
 
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
 export type UserStatusHistoryCreateWithoutUserInput = {
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
-  changeMadeBy: Prisma.UserCreateNestedOneWithoutChangesMadeInput
+  changeMadeAt?: Date | string
+  changeMadeBy: Prisma.UserCreateNestedOneWithoutUserStatusUpdatedInput
 }
 
 export type UserStatusHistoryUncheckedCreateWithoutUserInput = {
   id?: number
-  changeMadeByUserId: number
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeByUserId: number
+  changeMadeAt?: Date | string
 }
 
 export type UserStatusHistoryCreateOrConnectWithoutUserInput = {
@@ -505,8 +509,8 @@ export type UserStatusHistoryCreateManyUserInputEnvelope = {
 
 export type UserStatusHistoryCreateWithoutChangeMadeByInput = {
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAccountHistoryInput
 }
 
@@ -514,8 +518,8 @@ export type UserStatusHistoryUncheckedCreateWithoutChangeMadeByInput = {
   id?: number
   userId: number
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeAt?: Date | string
 }
 
 export type UserStatusHistoryCreateOrConnectWithoutChangeMadeByInput = {
@@ -550,10 +554,10 @@ export type UserStatusHistoryScalarWhereInput = {
   NOT?: Prisma.UserStatusHistoryScalarWhereInput | Prisma.UserStatusHistoryScalarWhereInput[]
   id?: Prisma.IntFilter<"UserStatusHistory"> | number
   userId?: Prisma.IntFilter<"UserStatusHistory"> | number
-  changeMadeByUserId?: Prisma.IntFilter<"UserStatusHistory"> | number
   status?: Prisma.EnumEUserAccountStatusFilter<"UserStatusHistory"> | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFilter<"UserStatusHistory"> | Date | string
   reason?: Prisma.StringFilter<"UserStatusHistory"> | string
+  changeMadeByUserId?: Prisma.IntFilter<"UserStatusHistory"> | number
+  changeMadeAt?: Prisma.DateTimeFilter<"UserStatusHistory"> | Date | string
 }
 
 export type UserStatusHistoryUpsertWithWhereUniqueWithoutChangeMadeByInput = {
@@ -574,47 +578,47 @@ export type UserStatusHistoryUpdateManyWithWhereWithoutChangeMadeByInput = {
 
 export type UserStatusHistoryCreateManyUserInput = {
   id?: number
-  changeMadeByUserId: number
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeByUserId: number
+  changeMadeAt?: Date | string
 }
 
 export type UserStatusHistoryCreateManyChangeMadeByInput = {
   id?: number
   userId: number
   status: $Enums.EUserAccountStatus
-  changeMadeAt?: Date | string
   reason: string
+  changeMadeAt?: Date | string
 }
 
 export type UserStatusHistoryUpdateWithoutUserInput = {
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
-  changeMadeBy?: Prisma.UserUpdateOneRequiredWithoutChangesMadeNestedInput
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  changeMadeBy?: Prisma.UserUpdateOneRequiredWithoutUserStatusUpdatedNestedInput
 }
 
 export type UserStatusHistoryUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserStatusHistoryUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeByUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserStatusHistoryUpdateWithoutChangeMadeByInput = {
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAccountHistoryNestedInput
 }
 
@@ -622,16 +626,16 @@ export type UserStatusHistoryUncheckedUpdateWithoutChangeMadeByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
+  changeMadeAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -639,10 +643,10 @@ export type UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByInput = {
 export type UserStatusHistorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  changeMadeByUserId?: boolean
   status?: boolean
-  changeMadeAt?: boolean
   reason?: boolean
+  changeMadeByUserId?: boolean
+  changeMadeAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   changeMadeBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userStatusHistory"]>
@@ -650,10 +654,10 @@ export type UserStatusHistorySelect<ExtArgs extends runtime.Types.Extensions.Int
 export type UserStatusHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  changeMadeByUserId?: boolean
   status?: boolean
-  changeMadeAt?: boolean
   reason?: boolean
+  changeMadeByUserId?: boolean
+  changeMadeAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   changeMadeBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userStatusHistory"]>
@@ -661,10 +665,10 @@ export type UserStatusHistorySelectCreateManyAndReturn<ExtArgs extends runtime.T
 export type UserStatusHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  changeMadeByUserId?: boolean
   status?: boolean
-  changeMadeAt?: boolean
   reason?: boolean
+  changeMadeByUserId?: boolean
+  changeMadeAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   changeMadeBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userStatusHistory"]>
@@ -672,13 +676,13 @@ export type UserStatusHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.T
 export type UserStatusHistorySelectScalar = {
   id?: boolean
   userId?: boolean
-  changeMadeByUserId?: boolean
   status?: boolean
-  changeMadeAt?: boolean
   reason?: boolean
+  changeMadeByUserId?: boolean
+  changeMadeAt?: boolean
 }
 
-export type UserStatusHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "changeMadeByUserId" | "status" | "changeMadeAt" | "reason", ExtArgs["result"]["userStatusHistory"]>
+export type UserStatusHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "status" | "reason" | "changeMadeByUserId" | "changeMadeAt", ExtArgs["result"]["userStatusHistory"]>
 export type UserStatusHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   changeMadeBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -701,10 +705,10 @@ export type $UserStatusHistoryPayload<ExtArgs extends runtime.Types.Extensions.I
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     userId: number
-    changeMadeByUserId: number
     status: $Enums.EUserAccountStatus
-    changeMadeAt: Date
     reason: string
+    changeMadeByUserId: number
+    changeMadeAt: Date
   }, ExtArgs["result"]["userStatusHistory"]>
   composites: {}
 }
@@ -1132,10 +1136,10 @@ export interface Prisma__UserStatusHistoryClient<T, Null = never, ExtArgs extend
 export interface UserStatusHistoryFieldRefs {
   readonly id: Prisma.FieldRef<"UserStatusHistory", 'Int'>
   readonly userId: Prisma.FieldRef<"UserStatusHistory", 'Int'>
-  readonly changeMadeByUserId: Prisma.FieldRef<"UserStatusHistory", 'Int'>
   readonly status: Prisma.FieldRef<"UserStatusHistory", 'EUserAccountStatus'>
-  readonly changeMadeAt: Prisma.FieldRef<"UserStatusHistory", 'DateTime'>
   readonly reason: Prisma.FieldRef<"UserStatusHistory", 'String'>
+  readonly changeMadeByUserId: Prisma.FieldRef<"UserStatusHistory", 'Int'>
+  readonly changeMadeAt: Prisma.FieldRef<"UserStatusHistory", 'DateTime'>
 }
     
 

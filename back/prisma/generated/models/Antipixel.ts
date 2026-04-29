@@ -232,7 +232,7 @@ export type AntipixelWhereInput = {
   userId?: Prisma.IntFilter<"Antipixel"> | number
   createdAt?: Prisma.DateTimeFilter<"Antipixel"> | Date | string
   hashToAntipixelId?: Prisma.IntFilter<"Antipixel"> | number
-  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  submittedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tags?: Prisma.TagOnAntipixelListRelationFilter
   hashToAntipixel?: Prisma.XOR<Prisma.HashToAntipixelScalarRelationFilter, Prisma.HashToAntipixelWhereInput>
 }
@@ -244,7 +244,7 @@ export type AntipixelOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   hashToAntipixelId?: Prisma.SortOrder
-  createdBy?: Prisma.UserOrderByWithRelationInput
+  submittedBy?: Prisma.UserOrderByWithRelationInput
   tags?: Prisma.TagOnAntipixelOrderByRelationAggregateInput
   hashToAntipixel?: Prisma.HashToAntipixelOrderByWithRelationInput
 }
@@ -259,7 +259,7 @@ export type AntipixelWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"Antipixel"> | number
   createdAt?: Prisma.DateTimeFilter<"Antipixel"> | Date | string
   hashToAntipixelId?: Prisma.IntFilter<"Antipixel"> | number
-  createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  submittedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tags?: Prisma.TagOnAntipixelListRelationFilter
   hashToAntipixel?: Prisma.XOR<Prisma.HashToAntipixelScalarRelationFilter, Prisma.HashToAntipixelWhereInput>
 }, "id">
@@ -294,7 +294,7 @@ export type AntipixelCreateInput = {
   name: string
   path: string
   createdAt?: Date | string
-  createdBy: Prisma.UserCreateNestedOneWithoutAntipixelsInput
+  submittedBy: Prisma.UserCreateNestedOneWithoutAntipixelsSubmittedInput
   tags?: Prisma.TagOnAntipixelCreateNestedManyWithoutAntipixelInput
   hashToAntipixel: Prisma.HashToAntipixelCreateNestedOneWithoutAntipixelsInput
 }
@@ -313,7 +313,7 @@ export type AntipixelUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsNestedInput
+  submittedBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput
   tags?: Prisma.TagOnAntipixelUpdateManyWithoutAntipixelNestedInput
   hashToAntipixel?: Prisma.HashToAntipixelUpdateOneRequiredWithoutAntipixelsNestedInput
 }
@@ -406,45 +406,45 @@ export type AntipixelSumOrderByAggregateInput = {
   hashToAntipixelId?: Prisma.SortOrder
 }
 
-export type AntipixelCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutCreatedByInput, Prisma.AntipixelUncheckedCreateWithoutCreatedByInput> | Prisma.AntipixelCreateWithoutCreatedByInput[] | Prisma.AntipixelUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutCreatedByInput | Prisma.AntipixelCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.AntipixelCreateManyCreatedByInputEnvelope
+export type AntipixelCreateNestedManyWithoutSubmittedByInput = {
+  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutSubmittedByInput, Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput> | Prisma.AntipixelCreateWithoutSubmittedByInput[] | Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput[]
+  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput | Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput[]
+  createMany?: Prisma.AntipixelCreateManySubmittedByInputEnvelope
   connect?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
 }
 
-export type AntipixelUncheckedCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutCreatedByInput, Prisma.AntipixelUncheckedCreateWithoutCreatedByInput> | Prisma.AntipixelCreateWithoutCreatedByInput[] | Prisma.AntipixelUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutCreatedByInput | Prisma.AntipixelCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.AntipixelCreateManyCreatedByInputEnvelope
+export type AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput = {
+  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutSubmittedByInput, Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput> | Prisma.AntipixelCreateWithoutSubmittedByInput[] | Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput[]
+  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput | Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput[]
+  createMany?: Prisma.AntipixelCreateManySubmittedByInputEnvelope
   connect?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
 }
 
-export type AntipixelUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutCreatedByInput, Prisma.AntipixelUncheckedCreateWithoutCreatedByInput> | Prisma.AntipixelCreateWithoutCreatedByInput[] | Prisma.AntipixelUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutCreatedByInput | Prisma.AntipixelCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.AntipixelUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.AntipixelUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.AntipixelCreateManyCreatedByInputEnvelope
+export type AntipixelUpdateManyWithoutSubmittedByNestedInput = {
+  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutSubmittedByInput, Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput> | Prisma.AntipixelCreateWithoutSubmittedByInput[] | Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput[]
+  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput | Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput[]
+  upsert?: Prisma.AntipixelUpsertWithWhereUniqueWithoutSubmittedByInput | Prisma.AntipixelUpsertWithWhereUniqueWithoutSubmittedByInput[]
+  createMany?: Prisma.AntipixelCreateManySubmittedByInputEnvelope
   set?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
   disconnect?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
   delete?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
   connect?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
-  update?: Prisma.AntipixelUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.AntipixelUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.AntipixelUpdateManyWithWhereWithoutCreatedByInput | Prisma.AntipixelUpdateManyWithWhereWithoutCreatedByInput[]
+  update?: Prisma.AntipixelUpdateWithWhereUniqueWithoutSubmittedByInput | Prisma.AntipixelUpdateWithWhereUniqueWithoutSubmittedByInput[]
+  updateMany?: Prisma.AntipixelUpdateManyWithWhereWithoutSubmittedByInput | Prisma.AntipixelUpdateManyWithWhereWithoutSubmittedByInput[]
   deleteMany?: Prisma.AntipixelScalarWhereInput | Prisma.AntipixelScalarWhereInput[]
 }
 
-export type AntipixelUncheckedUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutCreatedByInput, Prisma.AntipixelUncheckedCreateWithoutCreatedByInput> | Prisma.AntipixelCreateWithoutCreatedByInput[] | Prisma.AntipixelUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutCreatedByInput | Prisma.AntipixelCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.AntipixelUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.AntipixelUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.AntipixelCreateManyCreatedByInputEnvelope
+export type AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput = {
+  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutSubmittedByInput, Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput> | Prisma.AntipixelCreateWithoutSubmittedByInput[] | Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput[]
+  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput | Prisma.AntipixelCreateOrConnectWithoutSubmittedByInput[]
+  upsert?: Prisma.AntipixelUpsertWithWhereUniqueWithoutSubmittedByInput | Prisma.AntipixelUpsertWithWhereUniqueWithoutSubmittedByInput[]
+  createMany?: Prisma.AntipixelCreateManySubmittedByInputEnvelope
   set?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
   disconnect?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
   delete?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
   connect?: Prisma.AntipixelWhereUniqueInput | Prisma.AntipixelWhereUniqueInput[]
-  update?: Prisma.AntipixelUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.AntipixelUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.AntipixelUpdateManyWithWhereWithoutCreatedByInput | Prisma.AntipixelUpdateManyWithWhereWithoutCreatedByInput[]
+  update?: Prisma.AntipixelUpdateWithWhereUniqueWithoutSubmittedByInput | Prisma.AntipixelUpdateWithWhereUniqueWithoutSubmittedByInput[]
+  updateMany?: Prisma.AntipixelUpdateManyWithWhereWithoutSubmittedByInput | Prisma.AntipixelUpdateManyWithWhereWithoutSubmittedByInput[]
   deleteMany?: Prisma.AntipixelScalarWhereInput | Prisma.AntipixelScalarWhereInput[]
 }
 
@@ -504,7 +504,7 @@ export type AntipixelUncheckedUpdateManyWithoutHashToAntipixelNestedInput = {
   deleteMany?: Prisma.AntipixelScalarWhereInput | Prisma.AntipixelScalarWhereInput[]
 }
 
-export type AntipixelCreateWithoutCreatedByInput = {
+export type AntipixelCreateWithoutSubmittedByInput = {
   name: string
   path: string
   createdAt?: Date | string
@@ -512,7 +512,7 @@ export type AntipixelCreateWithoutCreatedByInput = {
   hashToAntipixel: Prisma.HashToAntipixelCreateNestedOneWithoutAntipixelsInput
 }
 
-export type AntipixelUncheckedCreateWithoutCreatedByInput = {
+export type AntipixelUncheckedCreateWithoutSubmittedByInput = {
   id?: number
   name: string
   path: string
@@ -521,30 +521,30 @@ export type AntipixelUncheckedCreateWithoutCreatedByInput = {
   tags?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAntipixelInput
 }
 
-export type AntipixelCreateOrConnectWithoutCreatedByInput = {
+export type AntipixelCreateOrConnectWithoutSubmittedByInput = {
   where: Prisma.AntipixelWhereUniqueInput
-  create: Prisma.XOR<Prisma.AntipixelCreateWithoutCreatedByInput, Prisma.AntipixelUncheckedCreateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.AntipixelCreateWithoutSubmittedByInput, Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput>
 }
 
-export type AntipixelCreateManyCreatedByInputEnvelope = {
-  data: Prisma.AntipixelCreateManyCreatedByInput | Prisma.AntipixelCreateManyCreatedByInput[]
+export type AntipixelCreateManySubmittedByInputEnvelope = {
+  data: Prisma.AntipixelCreateManySubmittedByInput | Prisma.AntipixelCreateManySubmittedByInput[]
   skipDuplicates?: boolean
 }
 
-export type AntipixelUpsertWithWhereUniqueWithoutCreatedByInput = {
+export type AntipixelUpsertWithWhereUniqueWithoutSubmittedByInput = {
   where: Prisma.AntipixelWhereUniqueInput
-  update: Prisma.XOR<Prisma.AntipixelUpdateWithoutCreatedByInput, Prisma.AntipixelUncheckedUpdateWithoutCreatedByInput>
-  create: Prisma.XOR<Prisma.AntipixelCreateWithoutCreatedByInput, Prisma.AntipixelUncheckedCreateWithoutCreatedByInput>
+  update: Prisma.XOR<Prisma.AntipixelUpdateWithoutSubmittedByInput, Prisma.AntipixelUncheckedUpdateWithoutSubmittedByInput>
+  create: Prisma.XOR<Prisma.AntipixelCreateWithoutSubmittedByInput, Prisma.AntipixelUncheckedCreateWithoutSubmittedByInput>
 }
 
-export type AntipixelUpdateWithWhereUniqueWithoutCreatedByInput = {
+export type AntipixelUpdateWithWhereUniqueWithoutSubmittedByInput = {
   where: Prisma.AntipixelWhereUniqueInput
-  data: Prisma.XOR<Prisma.AntipixelUpdateWithoutCreatedByInput, Prisma.AntipixelUncheckedUpdateWithoutCreatedByInput>
+  data: Prisma.XOR<Prisma.AntipixelUpdateWithoutSubmittedByInput, Prisma.AntipixelUncheckedUpdateWithoutSubmittedByInput>
 }
 
-export type AntipixelUpdateManyWithWhereWithoutCreatedByInput = {
+export type AntipixelUpdateManyWithWhereWithoutSubmittedByInput = {
   where: Prisma.AntipixelScalarWhereInput
-  data: Prisma.XOR<Prisma.AntipixelUpdateManyMutationInput, Prisma.AntipixelUncheckedUpdateManyWithoutCreatedByInput>
+  data: Prisma.XOR<Prisma.AntipixelUpdateManyMutationInput, Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByInput>
 }
 
 export type AntipixelScalarWhereInput = {
@@ -563,7 +563,7 @@ export type AntipixelCreateWithoutTagsInput = {
   name: string
   path: string
   createdAt?: Date | string
-  createdBy: Prisma.UserCreateNestedOneWithoutAntipixelsInput
+  submittedBy: Prisma.UserCreateNestedOneWithoutAntipixelsSubmittedInput
   hashToAntipixel: Prisma.HashToAntipixelCreateNestedOneWithoutAntipixelsInput
 }
 
@@ -596,7 +596,7 @@ export type AntipixelUpdateWithoutTagsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsNestedInput
+  submittedBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput
   hashToAntipixel?: Prisma.HashToAntipixelUpdateOneRequiredWithoutAntipixelsNestedInput
 }
 
@@ -613,7 +613,7 @@ export type AntipixelCreateWithoutHashToAntipixelInput = {
   name: string
   path: string
   createdAt?: Date | string
-  createdBy: Prisma.UserCreateNestedOneWithoutAntipixelsInput
+  submittedBy: Prisma.UserCreateNestedOneWithoutAntipixelsSubmittedInput
   tags?: Prisma.TagOnAntipixelCreateNestedManyWithoutAntipixelInput
 }
 
@@ -652,7 +652,7 @@ export type AntipixelUpdateManyWithWhereWithoutHashToAntipixelInput = {
   data: Prisma.XOR<Prisma.AntipixelUpdateManyMutationInput, Prisma.AntipixelUncheckedUpdateManyWithoutHashToAntipixelInput>
 }
 
-export type AntipixelCreateManyCreatedByInput = {
+export type AntipixelCreateManySubmittedByInput = {
   id?: number
   name: string
   path: string
@@ -660,7 +660,7 @@ export type AntipixelCreateManyCreatedByInput = {
   hashToAntipixelId: number
 }
 
-export type AntipixelUpdateWithoutCreatedByInput = {
+export type AntipixelUpdateWithoutSubmittedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -668,7 +668,7 @@ export type AntipixelUpdateWithoutCreatedByInput = {
   hashToAntipixel?: Prisma.HashToAntipixelUpdateOneRequiredWithoutAntipixelsNestedInput
 }
 
-export type AntipixelUncheckedUpdateWithoutCreatedByInput = {
+export type AntipixelUncheckedUpdateWithoutSubmittedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
@@ -677,7 +677,7 @@ export type AntipixelUncheckedUpdateWithoutCreatedByInput = {
   tags?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAntipixelNestedInput
 }
 
-export type AntipixelUncheckedUpdateManyWithoutCreatedByInput = {
+export type AntipixelUncheckedUpdateManyWithoutSubmittedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
@@ -697,7 +697,7 @@ export type AntipixelUpdateWithoutHashToAntipixelInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsNestedInput
+  submittedBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput
   tags?: Prisma.TagOnAntipixelUpdateManyWithoutAntipixelNestedInput
 }
 
@@ -756,7 +756,7 @@ export type AntipixelSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   userId?: boolean
   createdAt?: boolean
   hashToAntipixelId?: boolean
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tags?: boolean | Prisma.Antipixel$tagsArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.AntipixelCountOutputTypeDefaultArgs<ExtArgs>
@@ -769,7 +769,7 @@ export type AntipixelSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   userId?: boolean
   createdAt?: boolean
   hashToAntipixelId?: boolean
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["antipixel"]>
 
@@ -780,7 +780,7 @@ export type AntipixelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   userId?: boolean
   createdAt?: boolean
   hashToAntipixelId?: boolean
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["antipixel"]>
 
@@ -795,24 +795,24 @@ export type AntipixelSelectScalar = {
 
 export type AntipixelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "path" | "userId" | "createdAt" | "hashToAntipixelId", ExtArgs["result"]["antipixel"]>
 export type AntipixelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tags?: boolean | Prisma.Antipixel$tagsArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.AntipixelCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AntipixelIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
 }
 export type AntipixelIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
 }
 
 export type $AntipixelPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Antipixel"
   objects: {
-    createdBy: Prisma.$UserPayload<ExtArgs>
+    submittedBy: Prisma.$UserPayload<ExtArgs>
     tags: Prisma.$TagOnAntipixelPayload<ExtArgs>[]
     hashToAntipixel: Prisma.$HashToAntipixelPayload<ExtArgs>
   }
@@ -1217,7 +1217,7 @@ readonly fields: AntipixelFieldRefs;
  */
 export interface Prisma__AntipixelClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  submittedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tags<T extends Prisma.Antipixel$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Antipixel$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagOnAntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   hashToAntipixel<T extends Prisma.HashToAntipixelDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HashToAntipixelDefaultArgs<ExtArgs>>): Prisma.Prisma__HashToAntipixelClient<runtime.Types.Result.GetResult<Prisma.$HashToAntipixelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**

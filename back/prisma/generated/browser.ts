@@ -18,6 +18,21 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model PermissionOnRole
+ * 
+ */
+export type PermissionOnRole = Prisma.PermissionOnRoleModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
  * Model User
  * 
  */
@@ -32,6 +47,11 @@ export type UserStatusHistory = Prisma.UserStatusHistoryModel
  * 
  */
 export type Tag = Prisma.TagModel
+/**
+ * Model TagsStatusHistory
+ * 
+ */
+export type TagsStatusHistory = Prisma.TagsStatusHistoryModel
 /**
  * Model TagOnAntipixel
  * 

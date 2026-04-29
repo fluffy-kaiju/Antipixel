@@ -1,8 +1,7 @@
 FROM archlinux:base
     LABEL org.opencontainers.image.authors="Fluffy Kaiju <fluffy@fluffy-laptop>"
 
-
-RUN pacman -Syu --noconfirm base-devel sudo zsh nvm git pnpm typescript-language-server && \
+RUN pacman -Syu --noconfirm base-devel sudo zsh git && \
     pacman -Scc --noconfirm
 
 RUN useradd -m -s /bin/zsh dev
@@ -12,15 +11,20 @@ RUN echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER dev
 
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-RUN echo "source /usr/share/nvm/init-nvm.sh" >> .zshrc
-RUN echo "source /usr/share/nvm/init-nvm.sh" >> .bashrc
-
-RUN SHELL="/bin/zsh" pnpm setup
-RUN SHELL="/bin/bash" pnpm setup
-
 WORKDIR /tmp/
 RUN git clone https://aur.archlinux.org/yay-bin.git
 WORKDIR /tmp/yay-bin/
 RUN makepkg -si --noconfirm
-RUN yay -Syu emacs-lsp-booster --noconfirm
+RUN rm -rf /tmp/yay-bin/
+
+RUN yay -Syu emacs-lsp-booster nvm pnpm ripgrep \
+    yaml-language-server typescript-language-server dockerfile-language-server bash-language-server vscode-json-languageserver\
+    --noconfirm
+
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN echo "source /usr/share/nvm/init-nvm.sh" >> .zshrc
+RUN echo "source /usr/share/nvm/init-nvm.sh" >> .bashrc
+RUN  /home/dev/.tramp_history
+
+RUN SHELL="/bin/zsh" pnpm setup
+RUN SHELL="/bin/bash" pnpm setup
