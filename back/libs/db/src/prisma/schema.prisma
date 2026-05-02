@@ -1,9 +1,10 @@
 // This is your Prisma schema file,
 
 generator client {
-  provider     = "prisma-client"
-  output       = "./generated/"
-  moduleFormat = "cjs"
+  provider            = "prisma-client"
+  output              = "./generated/"
+  moduleFormat        = "cjs"
+  // Fix using `prisma-client` with monorepo standalone lib https://github.com/prisma/prisma/issues/28627#issuecomment-3567033856
   importFileExtension = ""
 }
 
