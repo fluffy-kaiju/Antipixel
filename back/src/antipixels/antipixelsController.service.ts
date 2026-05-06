@@ -3,7 +3,7 @@ import { CreateAntipixelDto } from './dto/create-antipixel.dto';
 import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
 
 @Injectable()
-export class AntipixelsService {
+export class AntipixelsControllerService {
   create(createAntipixelDto: CreateAntipixelDto) {
     return 'This action adds a new antipixel';
   }

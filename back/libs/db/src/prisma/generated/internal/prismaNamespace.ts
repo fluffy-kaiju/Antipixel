@@ -1220,7 +1220,9 @@ export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof Role
 export const UserScalarFieldEnum = {
   id: 'id',
   userName: 'userName',
-  status: 'status'
+  status: 'status',
+  email: 'email',
+  passwordHash: 'passwordHash'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

@@ -139,7 +139,7 @@ export type PrismaHttpError = {
  *    const errmsg = `${tag.name} already exist!`;
  *    throw new UnauthorizedException(errmsg);
  *  }
- * ...
+ *
  *
  * // If you juste want to put a custom error:
  * async userCreateATag(userId: number, tagName: string): Promise<number> {

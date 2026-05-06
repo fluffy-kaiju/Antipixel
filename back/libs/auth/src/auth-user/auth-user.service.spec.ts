@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AntipixelsService } from './antipixels.service';
+import { AuthUserService } from './auth-user.service';
 
-describe('AntipixelsService', () => {
-  let service: AntipixelsService;
+describe('AuthUserService', () => {
+  let service: AuthUserService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AntipixelsService],
+      providers: [AuthUserService],
     }).compile();
 
-    service = module.get<AntipixelsService>(AntipixelsService);
+    service = module.get<AuthUserService>(AuthUserService);
   });
 
   it('should be defined', () => {

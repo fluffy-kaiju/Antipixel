@@ -68,6 +68,9 @@ model User {
   status         EUserAccountStatus  @default(NOOB)
   accountHistory UserStatusHistory[] @relation("AccountHistory")
 
+  email        String @unique
+  passwordHash String
+
   rolesCreated           Role[]
   antipixelsSubmitted    Antipixel[]
   UserStatusUpdated      UserStatusHistory[] @relation("ChangesMadeBy")

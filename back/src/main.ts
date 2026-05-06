@@ -1,32 +1,34 @@
 import { NestFactory } from '@nestjs/core';
-import { INestApplication, Logger } from '@nestjs/common';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { PrismaFilter } from '@db/db/prisma/prisma.filter';
 import { ConfigService } from '@nestjs/config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidatorOptions } from '@nestjs/common/interfaces/external/validator-options.interface';
 
 const log = new Logger(bootstrap.name);
 
-// function setupSwaggerModule(app: INestApplication<any>) {
-//   const config = new DocumentBuilder()
-//     .setTitle('Antipixel api')
-//     .setDescription('The antipixel API description')
-//     .setVersion('0.1')
-//     .build();
-//   const document = SwaggerModule.createDocument(app, config);
-//   SwaggerModule.setup('api', app, document);
-// }
+function setupSwaggerModule(app: INestApplication<any>) {
+    const config = new DocumentBuilder()
+        .setTitle('Antipixel api')
+        .setDescription('The antipixel API description')
+        .setVersion('0.1')
+        .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+}
 
-// function setupDTOModule(app: INestApplication<any>, env: string) {
-//   const opt: ValidatorOptions = {};
+function setupDTOModule(app: INestApplication<any>, env: string) {
+  const opt: ValidatorOptions = {};
 
-//   if (env === 'development') {
-//     opt.enableDebugMessages = true;
-//   }
+  if (env === 'development') {
+    opt.enableDebugMessages = true;
+  }
 
-//   opt.forbidNonWhitelisted = true;
+  opt.forbidNonWhitelisted = true;
 
-//   app.useGlobalPipes(new ValidationPipe(opt));
-// }
+  app.useGlobalPipes(new ValidationPipe(opt));
+}
 
 function setupFiltersModule(app: INestApplication<any>) {
     app.useGlobalFilters(new PrismaFilter());
@@ -42,12 +44,12 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
     const configService = app.get<ConfigService>(ConfigService);
-    const env = configService.get<string>('NODE_ENV');
+    const env = configService.getOrThrow<string>('NODE_ENV');
 
     log.debug(`NODE_ENV: ${env}`);
 
-    //   setupSwaggerModule(app);
-    // setupDTOModule(app, env);
+    setupSwaggerModule(app);
+    setupDTOModule(app, env);
     setupFiltersModule(app);
 
     app.enableShutdownHooks();

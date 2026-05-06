@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AntipixelsService } from './antipixels.service';
 import { AntipixelsController } from './antipixels.controller';
+import { AntipixelsControllerService } from './antipixelsController.service';
+import { AntipixelsModelModule } from '@db/db/antipixels-model/antipixels-model.module';
 
 @Module({
-  controllers: [AntipixelsController],
-  providers: [AntipixelsService],
+    imports: [AntipixelsModelModule],
+    controllers: [AntipixelsController],
+    providers: [AntipixelsControllerService],
 })
-export class AntipixelsModule {}
+export class AntipixelsModule { }

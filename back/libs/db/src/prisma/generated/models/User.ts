@@ -38,18 +38,24 @@ export type UserMinAggregateOutputType = {
   id: number | null
   userName: string | null
   status: $Enums.EUserAccountStatus | null
+  email: string | null
+  passwordHash: string | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: number | null
   userName: string | null
   status: $Enums.EUserAccountStatus | null
+  email: string | null
+  passwordHash: string | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   userName: number
   status: number
+  email: number
+  passwordHash: number
   _all: number
 }
 
@@ -66,18 +72,24 @@ export type UserMinAggregateInputType = {
   id?: true
   userName?: true
   status?: true
+  email?: true
+  passwordHash?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   userName?: true
   status?: true
+  email?: true
+  passwordHash?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   userName?: true
   status?: true
+  email?: true
+  passwordHash?: true
   _all?: true
 }
 
@@ -171,6 +183,8 @@ export type UserGroupByOutputType = {
   id: number
   userName: string
   status: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -200,6 +214,8 @@ export type UserWhereInput = {
   id?: Prisma.IntFilter<"User"> | number
   userName?: Prisma.StringFilter<"User"> | string
   status?: Prisma.EnumEUserAccountStatusFilter<"User"> | $Enums.EUserAccountStatus
+  email?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringFilter<"User"> | string
   accountHistory?: Prisma.UserStatusHistoryListRelationFilter
   rolesCreated?: Prisma.RoleListRelationFilter
   antipixelsSubmitted?: Prisma.AntipixelListRelationFilter
@@ -213,6 +229,8 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   accountHistory?: Prisma.UserStatusHistoryOrderByRelationAggregateInput
   rolesCreated?: Prisma.RoleOrderByRelationAggregateInput
   antipixelsSubmitted?: Prisma.AntipixelOrderByRelationAggregateInput
@@ -225,10 +243,12 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   userName?: string
+  email?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   status?: Prisma.EnumEUserAccountStatusFilter<"User"> | $Enums.EUserAccountStatus
+  passwordHash?: Prisma.StringFilter<"User"> | string
   accountHistory?: Prisma.UserStatusHistoryListRelationFilter
   rolesCreated?: Prisma.RoleListRelationFilter
   antipixelsSubmitted?: Prisma.AntipixelListRelationFilter
@@ -236,12 +256,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   tagCreated?: Prisma.TagListRelationFilter
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelListRelationFilter
   tagsStatusUpdated?: Prisma.TagsStatusHistoryListRelationFilter
-}, "id" | "userName">
+}, "id" | "userName" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -256,11 +278,15 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
   userName?: Prisma.StringWithAggregatesFilter<"User"> | string
   status?: Prisma.EnumEUserAccountStatusWithAggregatesFilter<"User"> | $Enums.EUserAccountStatus
+  email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
 }
 
 export type UserCreateInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
@@ -274,6 +300,8 @@ export type UserUncheckedCreateInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
@@ -286,6 +314,8 @@ export type UserUncheckedCreateInput = {
 export type UserUpdateInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
@@ -299,6 +329,8 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
@@ -312,17 +344,23 @@ export type UserCreateManyInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
 }
 
 export type UserUpdateManyMutationInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserScalarRelationFilter = {
@@ -334,6 +372,8 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -344,12 +384,16 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userName?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -461,6 +505,8 @@ export type UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput = {
 export type UserCreateWithoutRolesCreatedInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
@@ -473,6 +519,8 @@ export type UserUncheckedCreateWithoutRolesCreatedInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
@@ -500,6 +548,8 @@ export type UserUpdateToOneWithWhereWithoutRolesCreatedInput = {
 export type UserUpdateWithoutRolesCreatedInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
@@ -512,6 +562,8 @@ export type UserUncheckedUpdateWithoutRolesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
@@ -523,6 +575,8 @@ export type UserUncheckedUpdateWithoutRolesCreatedInput = {
 export type UserCreateWithoutAccountHistoryInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
@@ -535,6 +589,8 @@ export type UserUncheckedCreateWithoutAccountHistoryInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
@@ -551,6 +607,8 @@ export type UserCreateOrConnectWithoutAccountHistoryInput = {
 export type UserCreateWithoutUserStatusUpdatedInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
@@ -563,6 +621,8 @@ export type UserUncheckedCreateWithoutUserStatusUpdatedInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
@@ -590,6 +650,8 @@ export type UserUpdateToOneWithWhereWithoutAccountHistoryInput = {
 export type UserUpdateWithoutAccountHistoryInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
@@ -602,6 +664,8 @@ export type UserUncheckedUpdateWithoutAccountHistoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
@@ -624,6 +688,8 @@ export type UserUpdateToOneWithWhereWithoutUserStatusUpdatedInput = {
 export type UserUpdateWithoutUserStatusUpdatedInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
@@ -636,6 +702,8 @@ export type UserUncheckedUpdateWithoutUserStatusUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
@@ -647,6 +715,8 @@ export type UserUncheckedUpdateWithoutUserStatusUpdatedInput = {
 export type UserCreateWithoutTagCreatedInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
@@ -659,6 +729,8 @@ export type UserUncheckedCreateWithoutTagCreatedInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
@@ -686,6 +758,8 @@ export type UserUpdateToOneWithWhereWithoutTagCreatedInput = {
 export type UserUpdateWithoutTagCreatedInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
@@ -698,6 +772,8 @@ export type UserUncheckedUpdateWithoutTagCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
@@ -709,6 +785,8 @@ export type UserUncheckedUpdateWithoutTagCreatedInput = {
 export type UserCreateWithoutTagsStatusUpdatedInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
@@ -721,6 +799,8 @@ export type UserUncheckedCreateWithoutTagsStatusUpdatedInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
@@ -748,6 +828,8 @@ export type UserUpdateToOneWithWhereWithoutTagsStatusUpdatedInput = {
 export type UserUpdateWithoutTagsStatusUpdatedInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
@@ -760,6 +842,8 @@ export type UserUncheckedUpdateWithoutTagsStatusUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
@@ -771,6 +855,8 @@ export type UserUncheckedUpdateWithoutTagsStatusUpdatedInput = {
 export type UserCreateWithoutTagOnAntipixelAssignedInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
@@ -783,6 +869,8 @@ export type UserUncheckedCreateWithoutTagOnAntipixelAssignedInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
@@ -810,6 +898,8 @@ export type UserUpdateToOneWithWhereWithoutTagOnAntipixelAssignedInput = {
 export type UserUpdateWithoutTagOnAntipixelAssignedInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
@@ -822,6 +912,8 @@ export type UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
@@ -833,6 +925,8 @@ export type UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput = {
 export type UserCreateWithoutAntipixelsSubmittedInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   UserStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
@@ -845,6 +939,8 @@ export type UserUncheckedCreateWithoutAntipixelsSubmittedInput = {
   id?: number
   userName: string
   status?: $Enums.EUserAccountStatus
+  email: string
+  passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
@@ -872,6 +968,8 @@ export type UserUpdateToOneWithWhereWithoutAntipixelsSubmittedInput = {
 export type UserUpdateWithoutAntipixelsSubmittedInput = {
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
@@ -884,6 +982,8 @@ export type UserUncheckedUpdateWithoutAntipixelsSubmittedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   UserStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
@@ -981,6 +1081,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   userName?: boolean
   status?: boolean
+  email?: boolean
+  passwordHash?: boolean
   accountHistory?: boolean | Prisma.User$accountHistoryArgs<ExtArgs>
   rolesCreated?: boolean | Prisma.User$rolesCreatedArgs<ExtArgs>
   antipixelsSubmitted?: boolean | Prisma.User$antipixelsSubmittedArgs<ExtArgs>
@@ -995,21 +1097,27 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   userName?: boolean
   status?: boolean
+  email?: boolean
+  passwordHash?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userName?: boolean
   status?: boolean
+  email?: boolean
+  passwordHash?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   userName?: boolean
   status?: boolean
+  email?: boolean
+  passwordHash?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userName" | "status", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userName" | "status" | "email" | "passwordHash", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accountHistory?: boolean | Prisma.User$accountHistoryArgs<ExtArgs>
   rolesCreated?: boolean | Prisma.User$rolesCreatedArgs<ExtArgs>
@@ -1038,6 +1146,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     userName: string
     status: $Enums.EUserAccountStatus
+    email: string
+    passwordHash: string
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1471,6 +1581,8 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'Int'>
   readonly userName: Prisma.FieldRef<"User", 'String'>
   readonly status: Prisma.FieldRef<"User", 'EUserAccountStatus'>
+  readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly passwordHash: Prisma.FieldRef<"User", 'String'>
 }
     
 

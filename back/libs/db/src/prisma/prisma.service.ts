@@ -1,12 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { BeforeApplicationShutdown, Injectable } from '@nestjs/common';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from './generated/client';
 import { OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+export class PrismaService extends PrismaClient implements OnModuleInit, BeforeApplicationShutdown {
     constructor() {
-        //TODO change name
         const adapter = new PrismaPg({
             connectionString: process.env.DATABASE_URL as string,
         });
@@ -28,11 +27,10 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
             })
     }
 
-    async onModuleDestroy() {
+    async beforeApplicationShutdown() {
         return this.$disconnect()
             .then(() => {
                 this.logger.verbose(`Successfully disconnected the db`);
             })
     }
 }
-

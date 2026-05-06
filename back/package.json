@@ -26,8 +26,11 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/swagger": "^11.4.2",
     "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.8.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
     "joi": "^18.1.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
@@ -81,8 +84,10 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
+      "^@auth/auth(|/.*)$": "<rootDir>/libs/auth/src/$1",
       "^@bucket/bucket(|/.*)$": "<rootDir>/libs/bucket/src/$1",
-      "^@db/db(|/.*)$": "<rootDir>/libs/db/src/$1"
+      "^@db/db(|/.*)$": "<rootDir>/libs/db/src/$1",
+      "^@mail/mail(|/.*)$": "<rootDir>/libs/mail/src/$1"
     }
   }
 }

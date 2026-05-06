@@ -22,6 +22,12 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@auth/auth": [
+        "libs/auth/src"
+      ],
+      "@auth/auth/*": [
+        "libs/auth/src/*"
+      ],
       "@bucket/bucket": [
         "libs/bucket/src"
       ],
@@ -33,6 +39,12 @@
       ],
       "@db/db/*": [
         "libs/db/src/*"
+      ],
+      "@mail/mail": [
+        "libs/mail/src"
+      ],
+      "@mail/mail/*": [
+        "libs/mail/src/*"
       ]
     }
   }

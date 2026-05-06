@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AntipixelsModule } from './antipixels/antipixels.module';
-import { S3Module } from '@bucket/bucket/s3.module';
-import { DbUserModule } from '@db/db/db-user/db-user.module';
 import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
+import { AntipixelsModule } from './antipixels/antipixels.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from '@auth/auth';
 
 @Module({
     imports: [
-        DbUserModule, S3Module, AntipixelsModule,
+        AntipixelsModule,
         ConfigModule.forRoot({
             validationSchema: Joi.object({
                 NODE_ENV: Joi.string()
@@ -19,9 +17,9 @@ import { ConfigModule } from '@nestjs/config';
                     .port()
                     .default(3000),
             })
-        })
+        }),
+        UsersModule,
+        AuthModule
     ],
-    controllers: [AppController],
-    providers: [AppService]
 })
 export class AppModule { }

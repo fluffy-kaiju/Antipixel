@@ -11,7 +11,9 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "moduleNameMapper": {
+    "^@auth/auth(|/.*)$": "<rootDir>/../libs/auth/src/$1",
     "^@bucket/bucket(|/.*)$": "<rootDir>/../libs/bucket/src/$1",
-    "^@db/db(|/.*)$": "<rootDir>/../libs/db/src/$1"
+    "^@db/db(|/.*)$": "<rootDir>/../libs/db/src/$1",
+    "^@mail/mail(|/.*)$": "<rootDir>/../libs/mail/src/$1"
   }
 }
