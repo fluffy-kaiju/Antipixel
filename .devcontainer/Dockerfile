@@ -24,7 +24,7 @@ RUN yay -Syu emacs-lsp-booster nvm pnpm ripgrep \
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN echo "source /usr/share/nvm/init-nvm.sh" >> .zshrc
 RUN echo "source /usr/share/nvm/init-nvm.sh" >> .bashrc
-RUN  /home/dev/.tramp_history
+RUN touch /home/dev/.tramp_history
 
 RUN SHELL="/bin/zsh" pnpm setup
 RUN SHELL="/bin/bash" pnpm setup
