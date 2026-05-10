@@ -6,7 +6,7 @@ export class UsersModelService {
 
     constructor(private prisma: PrismaService) { }
 
-    async create(data: {
+    async registerUser(data: {
         userName: string,
         email: string,
         passwordHash: string

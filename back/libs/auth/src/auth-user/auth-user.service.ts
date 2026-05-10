@@ -1,12 +1,18 @@
 import { overridePrismaFilter } from '@db/db/prisma/prisma.filter';
 import { UsersModelService } from '@db/db/users-model/users-model.service';
-import { Injectable } from '@nestjs/common';
-import { ERegisterError, RegisterConflictResponseDto } from '../dto/register.dto';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { AuthService } from '../auth.service';
+import { ERegisterError, RegisterConflictResponseDto, RegisterCreatedResponseEntity } from './dto/register.dto';
 
 @Injectable()
 export class AuthUserService {
 
-    constructor(private readonly usersModel: UsersModelService) { }
+    private readonly logger = new Logger(AuthUserService.name);
+
+    constructor(
+        private readonly usersModel: UsersModelService,
+        private readonly authService: AuthService,
+    ) { }
 
     async registerUser(data: {
         userName: string,
@@ -14,18 +20,27 @@ export class AuthUserService {
         password: string
     }) {
 
-        if (this.usersModel.getByUserName(data.userName) !== null) {
+        if (await this.usersModel.getByUserName(data.userName) !== null) {
+            this.logger.debug(ERegisterError.UserNameTaken);
             throw new RegisterConflictResponseDto(ERegisterError.UserNameTaken);
         }
 
-        if (this.usersModel.getByEmail(data.email) !== null) {
+        if (await this.usersModel.getByEmail(data.email) !== null) {
+            this.logger.debug(ERegisterError.EmailTaken);
             throw new RegisterConflictResponseDto(ERegisterError.EmailTaken);
         }
 
-        return this.usersModel.create({
+        const passwordHash = await this.authService.hashPassword(data.password)
+            .catch(err => {
+                this.logger.error(err);
+                throw new InternalServerErrorException(ERegisterError.HashingFailed);
+
+            });
+
+        return this.usersModel.registerUser({
             userName: data.userName,
             email: data.email,
-            passwordHash: data.password//TODO CHANGE TO HASH
+            passwordHash: passwordHash
         })
             .catch((e) =>
                 overridePrismaFilter(e, (err) => {
@@ -35,6 +50,5 @@ export class AuthUserService {
                     throw e;
                 })
             )
-
     }
 }

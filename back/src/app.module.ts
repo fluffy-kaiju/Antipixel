@@ -3,7 +3,7 @@ import * as Joi from 'joi';
 import { ConfigModule } from '@nestjs/config';
 import { AntipixelsModule } from './antipixels/antipixels.module';
 import { UsersModule } from './users/users.module';
-import { AuthModule } from '@auth/auth';
+import { AuthUserModule } from '@auth/auth/auth-user/auth-user.module';
 
 @Module({
     imports: [
@@ -19,7 +19,7 @@ import { AuthModule } from '@auth/auth';
             })
         }),
         UsersModule,
-        AuthModule
+        AuthUserModule
     ],
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
-import { NestFactory } from '@nestjs/core';
-import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
+import { NestFactory, Reflector } from '@nestjs/core';
+import { ClassSerializerInterceptor, INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { PrismaFilter } from '@db/db/prisma/prisma.filter';
 import { ConfigService } from '@nestjs/config';
@@ -19,20 +19,26 @@ function setupSwaggerModule(app: INestApplication<any>) {
 }
 
 function setupDTOModule(app: INestApplication<any>, env: string) {
-  const opt: ValidatorOptions = {};
+    const opt: ValidatorOptions = {};
 
-  if (env === 'development') {
-    opt.enableDebugMessages = true;
-  }
+    if (env === 'development') {
+        opt.enableDebugMessages = true;
+    }
 
-  opt.forbidNonWhitelisted = true;
+    opt.whitelist = true;
+    opt.forbidNonWhitelisted = true;
 
-  app.useGlobalPipes(new ValidationPipe(opt));
+    app.useGlobalPipes(new ValidationPipe(opt));
+
+    app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector), {
+        strategy: 'excludeAll'
+    }));
 }
 
 function setupFiltersModule(app: INestApplication<any>) {
     app.useGlobalFilters(new PrismaFilter());
 }
+
 
 async function bootstrap() {
     // TODO Custom logger, json output when prod and webhook alert
@@ -48,9 +54,9 @@ async function bootstrap() {
 
     log.debug(`NODE_ENV: ${env}`);
 
-    setupSwaggerModule(app);
     setupDTOModule(app, env);
     setupFiltersModule(app);
+    setupSwaggerModule(app);
 
     app.enableShutdownHooks();
 
