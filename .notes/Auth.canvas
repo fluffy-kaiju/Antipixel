@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"71c918bc9ed92598","x":-299,"y":-347,"width":250,"height":147,"type":"text","text":"Register\n- Email\n- Username\n- Password"},
+		{"id":"4d46344ff145bfba","x":-299,"y":-120,"width":250,"height":60,"type":"text","text":"Email or Username taken"},
+		{"id":"5ff109407f776fb6","x":20,"y":-303,"width":250,"height":60,"type":"text","text":"Send confirmation url mail"},
+		{"id":"c7de6a763dd0c63b","x":340,"y":-303,"width":250,"height":60,"type":"text","text":"Send temporal token for mail confirmation"}
+	],
+	"edges":[
+		{"id":"3f3f48d00386b6cc","fromNode":"71c918bc9ed92598","fromSide":"bottom","toNode":"4d46344ff145bfba","toSide":"top","color":"1"},
+		{"id":"d7798d03a2b35d2a","fromNode":"71c918bc9ed92598","fromSide":"right","toNode":"5ff109407f776fb6","toSide":"left","color":"4"},
+		{"id":"430bbfc23e1d9186","fromNode":"5ff109407f776fb6","fromSide":"right","toNode":"c7de6a763dd0c63b","toSide":"left"}
+	]
+}
