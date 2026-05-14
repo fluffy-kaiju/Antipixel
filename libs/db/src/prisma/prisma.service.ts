@@ -22,13 +22,13 @@ export class PrismaService extends PrismaClient implements OnModuleInit, BeforeA
                 this.logger.verbose('Successfully connected to the db');
             })
             .catch(async (err) => {
-                this.logger.error('Db connection failed!!')
+                this.logger.fatal('Db connection failed!!')
                 throw err;
             })
     }
 
     async beforeApplicationShutdown() {
-        return this.$disconnect()
+        return await this.$disconnect()
             .then(() => {
                 this.logger.verbose(`Successfully disconnected the db`);
             })
