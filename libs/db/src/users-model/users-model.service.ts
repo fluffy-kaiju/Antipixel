@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { EUserAccountStatus } from '../prisma/generated/enums';
 
 @Injectable()
 export class UsersModelService {
@@ -11,11 +12,39 @@ export class UsersModelService {
         email: string,
         passwordHash: string
     }) {
-        return await this.prisma.user.create({
+        return await this.prisma.$transaction(async (tx) => {
+            const user = await tx.user.create({
+                data: {
+                    userName: data.userName,
+                    email: data.email,
+                    passwordHash: data.passwordHash,
+                    status: EUserAccountStatus.NOOB,
+                }
+            });
+            await tx.userStatusHistory.create({
+                data: {
+                    userId: user.id,
+                    changeMadeByUserId: user.id,
+                    status: EUserAccountStatus.NOOB,
+                    reason: 'User registered'
+                }
+            })
+            return user;
+        });
+    }
+
+    async createEmailConfirmationCode(userId: number) {
+        return this.prisma.passwordResetCode.create({
             data: {
-                userName: data.userName,
-                email: data.email,
-                passwordHash: data.passwordHash
+                userId: userId,
+            }
+        })
+    }
+
+    async getEmailConfirmationCode(token: string) {
+        return this.prisma.passwordResetCode.findUnique({
+            where: {
+                token: token,
             }
         })
     }

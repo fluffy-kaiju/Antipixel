@@ -8,13 +8,13 @@ import { MailerModule } from '@nestjs-modules/mailer';
     imports: [
         ConfigModule.forRoot({
             validationSchema: Joi.object({
-                MAIL_HOST: Joi.string().hostname(),
-                MAIL_PORT: Joi.number().port(),
-                MAIL_IS_SECURE: Joi.bool(),
-                MAIL_USER: Joi.string(),
-                MAIL_PASSWORD: Joi.string(),
-                MAIL_FROM_MAIL: Joi.string().email(),
-                MAIL_FROM_NAME: Joi.string(),
+                MAIL_HOST: Joi.string().hostname().required(),
+                MAIL_PORT: Joi.number().port().required(),
+                MAIL_IS_SECURE: Joi.bool().required(),
+                MAIL_USER: Joi.string().required(),
+                MAIL_PASSWORD: Joi.string().required(),
+                MAIL_FROM_MAIL: Joi.string().email().required(),
+                MAIL_FROM_NAME: Joi.string().required(),
             })
         }),
         MailerModule.forRootAsync({
@@ -32,7 +32,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
                     },
                 },
                 defaults: {
-                    from: `"${configService.getOrThrow<string>('MAIL_FROM_NAME')}" <${configService.getOrThrow<string>('MAIL_FROM_EMAIL')}>`
+                    from: `"${configService.getOrThrow<string>('MAIL_FROM_NAME')}" <${configService.getOrThrow<string>('MAIL_FROM_MAIL')}>`
                 }
 
             })

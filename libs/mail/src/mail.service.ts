@@ -17,11 +17,24 @@ export class MailService implements OnModuleInit {
 
         await transponder.verify()
             .then(() => {
-                this.logger.verbose(`Successfully connected to the Mail provider (${this.configService.getOrThrow<string>('MAIL_HOST')})`);
+                this.logger.verbose(
+                    `Successfully connected to the Mail provider (${this.configService.getOrThrow<string>('MAIL_HOST')})`
+                );
             })
             .catch((e) => {
-                this.logger.fatal(`Failed to connect to the Mail provider (${this.configService.getOrThrow<string>('MAIL_HOST')})`);
+                this.logger.fatal(
+                    `Failed to connect to the Mail provider (${this.configService.getOrThrow<string>('MAIL_HOST')})`
+                );
                 throw e;
             })
     }
+
+    async sendMailToUser(to: string, subject: string, text: string) {
+        return await this.mailerService.sendMail({
+            to,
+            subject,
+            text,
+        })
+    }
+
 }

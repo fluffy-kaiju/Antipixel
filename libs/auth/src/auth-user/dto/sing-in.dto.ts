@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsString, Length } from "class-validator";
+import { IsAlphanumeric, IsBase64, IsJWT, IsString, Length } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class SignInDto {
