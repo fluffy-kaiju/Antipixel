@@ -388,6 +388,8 @@ export const ModelName = {
   PermissionOnRole: 'PermissionOnRole',
   Role: 'Role',
   User: 'User',
+  EmailConfirmationCode: 'EmailConfirmationCode',
+  PasswordResetCode: 'PasswordResetCode',
   UserStatusHistory: 'UserStatusHistory',
   Tag: 'Tag',
   TagsStatusHistory: 'TagsStatusHistory',
@@ -409,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "permission" | "permissionOnRole" | "role" | "user" | "userStatusHistory" | "tag" | "tagsStatusHistory" | "tagOnAntipixel" | "hashToAntipixel" | "antipixel"
+    modelProps: "permission" | "permissionOnRole" | "role" | "user" | "emailConfirmationCode" | "passwordResetCode" | "userStatusHistory" | "tag" | "tagsStatusHistory" | "tagOnAntipixel" | "hashToAntipixel" | "antipixel"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -706,6 +708,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    EmailConfirmationCode: {
+      payload: Prisma.$EmailConfirmationCodePayload<ExtArgs>
+      fields: Prisma.EmailConfirmationCodeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmailConfirmationCodeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmailConfirmationCodeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>
+        }
+        findFirst: {
+          args: Prisma.EmailConfirmationCodeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmailConfirmationCodeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>
+        }
+        findMany: {
+          args: Prisma.EmailConfirmationCodeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>[]
+        }
+        create: {
+          args: Prisma.EmailConfirmationCodeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>
+        }
+        createMany: {
+          args: Prisma.EmailConfirmationCodeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmailConfirmationCodeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>[]
+        }
+        delete: {
+          args: Prisma.EmailConfirmationCodeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>
+        }
+        update: {
+          args: Prisma.EmailConfirmationCodeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>
+        }
+        deleteMany: {
+          args: Prisma.EmailConfirmationCodeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmailConfirmationCodeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmailConfirmationCodeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>[]
+        }
+        upsert: {
+          args: Prisma.EmailConfirmationCodeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailConfirmationCodePayload>
+        }
+        aggregate: {
+          args: Prisma.EmailConfirmationCodeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmailConfirmationCode>
+        }
+        groupBy: {
+          args: Prisma.EmailConfirmationCodeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailConfirmationCodeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmailConfirmationCodeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailConfirmationCodeCountAggregateOutputType> | number
+        }
+      }
+    }
+    PasswordResetCode: {
+      payload: Prisma.$PasswordResetCodePayload<ExtArgs>
+      fields: Prisma.PasswordResetCodeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PasswordResetCodeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PasswordResetCodeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>
+        }
+        findFirst: {
+          args: Prisma.PasswordResetCodeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PasswordResetCodeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>
+        }
+        findMany: {
+          args: Prisma.PasswordResetCodeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>[]
+        }
+        create: {
+          args: Prisma.PasswordResetCodeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>
+        }
+        createMany: {
+          args: Prisma.PasswordResetCodeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PasswordResetCodeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>[]
+        }
+        delete: {
+          args: Prisma.PasswordResetCodeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>
+        }
+        update: {
+          args: Prisma.PasswordResetCodeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>
+        }
+        deleteMany: {
+          args: Prisma.PasswordResetCodeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PasswordResetCodeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PasswordResetCodeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>[]
+        }
+        upsert: {
+          args: Prisma.PasswordResetCodeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetCodePayload>
+        }
+        aggregate: {
+          args: Prisma.PasswordResetCodeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePasswordResetCode>
+        }
+        groupBy: {
+          args: Prisma.PasswordResetCodeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PasswordResetCodeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PasswordResetCodeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PasswordResetCodeCountAggregateOutputType> | number
         }
       }
     }
@@ -1222,10 +1372,33 @@ export const UserScalarFieldEnum = {
   userName: 'userName',
   status: 'status',
   email: 'email',
+  emailIsVerified: 'emailIsVerified',
   passwordHash: 'passwordHash'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const EmailConfirmationCodeScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  TTL_sec: 'TTL_sec',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type EmailConfirmationCodeScalarFieldEnum = (typeof EmailConfirmationCodeScalarFieldEnum)[keyof typeof EmailConfirmationCodeScalarFieldEnum]
+
+
+export const PasswordResetCodeScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  TTL_sec: 'TTL_sec',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type PasswordResetCodeScalarFieldEnum = (typeof PasswordResetCodeScalarFieldEnum)[keyof typeof PasswordResetCodeScalarFieldEnum]
 
 
 export const UserStatusHistoryScalarFieldEnum = {
@@ -1354,6 +1527,13 @@ export type EnumEUserAccountStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
  * Reference to a field of type 'EUserAccountStatus[]'
  */
 export type ListEnumEUserAccountStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EUserAccountStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1512,6 +1692,8 @@ export type GlobalOmitConfig = {
   permissionOnRole?: Prisma.PermissionOnRoleOmit
   role?: Prisma.RoleOmit
   user?: Prisma.UserOmit
+  emailConfirmationCode?: Prisma.EmailConfirmationCodeOmit
+  passwordResetCode?: Prisma.PasswordResetCodeOmit
   userStatusHistory?: Prisma.UserStatusHistoryOmit
   tag?: Prisma.TagOmit
   tagsStatusHistory?: Prisma.TagsStatusHistoryOmit

@@ -55,6 +55,8 @@ export const ModelName = {
   PermissionOnRole: 'PermissionOnRole',
   Role: 'Role',
   User: 'User',
+  EmailConfirmationCode: 'EmailConfirmationCode',
+  PasswordResetCode: 'PasswordResetCode',
   UserStatusHistory: 'UserStatusHistory',
   Tag: 'Tag',
   TagsStatusHistory: 'TagsStatusHistory',
@@ -109,10 +111,33 @@ export const UserScalarFieldEnum = {
   userName: 'userName',
   status: 'status',
   email: 'email',
+  emailIsVerified: 'emailIsVerified',
   passwordHash: 'passwordHash'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const EmailConfirmationCodeScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  TTL_sec: 'TTL_sec',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type EmailConfirmationCodeScalarFieldEnum = (typeof EmailConfirmationCodeScalarFieldEnum)[keyof typeof EmailConfirmationCodeScalarFieldEnum]
+
+
+export const PasswordResetCodeScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  TTL_sec: 'TTL_sec',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type PasswordResetCodeScalarFieldEnum = (typeof PasswordResetCodeScalarFieldEnum)[keyof typeof PasswordResetCodeScalarFieldEnum]
 
 
 export const UserStatusHistoryScalarFieldEnum = {

@@ -68,28 +68,45 @@ model User {
   status         EUserAccountStatus  @default(NOOB)
   accountHistory UserStatusHistory[] @relation("AccountHistory")
 
-  email                 String                  @unique
-  userEmailConfirmation UserEmailConfirmation[]
-  passwordHash          String
+  email                 String                 @unique
+  emailConfirmationCode EmailConfirmationCode?
+  emailIsVerified       Boolean                @default(false)
+
+  passwordHash  String
+  passwordReset PasswordResetCode?
 
   rolesCreated           Role[]
   antipixelsSubmitted    Antipixel[]
-  UserStatusUpdated      UserStatusHistory[] @relation("ChangesMadeBy")
+  userStatusUpdated      UserStatusHistory[] @relation("ChangesMadeBy")
   tagCreated             Tag[]
   tagOnAntipixelAssigned TagOnAntipixel[]
   tagsStatusUpdated      TagsStatusHistory[]
 }
 
-model UserEmailConfirmation {
+model EmailConfirmationCode {
   id Int @id @default(autoincrement())
 
-  token String @unique
+  // https://www.prisma.io/docs/orm/reference/prisma-schema-reference#cuid
+  token String @unique @default(cuid(2))
 
-  TTL       DateTime
-  createdAt DateTime
+  TTL_sec   Int @default(30)
+  createdAt DateTime @default(now())
 
-  user   User @relation(references: [id], fields: [userId])
-  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
+}
+
+model PasswordResetCode {
+  id Int @id @default(autoincrement())
+
+  // https://www.prisma.io/docs/orm/reference/prisma-schema-reference#cuid
+  token String @unique @default(cuid(2))
+
+  TTL_sec   Int @default(30)
+  createdAt DateTime @default(now())
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
 }
 
 model UserStatusHistory {

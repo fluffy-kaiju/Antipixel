@@ -478,10 +478,6 @@ export type UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput =
   deleteMany?: Prisma.UserStatusHistoryScalarWhereInput | Prisma.UserStatusHistoryScalarWhereInput[]
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type UserStatusHistoryCreateWithoutUserInput = {
   status: $Enums.EUserAccountStatus
   reason: string

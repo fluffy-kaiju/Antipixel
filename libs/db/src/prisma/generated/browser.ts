@@ -38,6 +38,16 @@ export type Role = Prisma.RoleModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model EmailConfirmationCode
+ * 
+ */
+export type EmailConfirmationCode = Prisma.EmailConfirmationCodeModel
+/**
+ * Model PasswordResetCode
+ * 
+ */
+export type PasswordResetCode = Prisma.PasswordResetCodeModel
+/**
  * Model UserStatusHistory
  * 
  */
