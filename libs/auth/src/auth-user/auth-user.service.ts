@@ -43,9 +43,9 @@ export class AuthUserService {
 
         // TODO generate token
 
-        return {
-            token: 'lol'
-        } as LoginResponseEntity;
+        return new LoginResponseEntity({
+            token: 'test'
+        })
     }
 
     async registerUser(data: {

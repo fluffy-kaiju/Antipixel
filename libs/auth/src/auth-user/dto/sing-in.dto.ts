@@ -22,24 +22,38 @@ export class LoginResponseEntity {
     @ApiProperty({ description: "User token", example: "Todo" })
     @IsString()
     @Expose()
-    token: string
+    token: string;
 
+    constructor(p: Partial<LoginResponseEntity>) {
+        Object.assign(this, p)
+    }
 }
 
 export enum ELoginError {
+
     LoginFailed = "User dont exist or bad password",
     EmailNotVerified = "Email not verified"
+
 }
 
 export class LoginFailedError extends UnauthorizedException {
+
     @ApiProperty({ description: "Reason" })
-    @Expose()
-    message: string = ELoginError.LoginFailed
+    message: string;
+
+    constructor() {
+        super(ELoginError.LoginFailed)
+    }
+
 }
 
-
 export class LoginEmailNotVerifiedError extends ForbiddenException {
+
     @ApiProperty({ description: "Reason" })
-    @Expose()
-    message: string = ELoginError.EmailNotVerified
+    message: string;
+
+    constructor() {
+        super(ELoginError.EmailNotVerified)
+    }
+
 }

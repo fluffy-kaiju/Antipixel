@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Param, Query, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Query, UnauthorizedException, HttpCode, HttpStatus } from '@nestjs/common';
 import { ELoginError, LoginDto, LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity} from './dto/sing-in.dto';
 import { ERegisterError, RegisterDto, RegisterCreatedResponseEntity, RegisterConflictResponseEntity, VerifyEmailDto } from './dto/register.dto';
 import { ApiAcceptedResponse, ApiBadRequestResponse, ApiConflictResponse, ApiCookieAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
@@ -25,6 +25,7 @@ export class AuthUserController {
         type: LoginEmailNotVerifiedError,
     })
     @Post("/login")
+    @HttpCode(HttpStatus.OK)
     async login(@Body() loginDto: LoginDto): Promise<LoginResponseEntity> {
         // TODO     - check if user
         //          - check if mail verified
