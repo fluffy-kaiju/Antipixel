@@ -1,0 +1,54 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "App Server",
+      "type": "node",
+      "request": "launch",
+    //   "args": ["${workspaceFolder}/apps/server/src/main.ts"],
+		"runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+		"run",
+		"start:debug",
+        // "--nolazy",
+        // "-r",
+        // "ts-node/register",
+        // "-r",
+        // "tsconfig-paths/register"
+      ],
+      "sourceMaps": true,
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+    }
+  ]
+}
+
+
+// {
+// 	"version": "0.2.0",
+// 	"configurations": [
+// 		{
+// 			"name": "app server",
+// 			"type": "node",
+// 			"request": "launch",
+// 			"args": ["${workspacefolder}/apps/server/src/main.ts"],
+// 			"runtimeExecutable": "infisical",
+// 			"runtimeArgs": [
+// 				"run",
+// 				"--env=dev",
+// 				"--",
+// 				"npm",
+// 				"run",
+// 				"start:dev",
+// 				"--nolazy",
+// 				"-r",
+// 				"ts-node/register",
+// 				"-r",
+// 				"tsconfig-paths/register"
+// 			],
+// 			"sourceMaps": true,
+// 			"cwd": "${workspaceFolder}",
+// 			"console": "integratedTerminal",
+// 		},
+// 	]
+/
