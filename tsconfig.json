@@ -11,7 +11,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2023", // TODO FIX #12
-    "lib": ["ES2023", "esnext.temporal"], // TODO FIX #12
+    "lib": ["ES2023", "esnext.temporal", "esnext"], // TODO FIX #12
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",

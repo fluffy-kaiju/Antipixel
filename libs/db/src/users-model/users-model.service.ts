@@ -34,7 +34,7 @@ export class UsersModelService {
     }
 
     async createEmailConfirmationCode(userId: number) {
-        return this.prisma.passwordResetCode.create({
+        return this.prisma.emailConfirmationCode.create({
             data: {
                 userId: userId,
             }
@@ -42,9 +42,44 @@ export class UsersModelService {
     }
 
     async getEmailConfirmationCode(token: string) {
-        return this.prisma.passwordResetCode.findUnique({
+        return this.prisma.emailConfirmationCode.findUnique({
             where: {
                 token: token,
+            }
+        })
+    }
+
+    async getEmailConfirmationCodeByUserId(userId: number) {
+        return this.prisma.emailConfirmationCode.findUnique({
+            where: {
+                userId: userId,
+            }
+        })
+    }
+
+    async deleteAllEmailConfirmationCodeByUserId(userId: number) {
+        return this.prisma.emailConfirmationCode.deleteMany({
+            where: {
+                userId: userId,
+            }
+        })
+    }
+
+    async deleteEmailConfirmationCode(token: string) {
+        return this.prisma.emailConfirmationCode.delete({
+            where: {
+                token: token,
+            }
+        })
+    }
+
+    async updateEmailConfirmationStatus(userId: number, isVerified: boolean) {
+        return this.prisma.user.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                emailIsVerified: isVerified,
             }
         })
     }
@@ -61,6 +96,20 @@ export class UsersModelService {
         return this.prisma.user.findUnique({
             where: {
                 userName: userName
+            }
+        })
+    };
+
+    async getUserLoginByUserName(userName: string) {
+        return this.prisma.user.findUnique({
+            where: {
+                userName: userName
+            },
+            select: {
+                userName: true,
+                email: true,
+                emailIsVerified: true,
+                passwordHash: true
             }
         })
     };

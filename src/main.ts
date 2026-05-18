@@ -58,6 +58,7 @@ async function bootstrap() {
     setupFiltersModule(app);
     setupSwaggerModule(app);
 
+
     app.enableShutdownHooks();
 
     const port = configService.getOrThrow<number>(`API_PORT`)

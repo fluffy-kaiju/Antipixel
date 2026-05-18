@@ -17,7 +17,7 @@ WORKDIR /tmp/yay-bin/
 RUN makepkg -si --noconfirm
 RUN rm -rf /tmp/yay-bin/
 
-RUN yay -Syu nodejs emacs-lsp-booster nvm pnpm ripgrep \
+RUN yay -Syu nodejs emacs-lsp-booster nvm pnpm ripgrep jq lsof\
     yaml-language-server typescript-language-server dockerfile-language-server bash-language-server vscode-json-languageserver\
     --noconfirm
 

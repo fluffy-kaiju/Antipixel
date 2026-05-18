@@ -1,9 +1,10 @@
 import { overridePrismaFilter } from '@db/db/prisma/prisma.filter';
 import { UsersModelService } from '@db/db/users-model/users-model.service';
-import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { GoneException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
-import { ERegisterError, RegisterConflictResponseEntity, RegisterCreatedResponseEntity, VerifyEmailErrorResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity, VerifyEmailOkResponseEntity } from './dto/register.dto';
+import { ERegisterError, RegisterConflictResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity, VerifyEmailOkResponseEntity } from './dto/register.dto';
 import { AuthUserNotifyService } from './auth-user-notify.service';
+import { LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity } from './dto/sing-in.dto';
 
 @Injectable()
 export class AuthUserService {
@@ -15,6 +16,37 @@ export class AuthUserService {
         private readonly authService: AuthService,
         private readonly authUserNotifyService: AuthUserNotifyService,
     ) { }
+
+    async loginUser(data: {
+        userName: string,
+        password: string,
+    }) {
+
+        // TODO     - check if user
+        //          - check if mail verified
+        //          - check password hash
+        //          - send client token
+
+        const user = await this.usersModel.getUserLoginByUserName(data.userName)
+
+        if (user === null) {
+            throw new LoginFailedError();
+        }
+
+        if (!user.emailIsVerified) {
+            throw new LoginEmailNotVerifiedError();
+        }
+
+        if (! await this.authService.verifyHashPassword(user.passwordHash, data.password)) {
+            throw new LoginFailedError();
+        }
+
+        // TODO generate token
+
+        return {
+            token: 'lol'
+        } as LoginResponseEntity;
+    }
 
     async registerUser(data: {
         userName: string,
@@ -34,7 +66,7 @@ export class AuthUserService {
 
         const passwordHash = await this.authService.hashPassword(data.password)
             .catch(err => {
-                this.logger.error(err);
+                this.logger.fatal(err);
                 throw new InternalServerErrorException(ERegisterError.HashingFailed);
 
             });
@@ -69,9 +101,18 @@ export class AuthUserService {
     }
 
     async verifyEmail(token: string) {
-        const res = await this.usersModel.getEmailConfirmationCode(token);
-        if (res === null) return new VerifyEmailExpiredOrNotFoundResponseEntity();
-        const start = Temporal;
+        const code = await this.usersModel.getEmailConfirmationCode(token);
+        if (code === null) throw new GoneException(new VerifyEmailExpiredOrNotFoundResponseEntity());
+
+        const createdAt = code.createdAt.toTemporalInstant();
+        const expireAt = createdAt.add({ seconds: code.TTL_sec });
+
+        if (Temporal.Instant.compare(Temporal.Now.instant(), expireAt) > 0) {
+            throw new GoneException(new VerifyEmailExpiredOrNotFoundResponseEntity);
+        }
+
+        await this.usersModel.updateEmailConfirmationStatus(code.userId, true);
+        await this.usersModel.deleteAllEmailConfirmationCodeByUserId(code.userId);
 
         return new VerifyEmailOkResponseEntity();
     }

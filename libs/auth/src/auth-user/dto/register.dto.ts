@@ -1,7 +1,7 @@
 import { ConflictException } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
-import { IsAlphanumeric, IsEmail, IsEnum, IsJSON, IsJWT, IsString, Length } from "class-validator";
+import { IsAlphanumeric, IsEmail, IsEnum, IsJSON, IsJWT, IsString, IsUUID, Length } from "class-validator";
 
 export enum ERegisterError {
     UserNameTaken = 'Username already taken',
@@ -58,8 +58,8 @@ export class RegisterConflictResponseEntity extends ConflictException {
 }
 
 export class VerifyEmailDto {
-    @ApiProperty({description: "Email verification token"})
-    @IsJWT()
+    @ApiProperty({description: "Email verification token CUID2"})
+    @IsString() // WIP No cuid2 decorator aviable!
     token: string
 }
 
