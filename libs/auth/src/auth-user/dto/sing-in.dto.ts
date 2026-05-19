@@ -22,7 +22,7 @@ export class LoginResponseEntity {
     @ApiProperty({ description: "User token", example: "Todo" })
     @IsString()
     @Expose()
-    token: string;
+    access_token: string;
 
     constructor(p: Partial<LoginResponseEntity>) {
         Object.assign(this, p)

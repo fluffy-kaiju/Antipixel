@@ -2,9 +2,11 @@ import { overridePrismaFilter } from '@db/db/prisma/prisma.filter';
 import { UsersModelService } from '@db/db/users-model/users-model.service';
 import { GoneException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
-import { ERegisterError, RegisterConflictResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity, VerifyEmailOkResponseEntity } from './dto/register.dto';
+import { ERegisterError, RegisterConflictResponseEntity, RegisterCreatedResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity, VerifyEmailOkResponseEntity } from './dto/register.dto';
 import { AuthUserNotifyService } from './auth-user-notify.service';
 import { LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity } from './dto/sing-in.dto';
+import { JwtModelService } from '../jwt/jwt-model.service';
+import { AuthUserTokenEntity } from './dto/AuthUser.dto';
 
 @Injectable()
 export class AuthUserService {
@@ -15,6 +17,7 @@ export class AuthUserService {
         private readonly usersModel: UsersModelService,
         private readonly authService: AuthService,
         private readonly authUserNotifyService: AuthUserNotifyService,
+        private readonly jwtModelService: JwtModelService,
     ) { }
 
     async loginUser(data: {
@@ -41,11 +44,13 @@ export class AuthUserService {
             throw new LoginFailedError();
         }
 
-        // TODO generate token
+        const token_payload = new AuthUserTokenEntity({
+            id: user.id,
+            userName: user.userName,
+        });
+        const access_token = await this.jwtModelService.signToken(token_payload, AuthUserService.name);
 
-        return new LoginResponseEntity({
-            token: 'test'
-        })
+        return new LoginResponseEntity({ access_token: access_token })
     }
 
     async registerUser(data: {
@@ -96,8 +101,7 @@ export class AuthUserService {
                 this.logger.fatal(e);
                 throw new InternalServerErrorException(ERegisterError.FailedToSendVerificationMail)
             })
-
-        return newUser;
+        return new RegisterCreatedResponseEntity(newUser);
     }
 
     async verifyEmail(token: string) {

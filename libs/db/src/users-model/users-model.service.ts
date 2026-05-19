@@ -106,6 +106,7 @@ export class UsersModelService {
                 userName: userName
             },
             select: {
+                id: true,
                 userName: true,
                 email: true,
                 emailIsVerified: true,

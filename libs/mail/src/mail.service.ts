@@ -1,6 +1,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { SentMessageInfo } from 'nodemailer';
 
 @Injectable()
 export class MailService implements OnModuleInit {
@@ -30,11 +31,20 @@ export class MailService implements OnModuleInit {
     }
 
     async sendMailToUser(to: string, subject: string, text: string) {
-        return await this.mailerService.sendMail({
-            to,
-            subject,
-            text,
-        })
+        try {
+
+            const res: SentMessageInfo = await this.mailerService.sendMail({
+                to,
+                subject,
+                text,
+            })
+
+            this.logger.debug(`Mail send to: ${to}. ${subject}`);
+            this.logger.verbose(text);
+            this.logger.verbose(res);
+        } catch (e) {
+            this.logger.error(e);
+        }
     }
 
 }

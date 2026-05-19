@@ -16,6 +16,7 @@ import { JwtModelService } from './jwt-model.service';
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({
                 secret: configService.getOrThrow<string>('JWT_TOKEN_SECRET'),
+                global: true,
             }),
             inject: [ConfigService],
         }),

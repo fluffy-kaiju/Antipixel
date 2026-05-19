@@ -9,10 +9,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
+import { AuthUserGuard } from './auth-user.guard';
 import { JwtModelModule } from '../jwt/jwt-model.module';
 
 @Module({
-    imports: [UsersModelModule, AuthModule, MailModule,
+    imports: [UsersModelModule, AuthModule, MailModule, JwtModelModule,
         ConfigModule.forRoot({
             validationSchema: Joi.object({
                 JWT_TOKEN_SECRET: Joi.string().min(32) // TODO check jwt secret token recommendation
@@ -25,7 +26,7 @@ import { JwtModelModule } from '../jwt/jwt-model.module';
             }),
             inject: [ConfigService],
         }),],
-    providers: [AuthUserService, AuthUserNotifyService],
+    providers: [AuthUserService, AuthUserNotifyService, AuthUserGuard],
     controllers: [AuthUserController],
     exports: [AuthUserService, AuthUserNotifyService]
 })

@@ -13,6 +13,9 @@ function setupSwaggerModule(app: INestApplication<any>) {
         .setTitle('Antipixel api')
         .setDescription('The antipixel API description')
         .setVersion('0.1')
+        .addBearerAuth({
+            type: 'http', scheme: 'bearer', bearerFormat: 'JWT',
+        }, 'JWT-user-auth')
         .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);

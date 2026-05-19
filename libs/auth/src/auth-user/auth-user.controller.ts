@@ -1,9 +1,11 @@
-import { Body, Controller, Post, Get, Param, Query, UnauthorizedException, HttpCode, HttpStatus } from '@nestjs/common';
-import { ELoginError, LoginDto, LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity} from './dto/sing-in.dto';
+import { Body, Controller, Post, Get, Param, Query, UnauthorizedException, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
+import { ELoginError, LoginDto, LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity } from './dto/sing-in.dto';
 import { ERegisterError, RegisterDto, RegisterCreatedResponseEntity, RegisterConflictResponseEntity, VerifyEmailDto } from './dto/register.dto';
-import { ApiAcceptedResponse, ApiBadRequestResponse, ApiConflictResponse, ApiCookieAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiAcceptedResponse, ApiBadRequestResponse, ApiBearerAuth, ApiConflictResponse, ApiCookieAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { AuthUserService } from './auth-user.service';
 import { VerifyEmailErrorResponseEntity, VerifyEmailOkResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity } from './dto/register.dto';
+import { AuthUserGuard } from './auth-user.guard';
+import { Auth } from './auth-user.decorator';
 
 @Controller('auth')
 export class AuthUserController {
@@ -34,7 +36,7 @@ export class AuthUserController {
         return await this.authUserService.loginUser({
             userName: loginDto.userName,
             password: loginDto.password,
-        })
+        });
     }
 
     @ApiCreatedResponse({
@@ -52,12 +54,11 @@ export class AuthUserController {
     @Post("/register")
     async register(@Body() registerDto: RegisterDto)
         : Promise<RegisterCreatedResponseEntity> {
-        const res = await this.authUserService.registerUser({
+        return await this.authUserService.registerUser({
             userName: registerDto.userName,
             email: registerDto.email,
             password: registerDto.password
         })
-        return new RegisterCreatedResponseEntity(res);
     }
 
     @ApiAcceptedResponse({
@@ -81,9 +82,9 @@ export class AuthUserController {
         return await this.authUserService.verifyEmail(verifyEmailDto.token);
     }
 
+    @Auth()
     @Get("test/:param")
     async test(@Param('param') param) {
         console.log("test")
-
     }
 }
