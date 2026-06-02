@@ -51,6 +51,7 @@ export class AuthUserController {
         description: ERegisterError.UserNameTaken,
         type: RegisterConflictResponseEntity
     })
+    @Public()
     @Post("/register")
     async register(@Body() registerDto: RegisterDto)
         : Promise<RegisterCreatedResponseEntity> {
