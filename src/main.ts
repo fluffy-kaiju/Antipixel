@@ -5,6 +5,8 @@ import { PrismaFilter } from '@db/db/prisma/prisma.filter';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidatorOptions } from '@nestjs/common/interfaces/external/validator-options.interface';
+import { AuthUserGuard } from '@auth/auth/auth-user/auth-user.guard';
+import { Auth } from '@auth/auth/auth-user/auth-user.decorator';
 
 const log = new Logger(bootstrap.name);
 
@@ -16,6 +18,7 @@ function setupSwaggerModule(app: INestApplication<any>) {
         .addBearerAuth({
             type: 'http', scheme: 'bearer', bearerFormat: 'JWT',
         }, 'JWT-user-auth')
+        .addSecurityRequirements('JWT-user-auth')
         .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
@@ -34,6 +37,7 @@ function setupDTOModule(app: INestApplication<any>, env: string) {
     app.useGlobalPipes(new ValidationPipe(opt));
 
     app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector), {
+        // strategy: 'exposeAll'
         strategy: 'excludeAll'
     }));
 }
@@ -42,6 +46,10 @@ function setupFiltersModule(app: INestApplication<any>) {
     app.useGlobalFilters(new PrismaFilter());
 }
 
+function setupAuthAndGuard(app: INestApplication<any>) {
+    const authGuard = app.get(AuthUserGuard);
+    app.useGlobalGuards(authGuard);
+}
 
 async function bootstrap() {
     // TODO Custom logger, json output when prod and webhook alert
@@ -59,7 +67,9 @@ async function bootstrap() {
 
     setupDTOModule(app, env);
     setupFiltersModule(app);
+    setupAuthAndGuard(app);
     setupSwaggerModule(app);
+
 
 
     app.enableShutdownHooks();

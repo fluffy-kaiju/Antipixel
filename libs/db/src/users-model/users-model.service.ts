@@ -50,10 +50,21 @@ export class UsersModelService {
     }
 
     async getEmailConfirmationCodeByUserId(userId: number) {
-        return this.prisma.emailConfirmationCode.findUnique({
+        return this.prisma.emailConfirmationCode.findFirst({
             where: {
                 userId: userId,
             }
+        })
+    }
+
+    async getLastEmailConfirmationCodeByUserId(userId: number) {
+        return this.prisma.emailConfirmationCode.findFirst({
+            where: {
+                userId: userId,
+            },
+            orderBy: {
+                createdAt: 'desc'
+            },
         })
     }
 

@@ -1,4 +1,5 @@
-import { ConflictException } from "@nestjs/common";
+import { TooManyParts } from "@aws-sdk/client-s3";
+import { ConflictException, HttpException, HttpStatus, UnauthorizedException } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
 import { IsAlphanumeric, IsEmail, IsEnum, IsJSON, IsJWT, IsString, IsUUID, Length } from "class-validator";
@@ -13,7 +14,7 @@ export enum ERegisterError {
 
 export class RegisterDto {
 
-    @ApiProperty({ description: "Unique user name", example: "Keven"})
+    @ApiProperty({ description: "Unique user name", example: "Keven" })
     @IsAlphanumeric()
     @Length(3, 24)
     userName: string;
@@ -58,13 +59,13 @@ export class RegisterConflictResponseEntity extends ConflictException {
 }
 
 export class VerifyEmailDto {
-    @ApiProperty({description: "Email verification token CUID2"})
+    @ApiProperty({ description: "Email verification token CUID2" })
     @IsString() // WIP No cuid2 decorator aviable!
     token: string
 }
 
 export enum EVerifyEmailStatus {
-    OK      = 'Verified token',
+    OK = 'Verified token',
     EXPIRED = 'Expired token',
     INVALID = 'Invalid token',
 }
@@ -90,3 +91,53 @@ export class VerifyEmailExpiredOrNotFoundResponseEntity {
     status: string = EVerifyEmailStatus.EXPIRED
 }
 
+export class ResendVerifyEmailDto {
+
+    @ApiProperty({ description: "Email address" })
+    @IsEmail()
+    email: string;
+
+}
+
+export enum EResendVerifyEmailStatus {
+    OK = 'Email sent',
+    EmailNotFound = 'Email not found',
+}
+
+export class ResendVerifyEmailResponseEntity {
+
+    @ApiProperty()
+    @IsString()
+    @Expose()
+    status: string = EResendVerifyEmailStatus.OK;
+
+}
+
+export class ResendVerifyEmailNotFound extends UnauthorizedException {
+
+    @ApiProperty({ description: "Reason", example: EResendVerifyEmailStatus.EmailNotFound })
+    @Expose()
+    message: string;
+
+    constructor() {
+        super(EResendVerifyEmailStatus.EmailNotFound)
+    }
+
+}
+
+export class ResendVerifyEmailWait extends HttpException {
+    @ApiProperty({ description: 'Number of seconds to wait before retrying', example: 30 })
+    @Expose()
+    retryAfter_sec: number;
+
+    constructor(coolDown_sec: number) {
+        super(
+            {
+                statusCode: HttpStatus.TOO_MANY_REQUESTS,
+                message: `Wait ${coolDown_sec}s before retrying`,
+                retryAfter_sec: coolDown_sec,
+            },
+            HttpStatus.TOO_MANY_REQUESTS
+        );
+    }
+}

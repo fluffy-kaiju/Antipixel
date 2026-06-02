@@ -2,7 +2,7 @@ import { overridePrismaFilter } from '@db/db/prisma/prisma.filter';
 import { UsersModelService } from '@db/db/users-model/users-model.service';
 import { GoneException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
-import { ERegisterError, RegisterConflictResponseEntity, RegisterCreatedResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity, VerifyEmailOkResponseEntity } from './dto/register.dto';
+import { ERegisterError, RegisterConflictResponseEntity, RegisterCreatedResponseEntity, ResendVerifyEmailNotFound, ResendVerifyEmailWait, VerifyEmailExpiredOrNotFoundResponseEntity, VerifyEmailOkResponseEntity } from './dto/register.dto';
 import { AuthUserNotifyService } from './auth-user-notify.service';
 import { LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity } from './dto/sing-in.dto';
 import { JwtModelService } from '../jwt/jwt-model.service';
@@ -104,6 +104,38 @@ export class AuthUserService {
         return new RegisterCreatedResponseEntity(newUser);
     }
 
+    async resendEmailVerify(email: string) {
+
+        const user = await this.usersModel.getByEmail(email);
+        if (user === null) {
+            throw new ResendVerifyEmailNotFound();
+        }
+
+        const code = await this.usersModel.getLastEmailConfirmationCodeByUserId(user.id);
+
+        if (code !== null) {
+
+            const createdAt = code.createdAt.toTemporalInstant();
+            const expireAt = createdAt.add({ seconds: code.TTL_sec });
+            const now = Temporal.Now.instant();
+
+            if (Temporal.Instant.compare(now, expireAt) < 0) {
+                const remaining = Math.ceil(
+                    now.until(expireAt).total({ unit: 'second' })
+                );
+                throw new ResendVerifyEmailWait(remaining);
+            }
+
+            await this.usersModel.deleteAllEmailConfirmationCodeByUserId(user.id);
+            const emailValidationCode = await this.usersModel.createEmailConfirmationCode(user.id);
+            await this.authUserNotifyService.sendEmailConfirmationURL(
+                user.email,
+                user.userName,
+                emailValidationCode.token,
+            )
+        }
+    }
+
     async verifyEmail(token: string) {
         const code = await this.usersModel.getEmailConfirmationCode(token);
         if (code === null) throw new GoneException(new VerifyEmailExpiredOrNotFoundResponseEntity());
@@ -120,4 +152,5 @@ export class AuthUserService {
 
         return new VerifyEmailOkResponseEntity();
     }
+
 }

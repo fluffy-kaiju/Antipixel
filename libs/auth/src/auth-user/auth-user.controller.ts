@@ -1,11 +1,10 @@
 import { Body, Controller, Post, Get, Param, Query, UnauthorizedException, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { ELoginError, LoginDto, LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity } from './dto/sing-in.dto';
-import { ERegisterError, RegisterDto, RegisterCreatedResponseEntity, RegisterConflictResponseEntity, VerifyEmailDto } from './dto/register.dto';
-import { ApiAcceptedResponse, ApiBadRequestResponse, ApiBearerAuth, ApiConflictResponse, ApiCookieAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ERegisterError, RegisterDto, RegisterCreatedResponseEntity, RegisterConflictResponseEntity, VerifyEmailDto, ResendVerifyEmailDto, ResendVerifyEmailResponseEntity, ResendVerifyEmailNotFound, ResendVerifyEmailWait } from './dto/register.dto';
+import { ApiAcceptedResponse, ApiBadRequestResponse, ApiBearerAuth, ApiConflictResponse, ApiCookieAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiTooManyRequestsResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { AuthUserService } from './auth-user.service';
 import { VerifyEmailErrorResponseEntity, VerifyEmailOkResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity } from './dto/register.dto';
-import { AuthUserGuard } from './auth-user.guard';
-import { Auth } from './auth-user.decorator';
+import { Auth, Public } from './auth-user.decorator';
 
 @Controller('auth')
 export class AuthUserController {
@@ -26,6 +25,7 @@ export class AuthUserController {
         description: ELoginError.EmailNotVerified,
         type: LoginEmailNotVerifiedError,
     })
+    @Public()
     @Post("/login")
     @HttpCode(HttpStatus.OK)
     async login(@Body() loginDto: LoginDto): Promise<LoginResponseEntity> {
@@ -73,13 +73,32 @@ export class AuthUserController {
         description: 'Failed to verify email',
         type: VerifyEmailErrorResponseEntity
     })
-    @Get("/verifyEmail/:token")
-    async verifyEmail(@Param() verifyEmailDto: VerifyEmailDto)
+    @Public()
+    @Post("/email/verify")
+    async verifyEmail(@Body() verifyEmailDto: VerifyEmailDto)
         : Promise<
             VerifyEmailOkResponseEntity |
             VerifyEmailExpiredOrNotFoundResponseEntity |
             VerifyEmailErrorResponseEntity> {
         return await this.authUserService.verifyEmail(verifyEmailDto.token);
+    }
+
+    @ApiAcceptedResponse({
+        description: 'Successfully resent email',
+        type: ResendVerifyEmailResponseEntity
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Email not found',
+        type: ResendVerifyEmailNotFound,
+    })
+    @ApiTooManyRequestsResponse({
+        description: 'Number of seconds to wait before retrying',
+        type: ResendVerifyEmailWait,
+    })
+    @Public()
+    @Post('/email/verify/resend')
+    async resendVerifyEmail(@Body() resendDto: ResendVerifyEmailDto) {
+        return this.authUserService.resendEmailVerify(resendDto.email);
     }
 
     @Auth()

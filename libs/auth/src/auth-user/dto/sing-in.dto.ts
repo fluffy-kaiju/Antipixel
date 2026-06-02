@@ -19,7 +19,7 @@ export class LoginDto {
 
 export class LoginResponseEntity {
 
-    @ApiProperty({ description: "User token", example: "Todo" })
+    @ApiProperty({ description: "User token"})
     @IsString()
     @Expose()
     access_token: string;
@@ -38,7 +38,8 @@ export enum ELoginError {
 
 export class LoginFailedError extends UnauthorizedException {
 
-    @ApiProperty({ description: "Reason" })
+    @ApiProperty({ description: "Reason", example: ELoginError.LoginFailed})
+    @Expose()
     message: string;
 
     constructor() {
@@ -49,7 +50,8 @@ export class LoginFailedError extends UnauthorizedException {
 
 export class LoginEmailNotVerifiedError extends ForbiddenException {
 
-    @ApiProperty({ description: "Reason" })
+    @ApiProperty({ description: "Reason", example: ELoginError.EmailNotVerified })
+    @Expose()
     message: string;
 
     constructor() {
