@@ -51,6 +51,14 @@ function setupAuthAndGuard(app: INestApplication<any>) {
     app.useGlobalGuards(authGuard);
 }
 
+function setupCors(app: INestApplication<any>) {
+	app.enableCors({
+		origin: '*',
+		// origin: ['http://localhost:8080'],
+		credentials: true,
+	});
+}
+
 async function bootstrap() {
     // TODO Custom logger, json output when prod and webhook alert
     // const app = await NestFactory.create(AppModule, {
@@ -69,7 +77,7 @@ async function bootstrap() {
     setupFiltersModule(app);
     setupAuthAndGuard(app);
     setupSwaggerModule(app);
-
+	setupCors(app);
 
 
     app.enableShutdownHooks();

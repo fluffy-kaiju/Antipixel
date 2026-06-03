@@ -19,6 +19,12 @@ if [ ! -e /usr/bin/prisma-language-server ]; then
   sudo ln -s "$(command -v prisma-language-server)" /usr/bin/prisma-language-server
 fi
 
+pnpm i --global --save-dev @vue/language-server
+
+if [ ! -e /usr/bin/vue-language-server ]; then
+  sudo ln -s "$(command -v vue-language-server)" /usr/bin/vue-language-server
+fi
+
 if [ ! -e  /usr/local/lib/js-debug ]; then
     sudo mkdir -p /usr/local/lib/js-debug
 
