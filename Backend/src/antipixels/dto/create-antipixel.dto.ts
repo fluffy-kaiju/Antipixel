@@ -1,5 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, Length } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, Length } from "class-validator";
+
+
+const mb = 1000000;
+export const CreateAntipixelMaxUploadSize = mb * 1.4;
 
 export class CreateAntipixelDto {
 
@@ -11,9 +15,11 @@ export class CreateAntipixelDto {
     name: string;
 
     @ApiProperty()
+    @IsString()
     description: string;
 
     // Add the file property for Swagger
     @ApiProperty({ type: 'string', format: 'binary' })
+    @IsOptional()
     file: Express.Multer.File;
 }

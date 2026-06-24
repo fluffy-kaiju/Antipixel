@@ -1,7 +1,9 @@
 import { Injectable, InternalServerErrorException, Logger, OnModuleInit } from '@nestjs/common';
 
-import { S3Client, S3ClientConfigType, CreateBucketCommand, BucketCannedACL, BucketAlreadyExists, BucketAlreadyOwnedByYou, PutObjectCommand } from "@aws-sdk/client-s3"
+import { S3Client, S3ClientConfigType, CreateBucketCommand, BucketCannedACL, BucketAlreadyExists, BucketAlreadyOwnedByYou, PutObjectCommand, GetBucketPolicyCommand, GetBucketPolicy$, NoSuchBucket } from "@aws-sdk/client-s3"
 import { ConfigService } from '@nestjs/config';
+import { createHash } from 'node:crypto';
+import * as mime from 'mime-types';
 
 @Injectable()
 export class S3Service implements OnModuleInit {
@@ -34,12 +36,12 @@ export class S3Service implements OnModuleInit {
 
     private async bucketExistOrCreate(bucketName: string): Promise<void> {
 
-        const command = new CreateBucketCommand({
+        const create_command = new CreateBucketCommand({
             Bucket: bucketName,
             ACL: BucketCannedACL.public_read
         })
 
-        await this.client.send(command)
+        await this.client.send(create_command)
             .then(() => {
                 this.logger.verbose(`Bucket ${bucketName} created!`)
             })
@@ -49,16 +51,47 @@ export class S3Service implements OnModuleInit {
                     this.logger.verbose(`Bucket ${bucketName} exist!`)
                     return;
                 }
-                throw new InternalServerErrorException("Unhandled error CreateBucketCommand", {cause: error.message});
+                throw new InternalServerErrorException("Unhandled error CreateBucketCommand", { cause: error.message });
             })
+
+
+        // TODO check if bucket policy is configured
+        // const bucket_ressource_name = `${this.bucketName}`
+
+        // const set_anonymous_access_command = new GetBucketPolicyCommand({Bucket: bucket_ressource_name});
+        // await this.client.send(set_anonymous_access_command)
+        //     .then((data) => {
+        //         this.logger.debug(data);
+        //     })
+        //     .catch((error) => {
+        //         // if (error instanceof NoSuchBucketPolicy) {
+        //         //     this.logger.verbose(`Bucket ${bucketName} exist!`)
+        //         //     return;
+        //         // }
+        //         throw error;
+        //         throw new InternalServerErrorException("Unhandled error GetBucketPolicyCommand", { cause: error.message });
+        //     })
     }
 
-    public async uplaodObjectWithSha256AsKey(Buffer: Object) {
+    public async s3UploadAntipixel(buffer: Buffer, originalFileName: string, mimeType: string, antipixelId: number, shasum256: string) {
 
-        // TODO Get the file uploaded from the user and calc the hash
-        // const hash = crypto.createHash('sha256').update(fileBuffer).digest('hex');
-        const test_command = new PutObjectCommand({Bucket: this.bucketName, Body: "Test", Key: "tonpere2"})
-        const test_res = await this.client.send(test_command);
+        const s3Key = `${shasum256}/${originalFileName}`;
+
+        this.logger.verbose(`Uploading file with S3 Key: ${s3Key}`);
+
+        const put_command = new PutObjectCommand({
+            Bucket: this.bucketName,
+            Body: buffer,
+            Key: s3Key,
+            ContentType: mimeType, // Seems to not affect `MIME Type` proprety for seaweedfs :/
+            Metadata: {
+                'content-type': mimeType,
+                'antipixel-id': String(antipixelId),
+                'shasum256'   : shasum256,
+            }
+
+        });
+        const test_res = await this.client.send(put_command);
         this.logger.verbose(test_res);
     }
 

@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
-import { CreateAntipixelDto } from './dto/create-antipixel.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
+import { CreateAntipixelDto, CreateAntipixelMaxUploadSize } from './dto/create-antipixel.dto';
 import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
 import { AntipixelsControllerService } from './antipixelsController.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { FileHashPipe, FileWithHash } from './antipixel-validation-pipe.pipe';
 
 @Controller('antipixel')
 export class AntipixelsController {
@@ -18,7 +19,24 @@ export class AntipixelsController {
     })
     create(
         @Body() createAntipixelDto: CreateAntipixelDto,
-        @UploadedFile() file: Express.Multer.File,
+        @UploadedFile(
+            new ParseFilePipe({
+                validators: [
+                    new MaxFileSizeValidator({
+                        maxSize: CreateAntipixelMaxUploadSize,
+                        message: `File exceeds upload limit of ${CreateAntipixelMaxUploadSize} bytes.`
+                    }),
+                    new FileTypeValidator({
+                        fileType: /^image\//, errorMessage(ctx) {
+                            if (ctx.file) {
+                                return `Unsupported file format ${ctx.file.mimetype}`;
+                            }
+                            return `File missing`;
+                        }
+                    }),]
+            }),
+            FileHashPipe
+        ) file: FileWithHash,
     ) {
         return this.antipixelsControllerService.create(createAntipixelDto, file);
     }
