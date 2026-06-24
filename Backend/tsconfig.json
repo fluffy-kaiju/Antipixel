@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+      "types": [
+          "node",
+          "express",
+          "multer"
+      ],
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "resolvePackageJsonExports": true,
@@ -10,16 +15,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2023", // TODO FIX #12
-    "lib": ["ES2023", "esnext.temporal", "esnext"], // TODO FIX #12
+    "target": "ES2023",
+    "lib": ["ES2023", "esnext.temporal", "esnext"],
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "strictPropertyInitialization": false, // TODO FIX #12
-    "ignoreDeprecations": "6.0", // TODO FIX #12
+    "strictPropertyInitialization": false,
+    "ignoreDeprecations": "6.0",
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,

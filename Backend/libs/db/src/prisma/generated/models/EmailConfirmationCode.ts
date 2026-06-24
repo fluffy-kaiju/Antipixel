@@ -274,7 +274,7 @@ export type EmailConfirmationCodeScalarWhereWithAggregatesInput = {
 
 export type EmailConfirmationCodeCreateInput = {
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutEmailConfirmationCodeInput
 }
@@ -282,7 +282,7 @@ export type EmailConfirmationCodeCreateInput = {
 export type EmailConfirmationCodeUncheckedCreateInput = {
   id?: number
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
   userId: number
 }
@@ -305,7 +305,7 @@ export type EmailConfirmationCodeUncheckedUpdateInput = {
 export type EmailConfirmationCodeCreateManyInput = {
   id?: number
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
   userId: number
 }
@@ -403,14 +403,14 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type EmailConfirmationCodeCreateWithoutUserInput = {
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
 }
 
 export type EmailConfirmationCodeUncheckedCreateWithoutUserInput = {
   id?: number
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
 }
 

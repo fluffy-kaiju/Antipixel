@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Get, Param, Query, UnauthorizedException, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { ELoginError, LoginDto, LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity } from './dto/sing-in.dto';
-import { ERegisterError, RegisterDto, RegisterCreatedResponseEntity, RegisterConflictResponseEntity, VerifyEmailDto, ResendVerifyEmailDto, ResendVerifyEmailResponseEntity, ResendVerifyEmailNotFound, ResendVerifyEmailWait } from './dto/register.dto';
+import { ERegisterError, RegisterDto, RegisterCreatedResponseEntity, RegisterConflictResponseEntity, VerifyEmailDto, ResendVerifyEmailDto, ResendVerifyEmailResponseEntity, ResendVerifyEmailNotFound, ResendVerifyEmailWait, ResendVerifyEmailAlreadyVerify } from './dto/register.dto';
 import { ApiAcceptedResponse, ApiBadRequestResponse, ApiBearerAuth, ApiConflictResponse, ApiCookieAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiTooManyRequestsResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { AuthUserService } from './auth-user.service';
 import { VerifyEmailErrorResponseEntity, VerifyEmailOkResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity } from './dto/register.dto';
@@ -88,6 +88,10 @@ export class AuthUserController {
         description: 'Successfully resent email',
         type: ResendVerifyEmailResponseEntity
     })
+    @ApiConflictResponse({
+        description: 'Email already verified',
+        type: ResendVerifyEmailAlreadyVerify,
+})
     @ApiUnauthorizedResponse({
         description: 'Email not found',
         type: ResendVerifyEmailNotFound,

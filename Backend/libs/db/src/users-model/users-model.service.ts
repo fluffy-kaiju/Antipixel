@@ -34,11 +34,13 @@ export class UsersModelService {
     }
 
     async createEmailConfirmationCode(userId: number) {
+        const ttl = 60 * 5;
         return this.prisma.emailConfirmationCode.create({
             data: {
                 userId: userId,
+                TTL_sec: ttl,
             }
-        })
+        });
     }
 
     async getEmailConfirmationCode(token: string) {
@@ -46,7 +48,7 @@ export class UsersModelService {
             where: {
                 token: token,
             }
-        })
+        });
     }
 
     async getEmailConfirmationCodeByUserId(userId: number) {
@@ -54,7 +56,7 @@ export class UsersModelService {
             where: {
                 userId: userId,
             }
-        })
+        });
     }
 
     async getLastEmailConfirmationCodeByUserId(userId: number) {
@@ -65,7 +67,7 @@ export class UsersModelService {
             orderBy: {
                 createdAt: 'desc'
             },
-        })
+        });
     }
 
     async deleteAllEmailConfirmationCodeByUserId(userId: number) {
@@ -73,7 +75,7 @@ export class UsersModelService {
             where: {
                 userId: userId,
             }
-        })
+        });
     }
 
     async deleteEmailConfirmationCode(token: string) {
@@ -81,7 +83,7 @@ export class UsersModelService {
             where: {
                 token: token,
             }
-        })
+        });
     }
 
     async updateEmailConfirmationStatus(userId: number, isVerified: boolean) {
@@ -92,7 +94,7 @@ export class UsersModelService {
             data: {
                 emailIsVerified: isVerified,
             }
-        })
+        });
     }
 
     async getById(userId: number) {
@@ -100,7 +102,7 @@ export class UsersModelService {
             where: {
                 id: userId
             }
-        })
+        });
     };
 
     async getByUserName(userName: string) {
@@ -108,7 +110,7 @@ export class UsersModelService {
             where: {
                 userName: userName
             }
-        })
+        });
     };
 
     async getUserLoginByUserName(userName: string) {
@@ -123,15 +125,26 @@ export class UsersModelService {
                 emailIsVerified: true,
                 passwordHash: true
             }
-        })
-    };
+        });
+    }
 
     async getByEmail(email: string) {
         return this.prisma.user.findUnique({
             where: {
                 email: email
             }
-        })
-    };
+        });
+    }
+
+    async hasEmailVerified(id: number) {
+        return this.prisma.user.findUnique({
+            where: {
+                id: id,
+            },
+            select: {
+                emailIsVerified: true,
+            }
+        }).then((elem) => elem?.emailIsVerified ?? false);
+    }
 
 }

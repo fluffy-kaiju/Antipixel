@@ -100,8 +100,11 @@ export class ResendVerifyEmailDto {
 }
 
 export enum EResendVerifyEmailStatus {
+
     OK = 'Email sent',
     EmailNotFound = 'Email not found',
+    AlreadyVerified = 'Email already verified',
+
 }
 
 export class ResendVerifyEmailResponseEntity {
@@ -121,6 +124,18 @@ export class ResendVerifyEmailNotFound extends UnauthorizedException {
 
     constructor() {
         super(EResendVerifyEmailStatus.EmailNotFound)
+    }
+
+}
+
+export class ResendVerifyEmailAlreadyVerify extends ConflictException {
+    @ApiProperty({ description: "Reason", example: EResendVerifyEmailStatus.AlreadyVerified })
+
+    @Expose()
+    message: string;
+
+    constructor() {
+        super(EResendVerifyEmailStatus.AlreadyVerified)
     }
 
 }

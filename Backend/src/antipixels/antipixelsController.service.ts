@@ -1,26 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateAntipixelDto } from './dto/create-antipixel.dto';
 import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
 
 @Injectable()
 export class AntipixelsControllerService {
-  create(createAntipixelDto: CreateAntipixelDto) {
-    return 'This action adds a new antipixel';
-  }
 
-  findAll() {
-    return `This action returns all antipixels`;
-  }
+    private readonly logger = new Logger(AntipixelsControllerService.name);
 
-  findOne(id: number) {
-    return `This action returns a #${id} antipixel`;
-  }
+    create(
+        createAntipixelDto: CreateAntipixelDto,
+        file: Express.Multer.File,
+    ) {
+        this.logger.log(file.filename);
+        return 'This action adds a new antipixel';
+    }
 
-  update(id: number, updateAntipixelDto: UpdateAntipixelDto) {
-    return `This action updates a #${id} antipixel`;
-  }
+    findAll() {
+        return `This action returns all antipixels`;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} antipixel`;
-  }
+    findOne(id: number) {
+        return `This action returns a #${id} antipixel`;
+    }
+
+    update(id: number, updateAntipixelDto: UpdateAntipixelDto) {
+        return `This action updates a #${id} antipixel`;
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} antipixel`;
+    }
 }
