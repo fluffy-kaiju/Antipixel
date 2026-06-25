@@ -1,11 +1,14 @@
+import { Expose } from "class-transformer";
 import { IsNumber, IsString } from "class-validator"
 
 export class AuthUserTokenEntity {
 
     @IsNumber()
+    @Expose()
     id: number;
 
     @IsString()
+    @Expose()
     userName: string;
 
     constructor(p: Partial<AuthUserTokenEntity>) {

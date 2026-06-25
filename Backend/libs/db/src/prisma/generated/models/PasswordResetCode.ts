@@ -274,7 +274,7 @@ export type PasswordResetCodeScalarWhereWithAggregatesInput = {
 
 export type PasswordResetCodeCreateInput = {
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPasswordResetInput
 }
@@ -282,7 +282,7 @@ export type PasswordResetCodeCreateInput = {
 export type PasswordResetCodeUncheckedCreateInput = {
   id?: number
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
   userId: number
 }
@@ -305,7 +305,7 @@ export type PasswordResetCodeUncheckedUpdateInput = {
 export type PasswordResetCodeCreateManyInput = {
   id?: number
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
   userId: number
 }
@@ -399,14 +399,14 @@ export type PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput = {
 
 export type PasswordResetCodeCreateWithoutUserInput = {
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
 }
 
 export type PasswordResetCodeUncheckedCreateWithoutUserInput = {
   id?: number
   token?: string
-  TTL_sec?: number
+  TTL_sec: number
   createdAt?: Date | string
 }
 

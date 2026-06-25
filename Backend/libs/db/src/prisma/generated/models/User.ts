@@ -233,6 +233,7 @@ export type UserWhereInput = {
   tagCreated?: Prisma.TagListRelationFilter
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelListRelationFilter
   tagsStatusUpdated?: Prisma.TagsStatusHistoryListRelationFilter
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -251,6 +252,7 @@ export type UserOrderByWithRelationInput = {
   tagCreated?: Prisma.TagOrderByRelationAggregateInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelOrderByRelationAggregateInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryOrderByRelationAggregateInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +274,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   tagCreated?: Prisma.TagListRelationFilter
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelListRelationFilter
   tagsStatusUpdated?: Prisma.TagsStatusHistoryListRelationFilter
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryListRelationFilter
 }, "id" | "userName" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -315,6 +318,7 @@ export type UserCreateInput = {
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -333,6 +337,7 @@ export type UserUncheckedCreateInput = {
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUpdateInput = {
@@ -350,6 +355,7 @@ export type UserUpdateInput = {
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -368,6 +374,7 @@ export type UserUncheckedUpdateInput = {
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -556,6 +563,20 @@ export type UserUpdateOneRequiredWithoutTagOnAntipixelAssignedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTagOnAntipixelAssignedInput, Prisma.UserUpdateWithoutTagOnAntipixelAssignedInput>, Prisma.UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput>
 }
 
+export type UserCreateNestedOneWithoutAntipixelStatusUpdatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAntipixelStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutAntipixelStatusUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAntipixelStatusUpdatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAntipixelStatusUpdatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAntipixelStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutAntipixelStatusUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAntipixelStatusUpdatedInput
+  upsert?: Prisma.UserUpsertWithoutAntipixelStatusUpdatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAntipixelStatusUpdatedInput, Prisma.UserUpdateWithoutAntipixelStatusUpdatedInput>, Prisma.UserUncheckedUpdateWithoutAntipixelStatusUpdatedInput>
+}
+
 export type UserCreateNestedOneWithoutAntipixelsSubmittedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAntipixelsSubmittedInput, Prisma.UserUncheckedCreateWithoutAntipixelsSubmittedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAntipixelsSubmittedInput
@@ -584,6 +605,7 @@ export type UserCreateWithoutRolesCreatedInput = {
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutRolesCreatedInput = {
@@ -601,6 +623,7 @@ export type UserUncheckedCreateWithoutRolesCreatedInput = {
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutRolesCreatedInput = {
@@ -633,6 +656,7 @@ export type UserUpdateWithoutRolesCreatedInput = {
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesCreatedInput = {
@@ -650,6 +674,7 @@ export type UserUncheckedUpdateWithoutRolesCreatedInput = {
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutEmailConfirmationCodeInput = {
@@ -666,6 +691,7 @@ export type UserCreateWithoutEmailConfirmationCodeInput = {
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutEmailConfirmationCodeInput = {
@@ -683,6 +709,7 @@ export type UserUncheckedCreateWithoutEmailConfirmationCodeInput = {
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutEmailConfirmationCodeInput = {
@@ -715,6 +742,7 @@ export type UserUpdateWithoutEmailConfirmationCodeInput = {
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailConfirmationCodeInput = {
@@ -732,6 +760,7 @@ export type UserUncheckedUpdateWithoutEmailConfirmationCodeInput = {
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutPasswordResetInput = {
@@ -748,6 +777,7 @@ export type UserCreateWithoutPasswordResetInput = {
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetInput = {
@@ -765,6 +795,7 @@ export type UserUncheckedCreateWithoutPasswordResetInput = {
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetInput = {
@@ -797,6 +828,7 @@ export type UserUpdateWithoutPasswordResetInput = {
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetInput = {
@@ -814,6 +846,7 @@ export type UserUncheckedUpdateWithoutPasswordResetInput = {
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutAccountHistoryInput = {
@@ -830,6 +863,7 @@ export type UserCreateWithoutAccountHistoryInput = {
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutAccountHistoryInput = {
@@ -847,6 +881,7 @@ export type UserUncheckedCreateWithoutAccountHistoryInput = {
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutAccountHistoryInput = {
@@ -868,6 +903,7 @@ export type UserCreateWithoutUserStatusUpdatedInput = {
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutUserStatusUpdatedInput = {
@@ -885,6 +921,7 @@ export type UserUncheckedCreateWithoutUserStatusUpdatedInput = {
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutUserStatusUpdatedInput = {
@@ -917,6 +954,7 @@ export type UserUpdateWithoutAccountHistoryInput = {
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountHistoryInput = {
@@ -934,6 +972,7 @@ export type UserUncheckedUpdateWithoutAccountHistoryInput = {
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUpsertWithoutUserStatusUpdatedInput = {
@@ -961,6 +1000,7 @@ export type UserUpdateWithoutUserStatusUpdatedInput = {
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserStatusUpdatedInput = {
@@ -978,6 +1018,7 @@ export type UserUncheckedUpdateWithoutUserStatusUpdatedInput = {
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutTagCreatedInput = {
@@ -994,6 +1035,7 @@ export type UserCreateWithoutTagCreatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutTagCreatedInput = {
@@ -1011,6 +1053,7 @@ export type UserUncheckedCreateWithoutTagCreatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutTagCreatedInput = {
@@ -1043,6 +1086,7 @@ export type UserUpdateWithoutTagCreatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTagCreatedInput = {
@@ -1060,6 +1104,7 @@ export type UserUncheckedUpdateWithoutTagCreatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutTagsStatusUpdatedInput = {
@@ -1076,6 +1121,7 @@ export type UserCreateWithoutTagsStatusUpdatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutTagsStatusUpdatedInput = {
@@ -1093,6 +1139,7 @@ export type UserUncheckedCreateWithoutTagsStatusUpdatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutTagsStatusUpdatedInput = {
@@ -1125,6 +1172,7 @@ export type UserUpdateWithoutTagsStatusUpdatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTagsStatusUpdatedInput = {
@@ -1142,6 +1190,7 @@ export type UserUncheckedUpdateWithoutTagsStatusUpdatedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutTagOnAntipixelAssignedInput = {
@@ -1158,6 +1207,7 @@ export type UserCreateWithoutTagOnAntipixelAssignedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutTagOnAntipixelAssignedInput = {
@@ -1175,6 +1225,7 @@ export type UserUncheckedCreateWithoutTagOnAntipixelAssignedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutTagOnAntipixelAssignedInput = {
@@ -1207,6 +1258,7 @@ export type UserUpdateWithoutTagOnAntipixelAssignedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput = {
@@ -1224,6 +1276,93 @@ export type UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput = {
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+}
+
+export type UserCreateWithoutAntipixelStatusUpdatedInput = {
+  userName: string
+  status?: $Enums.EUserAccountStatus
+  email: string
+  emailIsVerified?: boolean
+  passwordHash: string
+  accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
+  emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
+  passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
+  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
+  userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+}
+
+export type UserUncheckedCreateWithoutAntipixelStatusUpdatedInput = {
+  id?: number
+  userName: string
+  status?: $Enums.EUserAccountStatus
+  email: string
+  emailIsVerified?: boolean
+  passwordHash: string
+  accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
+  passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
+  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
+  userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+}
+
+export type UserCreateOrConnectWithoutAntipixelStatusUpdatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAntipixelStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutAntipixelStatusUpdatedInput>
+}
+
+export type UserUpsertWithoutAntipixelStatusUpdatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAntipixelStatusUpdatedInput, Prisma.UserUncheckedUpdateWithoutAntipixelStatusUpdatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAntipixelStatusUpdatedInput, Prisma.UserUncheckedCreateWithoutAntipixelStatusUpdatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAntipixelStatusUpdatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAntipixelStatusUpdatedInput, Prisma.UserUncheckedUpdateWithoutAntipixelStatusUpdatedInput>
+}
+
+export type UserUpdateWithoutAntipixelStatusUpdatedInput = {
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailIsVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
+  emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
+  passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
+  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
+  userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAntipixelStatusUpdatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailIsVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
+  passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
+  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
+  userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
+  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
+  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserCreateWithoutAntipixelsSubmittedInput = {
@@ -1240,6 +1379,7 @@ export type UserCreateWithoutAntipixelsSubmittedInput = {
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserUncheckedCreateWithoutAntipixelsSubmittedInput = {
@@ -1257,6 +1397,7 @@ export type UserUncheckedCreateWithoutAntipixelsSubmittedInput = {
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
 }
 
 export type UserCreateOrConnectWithoutAntipixelsSubmittedInput = {
@@ -1289,6 +1430,7 @@ export type UserUpdateWithoutAntipixelsSubmittedInput = {
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAntipixelsSubmittedInput = {
@@ -1306,6 +1448,7 @@ export type UserUncheckedUpdateWithoutAntipixelsSubmittedInput = {
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
   tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
+  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
 }
 
 
@@ -1321,6 +1464,7 @@ export type UserCountOutputType = {
   tagCreated: number
   tagOnAntipixelAssigned: number
   tagsStatusUpdated: number
+  antipixelStatusUpdated: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1331,6 +1475,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   tagCreated?: boolean | UserCountOutputTypeCountTagCreatedArgs
   tagOnAntipixelAssigned?: boolean | UserCountOutputTypeCountTagOnAntipixelAssignedArgs
   tagsStatusUpdated?: boolean | UserCountOutputTypeCountTagsStatusUpdatedArgs
+  antipixelStatusUpdated?: boolean | UserCountOutputTypeCountAntipixelStatusUpdatedArgs
 }
 
 /**
@@ -1392,6 +1537,13 @@ export type UserCountOutputTypeCountTagsStatusUpdatedArgs<ExtArgs extends runtim
   where?: Prisma.TagsStatusHistoryWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAntipixelStatusUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AntipixelStatusHistoryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1409,6 +1561,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   tagCreated?: boolean | Prisma.User$tagCreatedArgs<ExtArgs>
   tagOnAntipixelAssigned?: boolean | Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs>
   tagsStatusUpdated?: boolean | Prisma.User$tagsStatusUpdatedArgs<ExtArgs>
+  antipixelStatusUpdated?: boolean | Prisma.User$antipixelStatusUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1450,6 +1603,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   tagCreated?: boolean | Prisma.User$tagCreatedArgs<ExtArgs>
   tagOnAntipixelAssigned?: boolean | Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs>
   tagsStatusUpdated?: boolean | Prisma.User$tagsStatusUpdatedArgs<ExtArgs>
+  antipixelStatusUpdated?: boolean | Prisma.User$antipixelStatusUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1467,6 +1621,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     tagCreated: Prisma.$TagPayload<ExtArgs>[]
     tagOnAntipixelAssigned: Prisma.$TagOnAntipixelPayload<ExtArgs>[]
     tagsStatusUpdated: Prisma.$TagsStatusHistoryPayload<ExtArgs>[]
+    antipixelStatusUpdated: Prisma.$AntipixelStatusHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1878,6 +2033,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   tagCreated<T extends Prisma.User$tagCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tagOnAntipixelAssigned<T extends Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagOnAntipixelAssignedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagOnAntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tagsStatusUpdated<T extends Prisma.User$tagsStatusUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagsStatusUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagsStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  antipixelStatusUpdated<T extends Prisma.User$antipixelStatusUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$antipixelStatusUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AntipixelStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2509,6 +2665,30 @@ export type User$tagsStatusUpdatedArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.TagsStatusHistoryScalarFieldEnum | Prisma.TagsStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * User.antipixelStatusUpdated
+ */
+export type User$antipixelStatusUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AntipixelStatusHistory
+   */
+  select?: Prisma.AntipixelStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AntipixelStatusHistory
+   */
+  omit?: Prisma.AntipixelStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AntipixelStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.AntipixelStatusHistoryWhereInput
+  orderBy?: Prisma.AntipixelStatusHistoryOrderByWithRelationInput | Prisma.AntipixelStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.AntipixelStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AntipixelStatusHistoryScalarFieldEnum | Prisma.AntipixelStatusHistoryScalarFieldEnum[]
 }
 
 /**

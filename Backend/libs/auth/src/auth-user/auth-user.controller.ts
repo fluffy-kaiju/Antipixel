@@ -4,7 +4,8 @@ import { ERegisterError, RegisterDto, RegisterCreatedResponseEntity, RegisterCon
 import { ApiAcceptedResponse, ApiBadRequestResponse, ApiBearerAuth, ApiConflictResponse, ApiCookieAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiTooManyRequestsResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { AuthUserService } from './auth-user.service';
 import { VerifyEmailErrorResponseEntity, VerifyEmailOkResponseEntity, VerifyEmailExpiredOrNotFoundResponseEntity } from './dto/register.dto';
-import { Auth, Public } from './auth-user.decorator';
+import { Auth, Public, AuthUser } from './auth-user.decorator';
+import { AuthUserTokenEntity } from './dto/AuthUser.dto';
 
 @Controller('auth')
 export class AuthUserController {
@@ -91,7 +92,7 @@ export class AuthUserController {
     @ApiConflictResponse({
         description: 'Email already verified',
         type: ResendVerifyEmailAlreadyVerify,
-})
+    })
     @ApiUnauthorizedResponse({
         description: 'Email not found',
         type: ResendVerifyEmailNotFound,
@@ -107,8 +108,10 @@ export class AuthUserController {
     }
 
     @Auth()
-    @Get("test/:param")
-    async test(@Param('param') param) {
-        console.log("test")
+    @Get("/me")
+    async test(
+        @AuthUser() authData: any,
+    ) {
+        return new AuthUserTokenEntity(authData);
     }
 }

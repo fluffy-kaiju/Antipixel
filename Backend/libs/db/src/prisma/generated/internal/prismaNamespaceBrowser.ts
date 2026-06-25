@@ -62,6 +62,7 @@ export const ModelName = {
   TagsStatusHistory: 'TagsStatusHistory',
   TagOnAntipixel: 'TagOnAntipixel',
   HashToAntipixel: 'HashToAntipixel',
+  AntipixelStatusHistory: 'AntipixelStatusHistory',
   Antipixel: 'Antipixel'
 } as const
 
@@ -193,10 +194,22 @@ export const HashToAntipixelScalarFieldEnum = {
 export type HashToAntipixelScalarFieldEnum = (typeof HashToAntipixelScalarFieldEnum)[keyof typeof HashToAntipixelScalarFieldEnum]
 
 
+export const AntipixelStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  changeMadeByUserId: 'changeMadeByUserId',
+  status: 'status',
+  changeMadeAt: 'changeMadeAt',
+  reason: 'reason'
+} as const
+
+export type AntipixelStatusHistoryScalarFieldEnum = (typeof AntipixelStatusHistoryScalarFieldEnum)[keyof typeof AntipixelStatusHistoryScalarFieldEnum]
+
+
 export const AntipixelScalarFieldEnum = {
   id: 'id',
   name: 'name',
   path: 'path',
+  description: 'description',
   userId: 'userId',
   createdAt: 'createdAt',
   hashToAntipixelId: 'hashToAntipixelId'

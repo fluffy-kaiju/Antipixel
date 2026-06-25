@@ -395,6 +395,7 @@ export const ModelName = {
   TagsStatusHistory: 'TagsStatusHistory',
   TagOnAntipixel: 'TagOnAntipixel',
   HashToAntipixel: 'HashToAntipixel',
+  AntipixelStatusHistory: 'AntipixelStatusHistory',
   Antipixel: 'Antipixel'
 } as const
 
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "permission" | "permissionOnRole" | "role" | "user" | "emailConfirmationCode" | "passwordResetCode" | "userStatusHistory" | "tag" | "tagsStatusHistory" | "tagOnAntipixel" | "hashToAntipixel" | "antipixel"
+    modelProps: "permission" | "permissionOnRole" | "role" | "user" | "emailConfirmationCode" | "passwordResetCode" | "userStatusHistory" | "tag" | "tagsStatusHistory" | "tagOnAntipixel" | "hashToAntipixel" | "antipixelStatusHistory" | "antipixel"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1229,6 +1230,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AntipixelStatusHistory: {
+      payload: Prisma.$AntipixelStatusHistoryPayload<ExtArgs>
+      fields: Prisma.AntipixelStatusHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AntipixelStatusHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AntipixelStatusHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.AntipixelStatusHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AntipixelStatusHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.AntipixelStatusHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.AntipixelStatusHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.AntipixelStatusHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AntipixelStatusHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.AntipixelStatusHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>
+        }
+        update: {
+          args: Prisma.AntipixelStatusHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.AntipixelStatusHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AntipixelStatusHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AntipixelStatusHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.AntipixelStatusHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AntipixelStatusHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.AntipixelStatusHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAntipixelStatusHistory>
+        }
+        groupBy: {
+          args: Prisma.AntipixelStatusHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AntipixelStatusHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AntipixelStatusHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AntipixelStatusHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
     Antipixel: {
       payload: Prisma.$AntipixelPayload<ExtArgs>
       fields: Prisma.AntipixelFieldRefs
@@ -1454,10 +1529,22 @@ export const HashToAntipixelScalarFieldEnum = {
 export type HashToAntipixelScalarFieldEnum = (typeof HashToAntipixelScalarFieldEnum)[keyof typeof HashToAntipixelScalarFieldEnum]
 
 
+export const AntipixelStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  changeMadeByUserId: 'changeMadeByUserId',
+  status: 'status',
+  changeMadeAt: 'changeMadeAt',
+  reason: 'reason'
+} as const
+
+export type AntipixelStatusHistoryScalarFieldEnum = (typeof AntipixelStatusHistoryScalarFieldEnum)[keyof typeof AntipixelStatusHistoryScalarFieldEnum]
+
+
 export const AntipixelScalarFieldEnum = {
   id: 'id',
   name: 'name',
   path: 'path',
+  description: 'description',
   userId: 'userId',
   createdAt: 'createdAt',
   hashToAntipixelId: 'hashToAntipixelId'
@@ -1699,6 +1786,7 @@ export type GlobalOmitConfig = {
   tagsStatusHistory?: Prisma.TagsStatusHistoryOmit
   tagOnAntipixel?: Prisma.TagOnAntipixelOmit
   hashToAntipixel?: Prisma.HashToAntipixelOmit
+  antipixelStatusHistory?: Prisma.AntipixelStatusHistoryOmit
   antipixel?: Prisma.AntipixelOmit
 }
 

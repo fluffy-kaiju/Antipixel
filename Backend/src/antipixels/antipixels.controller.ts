@@ -1,23 +1,28 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
-import { CreateAntipixelDto, CreateAntipixelMaxUploadSize } from './dto/create-antipixel.dto';
+import { CreateAntipixelDto, CreateAntipixelDuplicateHashException, CreateAntipixelMaxUploadSize, ECreateAntipixelStatus } from './dto/create-antipixel.dto';
 import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
 import { AntipixelsControllerService } from './antipixelsController.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { ApiBody, ApiConflictResponse, ApiConsumes } from '@nestjs/swagger';
 import { FileHashPipe, FileWithHash } from './antipixel-validation-pipe.pipe';
+import { AuthUser } from '@auth/auth/auth-user/auth-user.decorator';
 
 @Controller('antipixel')
 export class AntipixelsController {
     constructor(private readonly antipixelsControllerService: AntipixelsControllerService) { }
 
+    @ApiConflictResponse({
+        description: 'Antipixel with same hash found, duplicate is skipped',
+        type: CreateAntipixelDuplicateHashException,
+    })
     @Post('/upload')
     @UseInterceptors(FileInterceptor('file'))
     @ApiConsumes('multipart/form-data')
     @ApiBody({
-        description: 'List of cats',
         type: CreateAntipixelDto,
     })
-    create(
+    async create(
+        @AuthUser('id') userId: number,
         @Body() createAntipixelDto: CreateAntipixelDto,
         @UploadedFile(
             new ParseFilePipe({
@@ -38,7 +43,7 @@ export class AntipixelsController {
             FileHashPipe
         ) file: FileWithHash,
     ) {
-        return this.antipixelsControllerService.create(createAntipixelDto, file);
+        return this.antipixelsControllerService.create(createAntipixelDto, file, userId);
     }
 
     // @Post('/upload/bulk')

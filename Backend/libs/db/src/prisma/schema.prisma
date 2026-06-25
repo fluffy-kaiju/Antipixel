@@ -81,6 +81,7 @@ model User {
   tagCreated             Tag[]
   tagOnAntipixelAssigned TagOnAntipixel[]
   tagsStatusUpdated      TagsStatusHistory[]
+  antipixelStatusUpdated AntipixelStatusHistory[]
 }
 
 model EmailConfirmationCode {
@@ -202,24 +203,24 @@ enum EVirusScanStatus {
   UNSAFE
 }
 
-// model UserAntipixelHistory {
-//   id Int @id @default(autoincrement())
+model AntipixelStatusHistory {
+  id Int @id @default(autoincrement())
 
-//   changeMadeBy       User @relation(fields: [changeMadeByUserId], references: [id])
-//   changeMadeByUserId Int
+  changeMadeBy       User @relation(fields: [changeMadeByUserId], references: [id])
+  changeMadeByUserId Int
 
-//   status EUserAccountStatus
+  status EUserAccountStatus
 
-//   changeMadeAt DateTime @default(now())
-//   reason       String
-// }
+  changeMadeAt DateTime @default(now())
+  reason       String
+}
 
-//TODO history created, edited, status change
 model Antipixel {
   id Int @id @default(autoincrement())
 
   name String
   path String
+  description String
 
   submittedBy User @relation(fields: [userId], references: [id])
   userId      Int

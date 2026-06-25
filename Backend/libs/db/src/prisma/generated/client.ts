@@ -95,6 +95,11 @@ export type TagOnAntipixel = Prisma.TagOnAntipixelModel
  */
 export type HashToAntipixel = Prisma.HashToAntipixelModel
 /**
+ * Model AntipixelStatusHistory
+ * 
+ */
+export type AntipixelStatusHistory = Prisma.AntipixelStatusHistoryModel
+/**
  * Model Antipixel
  * 
  */

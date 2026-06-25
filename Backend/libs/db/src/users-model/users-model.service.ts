@@ -93,6 +93,18 @@ export class UsersModelService {
             },
             data: {
                 emailIsVerified: isVerified,
+                status: EUserAccountStatus.PRO,
+                accountHistory: {
+                    create: {
+                        reason: 'User verified his Email',
+                        status: EUserAccountStatus.PRO,
+                        changeMadeBy: {
+                            connect: {
+                                id: userId,
+                            }
+                        }
+                    }
+                }
             }
         });
     }
@@ -145,6 +157,26 @@ export class UsersModelService {
                 emailIsVerified: true,
             }
         }).then((elem) => elem?.emailIsVerified ?? false);
+    }
+
+    async updateStatus(userId: number, status: EUserAccountStatus, reason: string) {
+        return this.prisma.user.update({
+            where: { id: userId },
+            data: {
+                status: status,
+                accountHistory: {
+                    create: {
+                        status: status,
+                        reason: reason,
+                        changeMadeBy: {
+                            connect: {
+                                id: userId,
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
 }

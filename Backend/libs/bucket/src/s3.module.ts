@@ -13,10 +13,10 @@ import { ConfigModule } from '@nestjs/config';
                 S3_BUCKET_NAME: Joi.string().required(),
                 S3_REGION: Joi.string().required(),
             })
-        })
+        }),
     ],
     providers: [
-        S3Service
+        S3Service,
     ],
     exports: [
         S3Service
