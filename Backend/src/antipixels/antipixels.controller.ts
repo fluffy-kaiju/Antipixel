@@ -5,8 +5,9 @@ import { AntipixelsControllerService } from './antipixelsController.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiAcceptedResponse, ApiBody, ApiConflictResponse, ApiConsumes, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
 import { FileHashPipe, FileWithHash } from './antipixel-validation-pipe.pipe';
-import { AuthUser } from '@auth/auth/auth-user/auth-user.decorator';
+import { AuthUser, Public } from '@auth/auth/auth-user/auth-user.decorator';
 import { AntiNotFound, GetAntiAllDto, AntipixelResponseEntity, GetAntiByIdDto } from './dto/get-antipixel.dto';
+import { AuthUserTokenEntity } from '@auth/auth/auth-user/dto/AuthUser.dto';
 
 @Controller('antipixel')
 export class AntipixelsController {
@@ -23,7 +24,7 @@ export class AntipixelsController {
         type: CreateAntipixelDto,
     })
     async create(
-        @AuthUser('id') userId: number,
+        @AuthUser() userData: AuthUserTokenEntity,
         @Body() createAntipixelDto: CreateAntipixelDto,
         @UploadedFile(
             new ParseFilePipe({
@@ -44,7 +45,7 @@ export class AntipixelsController {
             FileHashPipe
         ) file: FileWithHash,
     ) {
-        return this.antipixelsControllerService.create(createAntipixelDto, file, userId);
+        return this.antipixelsControllerService.create(createAntipixelDto, file, userData.id, userData.userName);
     }
 
     // @Post('/upload/bulk')
@@ -58,6 +59,7 @@ export class AntipixelsController {
         type: AntipixelResponseEntity,
         isArray: true,
     })
+    @Public()
     @Get()
     async getAll(@Query() getAntipixelPaginationDto: GetAntiAllDto): Promise<AntipixelResponseEntity[]> {
         return await this.antipixelsControllerService.findAll(

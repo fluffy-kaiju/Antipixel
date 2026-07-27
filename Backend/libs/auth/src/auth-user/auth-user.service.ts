@@ -1,15 +1,16 @@
 import { overridePrismaFilter } from '@db/db/prisma/prisma.filter';
 import { UsersModelService } from '@db/db/users-model/users-model.service';
-import { GoneException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from '@nestjs/common';
+import { GoneException, Injectable, InternalServerErrorException, Logger, OnModuleInit, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 import { ERegisterError, RegisterConflictResponseEntity, RegisterCreatedResponseEntity, ResendVerifyEmailAlreadyVerify, ResendVerifyEmailNotFound, ResendVerifyEmailResponseEntity, ResendVerifyEmailWait, VerifyEmailExpiredOrNotFoundResponseEntity, VerifyEmailOkResponseEntity } from './dto/register.dto';
 import { AuthUserNotifyService } from './auth-user-notify.service';
 import { LoginEmailNotVerifiedError, LoginFailedError, LoginResponseEntity } from './dto/sing-in.dto';
 import { JwtModelService } from '../jwt/jwt-model.service';
 import { AuthUserTokenEntity } from './dto/AuthUser.dto';
+import { EUserAccountStatus } from '@db/db/prisma/generated/enums';
 
 @Injectable()
-export class AuthUserService {
+export class AuthUserService implements OnModuleInit {
 
     private readonly logger = new Logger(AuthUserService.name);
 
@@ -20,15 +21,38 @@ export class AuthUserService {
         private readonly jwtModelService: JwtModelService,
     ) { }
 
+    /**/
+    /* Check if the system user is setup. Needed for system action history.
+     */
+    async onModuleInit() {
+
+        this.logger.verbose(`Check if system user exist in db`);
+        const user = await this.usersModel.getById(this.usersModel.SYSTEM_ID);
+        if (user !== null) {
+            if (user.status !== EUserAccountStatus.SYSTEM) {
+                this.logger.fatal(`System user doesn't have the right account status!!!`);
+                this.logger.fatal(`Current ${user.status} vs expected ${EUserAccountStatus.SYSTEM}`);
+                this.logger.verbose(user);
+                process.exit(1);
+            }
+            this.logger.verbose(`Syster user exist`);
+            this.logger.verbose(user);
+            return;
+        }
+        this.logger.verbose(`System user with id ${this.usersModel.SYSTEM_ID} doesn't, try to create it`);
+        const sys_u = await this.usersModel.createSystemUser()
+            .catch((e) => {
+                this.logger.fatal(`Failed to create the system user!!!`)
+                process.exit(1);
+            })
+        this.logger.verbose(`System user created!`);
+        this.logger.verbose(sys_u);
+    };
+
     async loginUser(data: {
         userName: string,
         password: string,
     }) {
-
-        // TODO     - check if user
-        //          - check if mail verified
-        //          - check password hash
-        //          - send client token
 
         const user = await this.usersModel.getUserLoginByUserName(data.userName)
 
@@ -114,7 +138,6 @@ export class AuthUserService {
         const code = await this.usersModel.getLastEmailConfirmationCodeByUserId(user.id);
 
         if (code !== null) {
-            
 
             if (await this.usersModel.hasEmailVerified(code.userId)) {
                 throw new ResendVerifyEmailAlreadyVerify();

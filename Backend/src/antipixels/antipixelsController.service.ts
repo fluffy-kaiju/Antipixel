@@ -17,7 +17,8 @@ export class AntipixelsControllerService {
     async create(
         createAntipixelDto: CreateAntipixelDto,
         file: FileWithHash,
-        submittedBy: number,
+        submitterId: number,
+        submitterUserName: string,
     ) {
         const antipixel = await this.antiModel.newAntipixel({
             name: createAntipixelDto.name,
@@ -26,7 +27,9 @@ export class AntipixelsControllerService {
             fileMimeType: file.file.mimetype,
             fileShasum256: file.shasum256,
             originalFileName: file.file.originalname,
-            submittedBy: submittedBy // TODO get from the auth decorator
+            submitterId: submitterId,
+            submitterUserName: submitterUserName,
+
         })
         return new CreateAntipixelEntity(antipixel);
     }

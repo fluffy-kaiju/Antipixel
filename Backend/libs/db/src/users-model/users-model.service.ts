@@ -7,38 +7,56 @@ export class UsersModelService {
 
     constructor(private prisma: PrismaService) { }
 
+    readonly SYSTEM_ID = 1;
+    readonly SYSTEM_USERNAME = 'SYSTEM';
+    readonly EMAIL_CONFIRMATION_TOKEN_TTL = 60 * 5;
+
+    async createSystemUser() {
+        return await this.prisma.user.create({
+            data: {
+                id: this.SYSTEM_ID,
+                userName: this.SYSTEM_USERNAME,
+                email: 'system@system.fake',
+                passwordHash: '===NOPASS===',
+                status: EUserAccountStatus.SYSTEM,
+                accountHistory: {
+                    create: {
+                        changeMadeByUserId: this.SYSTEM_ID,
+                        status: EUserAccountStatus.SYSTEM,
+                        reason: 'System user created by system',
+                    }
+                }
+            }
+        });
+    };
+
     async registerUser(data: {
         userName: string,
         email: string,
         passwordHash: string
     }) {
-        return await this.prisma.$transaction(async (tx) => {
-            const user = await tx.user.create({
-                data: {
-                    userName: data.userName,
-                    email: data.email,
-                    passwordHash: data.passwordHash,
-                    status: EUserAccountStatus.NOOB,
+        return await this.prisma.user.create({
+            data: {
+                userName: data.userName,
+                email: data.email,
+                passwordHash: data.passwordHash,
+                status: EUserAccountStatus.NOOB,
+                accountHistory: {
+                    create: {
+                        changeMadeByUserId: this.SYSTEM_ID,
+                        status: EUserAccountStatus.NOOB,
+                        reason: 'User registered'
+                    }
                 }
-            });
-            await tx.userStatusHistory.create({
-                data: {
-                    userId: user.id,
-                    changeMadeByUserId: user.id,
-                    status: EUserAccountStatus.NOOB,
-                    reason: 'User registered'
-                }
-            })
-            return user;
+            },
         });
     }
 
     async createEmailConfirmationCode(userId: number) {
-        const ttl = 60 * 5;
         return this.prisma.emailConfirmationCode.create({
             data: {
                 userId: userId,
-                TTL_sec: ttl,
+                TTL_sec: this.EMAIL_CONFIRMATION_TOKEN_TTL,
             }
         });
     }
@@ -100,7 +118,7 @@ export class UsersModelService {
                         status: EUserAccountStatus.PRO,
                         changeMadeBy: {
                             connect: {
-                                id: userId,
+                                id: this.SYSTEM_ID,
                             }
                         }
                     }

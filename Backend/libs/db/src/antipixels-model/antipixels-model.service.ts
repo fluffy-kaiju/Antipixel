@@ -4,6 +4,7 @@ import { S3AntipixelsModelService } from '@bucket/bucket/s3-antipixels-model/s3-
 import { S3ServiceException } from '@aws-sdk/client-s3';
 import { CreateAntipixelDuplicateHashException } from 'src/antipixels/dto/create-antipixel.dto';
 import { overridePrismaFilter } from '../prisma/prisma.filter';
+import { EAntipixelStatus } from '../prisma/generated/enums';
 
 @Injectable()
 export class AntipixelsModelService {
@@ -28,7 +29,8 @@ export class AntipixelsModelService {
     async newAntipixel(data: {
         name: string,
         description: string,
-        submittedBy: number,
+        submitterId: number,
+        submitterUserName: string,
         fileBuffer: Buffer,
         fileMimeType: string,
         originalFileName: string,
@@ -76,7 +78,18 @@ export class AntipixelsModelService {
                 },
                 submittedBy: {
                     connect: {
-                        id: data.submittedBy,
+                        id: data.submitterId,
+                    }
+                },
+                statusHistory: {
+                    create: {
+                        reason: `Antipixel submitted by ${data.submitterUserName}`,
+                        changeMadeBy: {
+                            connect: {
+                                id: data.submitterId,
+                            }
+                        },
+                        status: EAntipixelStatus.OPEN,
                     }
                 }
             }

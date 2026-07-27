@@ -6,7 +6,6 @@ import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidatorOptions } from '@nestjs/common/interfaces/external/validator-options.interface';
 import { AuthUserGuard } from '@auth/auth/auth-user/auth-user.guard';
-import { Auth } from '@auth/auth/auth-user/auth-user.decorator';
 
 const log = new Logger(bootstrap.name);
 

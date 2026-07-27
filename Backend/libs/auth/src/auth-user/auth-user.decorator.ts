@@ -12,13 +12,13 @@ export const AuthUser = createParamDecorator(
     }
 )
 
-export function Auth() {
-    return applyDecorators(
-        UseGuards(AuthUserGuard),
-        ApiBearerAuth('JWT-user-auth'),
-        ApiUnauthorizedResponse(),
-    )
-}
+// export function Auth() {
+//     return applyDecorators(
+//         UseGuards(AuthUserGuard),
+//         ApiBearerAuth('JWT-user-auth'),
+//         ApiUnauthorizedResponse(),
+//     )
+// }
 
 export const IS_PUBLIC_KEY = 'isPublic';
 export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
