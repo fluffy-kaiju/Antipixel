@@ -43,6 +43,7 @@ export type AntipixelMinAggregateOutputType = {
   name: string | null
   path: string | null
   description: string | null
+  status: $Enums.EAntipixelStatus | null
   userId: number | null
   createdAt: Date | null
   hashToAntipixelId: number | null
@@ -53,6 +54,7 @@ export type AntipixelMaxAggregateOutputType = {
   name: string | null
   path: string | null
   description: string | null
+  status: $Enums.EAntipixelStatus | null
   userId: number | null
   createdAt: Date | null
   hashToAntipixelId: number | null
@@ -63,6 +65,7 @@ export type AntipixelCountAggregateOutputType = {
   name: number
   path: number
   description: number
+  status: number
   userId: number
   createdAt: number
   hashToAntipixelId: number
@@ -87,6 +90,7 @@ export type AntipixelMinAggregateInputType = {
   name?: true
   path?: true
   description?: true
+  status?: true
   userId?: true
   createdAt?: true
   hashToAntipixelId?: true
@@ -97,6 +101,7 @@ export type AntipixelMaxAggregateInputType = {
   name?: true
   path?: true
   description?: true
+  status?: true
   userId?: true
   createdAt?: true
   hashToAntipixelId?: true
@@ -107,6 +112,7 @@ export type AntipixelCountAggregateInputType = {
   name?: true
   path?: true
   description?: true
+  status?: true
   userId?: true
   createdAt?: true
   hashToAntipixelId?: true
@@ -204,6 +210,7 @@ export type AntipixelGroupByOutputType = {
   name: string
   path: string
   description: string
+  status: $Enums.EAntipixelStatus
   userId: number
   createdAt: Date
   hashToAntipixelId: number
@@ -237,9 +244,11 @@ export type AntipixelWhereInput = {
   name?: Prisma.StringFilter<"Antipixel"> | string
   path?: Prisma.StringFilter<"Antipixel"> | string
   description?: Prisma.StringFilter<"Antipixel"> | string
+  status?: Prisma.EnumEAntipixelStatusFilter<"Antipixel"> | $Enums.EAntipixelStatus
   userId?: Prisma.IntFilter<"Antipixel"> | number
   createdAt?: Prisma.DateTimeFilter<"Antipixel"> | Date | string
   hashToAntipixelId?: Prisma.IntFilter<"Antipixel"> | number
+  statusHistory?: Prisma.AntipixelStatusHistoryListRelationFilter
   submittedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tags?: Prisma.TagOnAntipixelListRelationFilter
   hashToAntipixel?: Prisma.XOR<Prisma.HashToAntipixelScalarRelationFilter, Prisma.HashToAntipixelWhereInput>
@@ -250,9 +259,11 @@ export type AntipixelOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   hashToAntipixelId?: Prisma.SortOrder
+  statusHistory?: Prisma.AntipixelStatusHistoryOrderByRelationAggregateInput
   submittedBy?: Prisma.UserOrderByWithRelationInput
   tags?: Prisma.TagOnAntipixelOrderByRelationAggregateInput
   hashToAntipixel?: Prisma.HashToAntipixelOrderByWithRelationInput
@@ -266,9 +277,11 @@ export type AntipixelWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Antipixel"> | string
   path?: Prisma.StringFilter<"Antipixel"> | string
   description?: Prisma.StringFilter<"Antipixel"> | string
+  status?: Prisma.EnumEAntipixelStatusFilter<"Antipixel"> | $Enums.EAntipixelStatus
   userId?: Prisma.IntFilter<"Antipixel"> | number
   createdAt?: Prisma.DateTimeFilter<"Antipixel"> | Date | string
   hashToAntipixelId?: Prisma.IntFilter<"Antipixel"> | number
+  statusHistory?: Prisma.AntipixelStatusHistoryListRelationFilter
   submittedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tags?: Prisma.TagOnAntipixelListRelationFilter
   hashToAntipixel?: Prisma.XOR<Prisma.HashToAntipixelScalarRelationFilter, Prisma.HashToAntipixelWhereInput>
@@ -279,6 +292,7 @@ export type AntipixelOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   hashToAntipixelId?: Prisma.SortOrder
@@ -297,6 +311,7 @@ export type AntipixelScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Antipixel"> | string
   path?: Prisma.StringWithAggregatesFilter<"Antipixel"> | string
   description?: Prisma.StringWithAggregatesFilter<"Antipixel"> | string
+  status?: Prisma.EnumEAntipixelStatusWithAggregatesFilter<"Antipixel"> | $Enums.EAntipixelStatus
   userId?: Prisma.IntWithAggregatesFilter<"Antipixel"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Antipixel"> | Date | string
   hashToAntipixelId?: Prisma.IntWithAggregatesFilter<"Antipixel"> | number
@@ -306,7 +321,9 @@ export type AntipixelCreateInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   createdAt?: Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutAntipixelInput
   submittedBy: Prisma.UserCreateNestedOneWithoutAntipixelsSubmittedInput
   tags?: Prisma.TagOnAntipixelCreateNestedManyWithoutAntipixelInput
   hashToAntipixel: Prisma.HashToAntipixelCreateNestedOneWithoutAntipixelsInput
@@ -317,9 +334,11 @@ export type AntipixelUncheckedCreateInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   userId: number
   createdAt?: Date | string
   hashToAntipixelId: number
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutAntipixelInput
   tags?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAntipixelInput
 }
 
@@ -327,7 +346,9 @@ export type AntipixelUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryUpdateManyWithoutAntipixelNestedInput
   submittedBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput
   tags?: Prisma.TagOnAntipixelUpdateManyWithoutAntipixelNestedInput
   hashToAntipixel?: Prisma.HashToAntipixelUpdateOneRequiredWithoutAntipixelsNestedInput
@@ -338,9 +359,11 @@ export type AntipixelUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hashToAntipixelId?: Prisma.IntFieldUpdateOperationsInput | number
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutAntipixelNestedInput
   tags?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAntipixelNestedInput
 }
 
@@ -349,6 +372,7 @@ export type AntipixelCreateManyInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   userId: number
   createdAt?: Date | string
   hashToAntipixelId: number
@@ -358,6 +382,7 @@ export type AntipixelUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -366,6 +391,7 @@ export type AntipixelUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hashToAntipixelId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -391,6 +417,7 @@ export type AntipixelCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   hashToAntipixelId?: Prisma.SortOrder
@@ -407,6 +434,7 @@ export type AntipixelMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   hashToAntipixelId?: Prisma.SortOrder
@@ -417,6 +445,7 @@ export type AntipixelMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   path?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   hashToAntipixelId?: Prisma.SortOrder
@@ -526,11 +555,27 @@ export type AntipixelUncheckedUpdateManyWithoutHashToAntipixelNestedInput = {
   deleteMany?: Prisma.AntipixelScalarWhereInput | Prisma.AntipixelScalarWhereInput[]
 }
 
+export type AntipixelCreateNestedOneWithoutStatusHistoryInput = {
+  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutStatusHistoryInput, Prisma.AntipixelUncheckedCreateWithoutStatusHistoryInput>
+  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutStatusHistoryInput
+  connect?: Prisma.AntipixelWhereUniqueInput
+}
+
+export type AntipixelUpdateOneRequiredWithoutStatusHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.AntipixelCreateWithoutStatusHistoryInput, Prisma.AntipixelUncheckedCreateWithoutStatusHistoryInput>
+  connectOrCreate?: Prisma.AntipixelCreateOrConnectWithoutStatusHistoryInput
+  upsert?: Prisma.AntipixelUpsertWithoutStatusHistoryInput
+  connect?: Prisma.AntipixelWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AntipixelUpdateToOneWithWhereWithoutStatusHistoryInput, Prisma.AntipixelUpdateWithoutStatusHistoryInput>, Prisma.AntipixelUncheckedUpdateWithoutStatusHistoryInput>
+}
+
 export type AntipixelCreateWithoutSubmittedByInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   createdAt?: Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutAntipixelInput
   tags?: Prisma.TagOnAntipixelCreateNestedManyWithoutAntipixelInput
   hashToAntipixel: Prisma.HashToAntipixelCreateNestedOneWithoutAntipixelsInput
 }
@@ -540,8 +585,10 @@ export type AntipixelUncheckedCreateWithoutSubmittedByInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   createdAt?: Date | string
   hashToAntipixelId: number
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutAntipixelInput
   tags?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAntipixelInput
 }
 
@@ -579,6 +626,7 @@ export type AntipixelScalarWhereInput = {
   name?: Prisma.StringFilter<"Antipixel"> | string
   path?: Prisma.StringFilter<"Antipixel"> | string
   description?: Prisma.StringFilter<"Antipixel"> | string
+  status?: Prisma.EnumEAntipixelStatusFilter<"Antipixel"> | $Enums.EAntipixelStatus
   userId?: Prisma.IntFilter<"Antipixel"> | number
   createdAt?: Prisma.DateTimeFilter<"Antipixel"> | Date | string
   hashToAntipixelId?: Prisma.IntFilter<"Antipixel"> | number
@@ -588,7 +636,9 @@ export type AntipixelCreateWithoutTagsInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   createdAt?: Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutAntipixelInput
   submittedBy: Prisma.UserCreateNestedOneWithoutAntipixelsSubmittedInput
   hashToAntipixel: Prisma.HashToAntipixelCreateNestedOneWithoutAntipixelsInput
 }
@@ -598,9 +648,11 @@ export type AntipixelUncheckedCreateWithoutTagsInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   userId: number
   createdAt?: Date | string
   hashToAntipixelId: number
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutAntipixelInput
 }
 
 export type AntipixelCreateOrConnectWithoutTagsInput = {
@@ -623,7 +675,9 @@ export type AntipixelUpdateWithoutTagsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryUpdateManyWithoutAntipixelNestedInput
   submittedBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput
   hashToAntipixel?: Prisma.HashToAntipixelUpdateOneRequiredWithoutAntipixelsNestedInput
 }
@@ -633,16 +687,20 @@ export type AntipixelUncheckedUpdateWithoutTagsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hashToAntipixelId?: Prisma.IntFieldUpdateOperationsInput | number
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutAntipixelNestedInput
 }
 
 export type AntipixelCreateWithoutHashToAntipixelInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   createdAt?: Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutAntipixelInput
   submittedBy: Prisma.UserCreateNestedOneWithoutAntipixelsSubmittedInput
   tags?: Prisma.TagOnAntipixelCreateNestedManyWithoutAntipixelInput
 }
@@ -652,8 +710,10 @@ export type AntipixelUncheckedCreateWithoutHashToAntipixelInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   userId: number
   createdAt?: Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutAntipixelInput
   tags?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAntipixelInput
 }
 
@@ -683,11 +743,74 @@ export type AntipixelUpdateManyWithWhereWithoutHashToAntipixelInput = {
   data: Prisma.XOR<Prisma.AntipixelUpdateManyMutationInput, Prisma.AntipixelUncheckedUpdateManyWithoutHashToAntipixelInput>
 }
 
+export type AntipixelCreateWithoutStatusHistoryInput = {
+  name: string
+  path: string
+  description: string
+  status?: $Enums.EAntipixelStatus
+  createdAt?: Date | string
+  submittedBy: Prisma.UserCreateNestedOneWithoutAntipixelsSubmittedInput
+  tags?: Prisma.TagOnAntipixelCreateNestedManyWithoutAntipixelInput
+  hashToAntipixel: Prisma.HashToAntipixelCreateNestedOneWithoutAntipixelsInput
+}
+
+export type AntipixelUncheckedCreateWithoutStatusHistoryInput = {
+  id?: number
+  name: string
+  path: string
+  description: string
+  status?: $Enums.EAntipixelStatus
+  userId: number
+  createdAt?: Date | string
+  hashToAntipixelId: number
+  tags?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAntipixelInput
+}
+
+export type AntipixelCreateOrConnectWithoutStatusHistoryInput = {
+  where: Prisma.AntipixelWhereUniqueInput
+  create: Prisma.XOR<Prisma.AntipixelCreateWithoutStatusHistoryInput, Prisma.AntipixelUncheckedCreateWithoutStatusHistoryInput>
+}
+
+export type AntipixelUpsertWithoutStatusHistoryInput = {
+  update: Prisma.XOR<Prisma.AntipixelUpdateWithoutStatusHistoryInput, Prisma.AntipixelUncheckedUpdateWithoutStatusHistoryInput>
+  create: Prisma.XOR<Prisma.AntipixelCreateWithoutStatusHistoryInput, Prisma.AntipixelUncheckedCreateWithoutStatusHistoryInput>
+  where?: Prisma.AntipixelWhereInput
+}
+
+export type AntipixelUpdateToOneWithWhereWithoutStatusHistoryInput = {
+  where?: Prisma.AntipixelWhereInput
+  data: Prisma.XOR<Prisma.AntipixelUpdateWithoutStatusHistoryInput, Prisma.AntipixelUncheckedUpdateWithoutStatusHistoryInput>
+}
+
+export type AntipixelUpdateWithoutStatusHistoryInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput
+  tags?: Prisma.TagOnAntipixelUpdateManyWithoutAntipixelNestedInput
+  hashToAntipixel?: Prisma.HashToAntipixelUpdateOneRequiredWithoutAntipixelsNestedInput
+}
+
+export type AntipixelUncheckedUpdateWithoutStatusHistoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hashToAntipixelId?: Prisma.IntFieldUpdateOperationsInput | number
+  tags?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAntipixelNestedInput
+}
+
 export type AntipixelCreateManySubmittedByInput = {
   id?: number
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   createdAt?: Date | string
   hashToAntipixelId: number
 }
@@ -696,7 +819,9 @@ export type AntipixelUpdateWithoutSubmittedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryUpdateManyWithoutAntipixelNestedInput
   tags?: Prisma.TagOnAntipixelUpdateManyWithoutAntipixelNestedInput
   hashToAntipixel?: Prisma.HashToAntipixelUpdateOneRequiredWithoutAntipixelsNestedInput
 }
@@ -706,8 +831,10 @@ export type AntipixelUncheckedUpdateWithoutSubmittedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hashToAntipixelId?: Prisma.IntFieldUpdateOperationsInput | number
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutAntipixelNestedInput
   tags?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAntipixelNestedInput
 }
 
@@ -716,6 +843,7 @@ export type AntipixelUncheckedUpdateManyWithoutSubmittedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hashToAntipixelId?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -725,6 +853,7 @@ export type AntipixelCreateManyHashToAntipixelInput = {
   name: string
   path: string
   description: string
+  status?: $Enums.EAntipixelStatus
   userId: number
   createdAt?: Date | string
 }
@@ -733,7 +862,9 @@ export type AntipixelUpdateWithoutHashToAntipixelInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryUpdateManyWithoutAntipixelNestedInput
   submittedBy?: Prisma.UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput
   tags?: Prisma.TagOnAntipixelUpdateManyWithoutAntipixelNestedInput
 }
@@ -743,8 +874,10 @@ export type AntipixelUncheckedUpdateWithoutHashToAntipixelInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  statusHistory?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutAntipixelNestedInput
   tags?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAntipixelNestedInput
 }
 
@@ -753,6 +886,7 @@ export type AntipixelUncheckedUpdateManyWithoutHashToAntipixelInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   path?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumEAntipixelStatusFieldUpdateOperationsInput | $Enums.EAntipixelStatus
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -763,10 +897,12 @@ export type AntipixelUncheckedUpdateManyWithoutHashToAntipixelInput = {
  */
 
 export type AntipixelCountOutputType = {
+  statusHistory: number
   tags: number
 }
 
 export type AntipixelCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  statusHistory?: boolean | AntipixelCountOutputTypeCountStatusHistoryArgs
   tags?: boolean | AntipixelCountOutputTypeCountTagsArgs
 }
 
@@ -783,6 +919,13 @@ export type AntipixelCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ex
 /**
  * AntipixelCountOutputType without action
  */
+export type AntipixelCountOutputTypeCountStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AntipixelStatusHistoryWhereInput
+}
+
+/**
+ * AntipixelCountOutputType without action
+ */
 export type AntipixelCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TagOnAntipixelWhereInput
 }
@@ -793,9 +936,11 @@ export type AntipixelSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   name?: boolean
   path?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
   createdAt?: boolean
   hashToAntipixelId?: boolean
+  statusHistory?: boolean | Prisma.Antipixel$statusHistoryArgs<ExtArgs>
   submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tags?: boolean | Prisma.Antipixel$tagsArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
@@ -807,6 +952,7 @@ export type AntipixelSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   name?: boolean
   path?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
   createdAt?: boolean
   hashToAntipixelId?: boolean
@@ -819,6 +965,7 @@ export type AntipixelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   name?: boolean
   path?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
   createdAt?: boolean
   hashToAntipixelId?: boolean
@@ -831,13 +978,15 @@ export type AntipixelSelectScalar = {
   name?: boolean
   path?: boolean
   description?: boolean
+  status?: boolean
   userId?: boolean
   createdAt?: boolean
   hashToAntipixelId?: boolean
 }
 
-export type AntipixelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "path" | "description" | "userId" | "createdAt" | "hashToAntipixelId", ExtArgs["result"]["antipixel"]>
+export type AntipixelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "path" | "description" | "status" | "userId" | "createdAt" | "hashToAntipixelId", ExtArgs["result"]["antipixel"]>
 export type AntipixelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  statusHistory?: boolean | Prisma.Antipixel$statusHistoryArgs<ExtArgs>
   submittedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   tags?: boolean | Prisma.Antipixel$tagsArgs<ExtArgs>
   hashToAntipixel?: boolean | Prisma.HashToAntipixelDefaultArgs<ExtArgs>
@@ -855,6 +1004,7 @@ export type AntipixelIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $AntipixelPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Antipixel"
   objects: {
+    statusHistory: Prisma.$AntipixelStatusHistoryPayload<ExtArgs>[]
     submittedBy: Prisma.$UserPayload<ExtArgs>
     tags: Prisma.$TagOnAntipixelPayload<ExtArgs>[]
     hashToAntipixel: Prisma.$HashToAntipixelPayload<ExtArgs>
@@ -864,6 +1014,7 @@ export type $AntipixelPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     name: string
     path: string
     description: string
+    status: $Enums.EAntipixelStatus
     userId: number
     createdAt: Date
     hashToAntipixelId: number
@@ -1261,6 +1412,7 @@ readonly fields: AntipixelFieldRefs;
  */
 export interface Prisma__AntipixelClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  statusHistory<T extends Prisma.Antipixel$statusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Antipixel$statusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AntipixelStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   submittedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tags<T extends Prisma.Antipixel$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Antipixel$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagOnAntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   hashToAntipixel<T extends Prisma.HashToAntipixelDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HashToAntipixelDefaultArgs<ExtArgs>>): Prisma.Prisma__HashToAntipixelClient<runtime.Types.Result.GetResult<Prisma.$HashToAntipixelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -1297,6 +1449,7 @@ export interface AntipixelFieldRefs {
   readonly name: Prisma.FieldRef<"Antipixel", 'String'>
   readonly path: Prisma.FieldRef<"Antipixel", 'String'>
   readonly description: Prisma.FieldRef<"Antipixel", 'String'>
+  readonly status: Prisma.FieldRef<"Antipixel", 'EAntipixelStatus'>
   readonly userId: Prisma.FieldRef<"Antipixel", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Antipixel", 'DateTime'>
   readonly hashToAntipixelId: Prisma.FieldRef<"Antipixel", 'Int'>
@@ -1698,6 +1851,30 @@ export type AntipixelDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many Antipixels to delete.
    */
   limit?: number
+}
+
+/**
+ * Antipixel.statusHistory
+ */
+export type Antipixel$statusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AntipixelStatusHistory
+   */
+  select?: Prisma.AntipixelStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AntipixelStatusHistory
+   */
+  omit?: Prisma.AntipixelStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AntipixelStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.AntipixelStatusHistoryWhereInput
+  orderBy?: Prisma.AntipixelStatusHistoryOrderByWithRelationInput | Prisma.AntipixelStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.AntipixelStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AntipixelStatusHistoryScalarFieldEnum | Prisma.AntipixelStatusHistoryScalarFieldEnum[]
 }
 
 /**

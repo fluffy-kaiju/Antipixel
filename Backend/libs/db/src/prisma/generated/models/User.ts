@@ -227,7 +227,6 @@ export type UserWhereInput = {
   accountHistory?: Prisma.UserStatusHistoryListRelationFilter
   emailConfirmationCode?: Prisma.XOR<Prisma.EmailConfirmationCodeNullableScalarRelationFilter, Prisma.EmailConfirmationCodeWhereInput> | null
   passwordReset?: Prisma.XOR<Prisma.PasswordResetCodeNullableScalarRelationFilter, Prisma.PasswordResetCodeWhereInput> | null
-  rolesCreated?: Prisma.RoleListRelationFilter
   antipixelsSubmitted?: Prisma.AntipixelListRelationFilter
   userStatusUpdated?: Prisma.UserStatusHistoryListRelationFilter
   tagCreated?: Prisma.TagListRelationFilter
@@ -246,7 +245,6 @@ export type UserOrderByWithRelationInput = {
   accountHistory?: Prisma.UserStatusHistoryOrderByRelationAggregateInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeOrderByWithRelationInput
   passwordReset?: Prisma.PasswordResetCodeOrderByWithRelationInput
-  rolesCreated?: Prisma.RoleOrderByRelationAggregateInput
   antipixelsSubmitted?: Prisma.AntipixelOrderByRelationAggregateInput
   userStatusUpdated?: Prisma.UserStatusHistoryOrderByRelationAggregateInput
   tagCreated?: Prisma.TagOrderByRelationAggregateInput
@@ -268,7 +266,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   accountHistory?: Prisma.UserStatusHistoryListRelationFilter
   emailConfirmationCode?: Prisma.XOR<Prisma.EmailConfirmationCodeNullableScalarRelationFilter, Prisma.EmailConfirmationCodeWhereInput> | null
   passwordReset?: Prisma.XOR<Prisma.PasswordResetCodeNullableScalarRelationFilter, Prisma.PasswordResetCodeWhereInput> | null
-  rolesCreated?: Prisma.RoleListRelationFilter
   antipixelsSubmitted?: Prisma.AntipixelListRelationFilter
   userStatusUpdated?: Prisma.UserStatusHistoryListRelationFilter
   tagCreated?: Prisma.TagListRelationFilter
@@ -312,7 +309,6 @@ export type UserCreateInput = {
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
@@ -331,7 +327,6 @@ export type UserUncheckedCreateInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
@@ -349,7 +344,6 @@ export type UserUpdateInput = {
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
@@ -368,7 +362,6 @@ export type UserUncheckedUpdateInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -401,11 +394,6 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailIsVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -443,18 +431,13 @@ export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type UserCreateNestedOneWithoutRolesCreatedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRolesCreatedInput
-  connect?: Prisma.UserWhereUniqueInput
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
-export type UserUpdateOneRequiredWithoutRolesCreatedNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRolesCreatedInput
-  upsert?: Prisma.UserUpsertWithoutRolesCreatedInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRolesCreatedInput, Prisma.UserUpdateWithoutRolesCreatedInput>, Prisma.UserUncheckedUpdateWithoutRolesCreatedInput>
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
 export type EnumEUserAccountStatusFieldUpdateOperationsInput = {
@@ -463,6 +446,14 @@ export type EnumEUserAccountStatusFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type UserCreateNestedOneWithoutEmailConfirmationCodeInput = {
@@ -591,92 +582,6 @@ export type UserUpdateOneRequiredWithoutAntipixelsSubmittedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAntipixelsSubmittedInput, Prisma.UserUpdateWithoutAntipixelsSubmittedInput>, Prisma.UserUncheckedUpdateWithoutAntipixelsSubmittedInput>
 }
 
-export type UserCreateWithoutRolesCreatedInput = {
-  userName: string
-  status?: $Enums.EUserAccountStatus
-  email: string
-  emailIsVerified?: boolean
-  passwordHash: string
-  accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
-  emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
-  passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
-  userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-  tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
-  tagsStatusUpdated?: Prisma.TagsStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryCreateNestedManyWithoutChangeMadeByInput
-}
-
-export type UserUncheckedCreateWithoutRolesCreatedInput = {
-  id?: number
-  userName: string
-  status?: $Enums.EUserAccountStatus
-  email: string
-  emailIsVerified?: boolean
-  passwordHash: string
-  accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
-  emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
-  passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
-  userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-  tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
-  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
-  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
-}
-
-export type UserCreateOrConnectWithoutRolesCreatedInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
-}
-
-export type UserUpsertWithoutRolesCreatedInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutRolesCreatedInput, Prisma.UserUncheckedUpdateWithoutRolesCreatedInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutRolesCreatedInput, Prisma.UserUncheckedCreateWithoutRolesCreatedInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutRolesCreatedInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutRolesCreatedInput, Prisma.UserUncheckedUpdateWithoutRolesCreatedInput>
-}
-
-export type UserUpdateWithoutRolesCreatedInput = {
-  userName?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailIsVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
-  emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
-  passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
-  userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-  tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
-  tagsStatusUpdated?: Prisma.TagsStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutRolesCreatedInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userName?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumEUserAccountStatusFieldUpdateOperationsInput | $Enums.EUserAccountStatus
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailIsVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
-  emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
-  passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
-  userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-  tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
-  tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
-  tagsStatusUpdated?: Prisma.TagsStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-  antipixelStatusUpdated?: Prisma.AntipixelStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
-}
-
 export type UserCreateWithoutEmailConfirmationCodeInput = {
   userName: string
   status?: $Enums.EUserAccountStatus
@@ -685,7 +590,6 @@ export type UserCreateWithoutEmailConfirmationCodeInput = {
   passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
@@ -703,7 +607,6 @@ export type UserUncheckedCreateWithoutEmailConfirmationCodeInput = {
   passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
@@ -736,7 +639,6 @@ export type UserUpdateWithoutEmailConfirmationCodeInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
@@ -754,7 +656,6 @@ export type UserUncheckedUpdateWithoutEmailConfirmationCodeInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -771,7 +672,6 @@ export type UserCreateWithoutPasswordResetInput = {
   passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
@@ -789,7 +689,6 @@ export type UserUncheckedCreateWithoutPasswordResetInput = {
   passwordHash: string
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
@@ -822,7 +721,6 @@ export type UserUpdateWithoutPasswordResetInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
@@ -840,7 +738,6 @@ export type UserUncheckedUpdateWithoutPasswordResetInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -857,7 +754,6 @@ export type UserCreateWithoutAccountHistoryInput = {
   passwordHash: string
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
@@ -875,7 +771,6 @@ export type UserUncheckedCreateWithoutAccountHistoryInput = {
   passwordHash: string
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
@@ -898,7 +793,6 @@ export type UserCreateWithoutUserStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
@@ -916,7 +810,6 @@ export type UserUncheckedCreateWithoutUserStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
@@ -948,7 +841,6 @@ export type UserUpdateWithoutAccountHistoryInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
@@ -966,7 +858,6 @@ export type UserUncheckedUpdateWithoutAccountHistoryInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -995,7 +886,6 @@ export type UserUpdateWithoutUserStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
@@ -1013,7 +903,6 @@ export type UserUncheckedUpdateWithoutUserStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
@@ -1030,7 +919,6 @@ export type UserCreateWithoutTagCreatedInput = {
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
@@ -1048,7 +936,6 @@ export type UserUncheckedCreateWithoutTagCreatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
@@ -1081,7 +968,6 @@ export type UserUpdateWithoutTagCreatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
@@ -1099,7 +985,6 @@ export type UserUncheckedUpdateWithoutTagCreatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
@@ -1116,7 +1001,6 @@ export type UserCreateWithoutTagsStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
@@ -1134,7 +1018,6 @@ export type UserUncheckedCreateWithoutTagsStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1167,7 +1050,6 @@ export type UserUpdateWithoutTagsStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
@@ -1185,7 +1067,6 @@ export type UserUncheckedUpdateWithoutTagsStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1202,7 +1083,6 @@ export type UserCreateWithoutTagOnAntipixelAssignedInput = {
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
@@ -1220,7 +1100,6 @@ export type UserUncheckedCreateWithoutTagOnAntipixelAssignedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1253,7 +1132,6 @@ export type UserUpdateWithoutTagOnAntipixelAssignedInput = {
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
@@ -1271,7 +1149,6 @@ export type UserUncheckedUpdateWithoutTagOnAntipixelAssignedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1288,7 +1165,6 @@ export type UserCreateWithoutAntipixelStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
@@ -1306,7 +1182,6 @@ export type UserUncheckedCreateWithoutAntipixelStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedCreateNestedManyWithoutSubmittedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1339,7 +1214,6 @@ export type UserUpdateWithoutAntipixelStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
@@ -1357,7 +1231,6 @@ export type UserUncheckedUpdateWithoutAntipixelStatusUpdatedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   antipixelsSubmitted?: Prisma.AntipixelUncheckedUpdateManyWithoutSubmittedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1374,7 +1247,6 @@ export type UserCreateWithoutAntipixelsSubmittedInput = {
   accountHistory?: Prisma.UserStatusHistoryCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelCreateNestedManyWithoutAssignedByInput
@@ -1392,7 +1264,6 @@ export type UserUncheckedCreateWithoutAntipixelsSubmittedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutUserInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedCreateNestedOneWithoutUserInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedCreateNestedOneWithoutUserInput
-  rolesCreated?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedCreateNestedManyWithoutChangeMadeByInput
   tagCreated?: Prisma.TagUncheckedCreateNestedManyWithoutCreatedByInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedCreateNestedManyWithoutAssignedByInput
@@ -1425,7 +1296,6 @@ export type UserUpdateWithoutAntipixelsSubmittedInput = {
   accountHistory?: Prisma.UserStatusHistoryUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUpdateManyWithoutAssignedByNestedInput
@@ -1443,7 +1313,6 @@ export type UserUncheckedUpdateWithoutAntipixelsSubmittedInput = {
   accountHistory?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
   emailConfirmationCode?: Prisma.EmailConfirmationCodeUncheckedUpdateOneWithoutUserNestedInput
   passwordReset?: Prisma.PasswordResetCodeUncheckedUpdateOneWithoutUserNestedInput
-  rolesCreated?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
   userStatusUpdated?: Prisma.UserStatusHistoryUncheckedUpdateManyWithoutChangeMadeByNestedInput
   tagCreated?: Prisma.TagUncheckedUpdateManyWithoutCreatedByNestedInput
   tagOnAntipixelAssigned?: Prisma.TagOnAntipixelUncheckedUpdateManyWithoutAssignedByNestedInput
@@ -1458,7 +1327,6 @@ export type UserUncheckedUpdateWithoutAntipixelsSubmittedInput = {
 
 export type UserCountOutputType = {
   accountHistory: number
-  rolesCreated: number
   antipixelsSubmitted: number
   userStatusUpdated: number
   tagCreated: number
@@ -1469,7 +1337,6 @@ export type UserCountOutputType = {
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accountHistory?: boolean | UserCountOutputTypeCountAccountHistoryArgs
-  rolesCreated?: boolean | UserCountOutputTypeCountRolesCreatedArgs
   antipixelsSubmitted?: boolean | UserCountOutputTypeCountAntipixelsSubmittedArgs
   userStatusUpdated?: boolean | UserCountOutputTypeCountUserStatusUpdatedArgs
   tagCreated?: boolean | UserCountOutputTypeCountTagCreatedArgs
@@ -1493,13 +1360,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountAccountHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserStatusHistoryWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountRolesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RoleWhereInput
 }
 
 /**
@@ -1555,7 +1415,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   accountHistory?: boolean | Prisma.User$accountHistoryArgs<ExtArgs>
   emailConfirmationCode?: boolean | Prisma.User$emailConfirmationCodeArgs<ExtArgs>
   passwordReset?: boolean | Prisma.User$passwordResetArgs<ExtArgs>
-  rolesCreated?: boolean | Prisma.User$rolesCreatedArgs<ExtArgs>
   antipixelsSubmitted?: boolean | Prisma.User$antipixelsSubmittedArgs<ExtArgs>
   userStatusUpdated?: boolean | Prisma.User$userStatusUpdatedArgs<ExtArgs>
   tagCreated?: boolean | Prisma.User$tagCreatedArgs<ExtArgs>
@@ -1597,7 +1456,6 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   accountHistory?: boolean | Prisma.User$accountHistoryArgs<ExtArgs>
   emailConfirmationCode?: boolean | Prisma.User$emailConfirmationCodeArgs<ExtArgs>
   passwordReset?: boolean | Prisma.User$passwordResetArgs<ExtArgs>
-  rolesCreated?: boolean | Prisma.User$rolesCreatedArgs<ExtArgs>
   antipixelsSubmitted?: boolean | Prisma.User$antipixelsSubmittedArgs<ExtArgs>
   userStatusUpdated?: boolean | Prisma.User$userStatusUpdatedArgs<ExtArgs>
   tagCreated?: boolean | Prisma.User$tagCreatedArgs<ExtArgs>
@@ -1615,7 +1473,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     accountHistory: Prisma.$UserStatusHistoryPayload<ExtArgs>[]
     emailConfirmationCode: Prisma.$EmailConfirmationCodePayload<ExtArgs> | null
     passwordReset: Prisma.$PasswordResetCodePayload<ExtArgs> | null
-    rolesCreated: Prisma.$RolePayload<ExtArgs>[]
     antipixelsSubmitted: Prisma.$AntipixelPayload<ExtArgs>[]
     userStatusUpdated: Prisma.$UserStatusHistoryPayload<ExtArgs>[]
     tagCreated: Prisma.$TagPayload<ExtArgs>[]
@@ -2027,7 +1884,6 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   accountHistory<T extends Prisma.User$accountHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailConfirmationCode<T extends Prisma.User$emailConfirmationCodeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailConfirmationCodeArgs<ExtArgs>>): Prisma.Prisma__EmailConfirmationCodeClient<runtime.Types.Result.GetResult<Prisma.$EmailConfirmationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   passwordReset<T extends Prisma.User$passwordResetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetArgs<ExtArgs>>): Prisma.Prisma__PasswordResetCodeClient<runtime.Types.Result.GetResult<Prisma.$PasswordResetCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  rolesCreated<T extends Prisma.User$rolesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rolesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   antipixelsSubmitted<T extends Prisma.User$antipixelsSubmittedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$antipixelsSubmittedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AntipixelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userStatusUpdated<T extends Prisma.User$userStatusUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userStatusUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tagCreated<T extends Prisma.User$tagCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2521,30 +2377,6 @@ export type User$passwordResetArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.PasswordResetCodeInclude<ExtArgs> | null
   where?: Prisma.PasswordResetCodeWhereInput
-}
-
-/**
- * User.rolesCreated
- */
-export type User$rolesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Role
-   */
-  select?: Prisma.RoleSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Role
-   */
-  omit?: Prisma.RoleOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RoleInclude<ExtArgs> | null
-  where?: Prisma.RoleWhereInput
-  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
-  cursor?: Prisma.RoleWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
 }
 
 /**

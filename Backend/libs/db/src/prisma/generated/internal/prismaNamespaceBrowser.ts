@@ -51,9 +51,6 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Permission: 'Permission',
-  PermissionOnRole: 'PermissionOnRole',
-  Role: 'Role',
   User: 'User',
   EmailConfirmationCode: 'EmailConfirmationCode',
   PasswordResetCode: 'PasswordResetCode',
@@ -80,31 +77,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const PermissionScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-} as const
-
-export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
-
-
-export const PermissionOnRoleScalarFieldEnum = {
-  permissionId: 'permissionId',
-  roleId: 'roleId'
-} as const
-
-export type PermissionOnRoleScalarFieldEnum = (typeof PermissionOnRoleScalarFieldEnum)[keyof typeof PermissionOnRoleScalarFieldEnum]
-
-
-export const RoleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdByUserId: 'createdByUserId'
-} as const
-
-export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -199,7 +171,8 @@ export const AntipixelStatusHistoryScalarFieldEnum = {
   changeMadeByUserId: 'changeMadeByUserId',
   status: 'status',
   changeMadeAt: 'changeMadeAt',
-  reason: 'reason'
+  reason: 'reason',
+  antipixelId: 'antipixelId'
 } as const
 
 export type AntipixelStatusHistoryScalarFieldEnum = (typeof AntipixelStatusHistoryScalarFieldEnum)[keyof typeof AntipixelStatusHistoryScalarFieldEnum]
@@ -210,6 +183,7 @@ export const AntipixelScalarFieldEnum = {
   name: 'name',
   path: 'path',
   description: 'description',
+  status: 'status',
   userId: 'userId',
   createdAt: 'createdAt',
   hashToAntipixelId: 'hashToAntipixelId'

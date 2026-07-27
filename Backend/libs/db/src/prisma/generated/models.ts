@@ -8,9 +8,6 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Permission'
-export type * from './models/PermissionOnRole'
-export type * from './models/Role'
 export type * from './models/User'
 export type * from './models/EmailConfirmationCode'
 export type * from './models/PasswordResetCode'

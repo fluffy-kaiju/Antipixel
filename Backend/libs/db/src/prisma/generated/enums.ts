@@ -37,3 +37,11 @@ export const EVirusScanStatus = {
 } as const
 
 export type EVirusScanStatus = (typeof EVirusScanStatus)[keyof typeof EVirusScanStatus]
+
+
+export const EAntipixelStatus = {
+  OPEN: 'OPEN',
+  LOCKED: 'LOCKED'
+} as const
+
+export type EAntipixelStatus = (typeof EAntipixelStatus)[keyof typeof EAntipixelStatus]

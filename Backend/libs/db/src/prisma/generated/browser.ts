@@ -18,21 +18,6 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model Permission
- * 
- */
-export type Permission = Prisma.PermissionModel
-/**
- * Model PermissionOnRole
- * 
- */
-export type PermissionOnRole = Prisma.PermissionOnRoleModel
-/**
- * Model Role
- * 
- */
-export type Role = Prisma.RoleModel
-/**
  * Model User
  * 
  */
