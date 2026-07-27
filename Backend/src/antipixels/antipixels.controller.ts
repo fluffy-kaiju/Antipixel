@@ -1,11 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, Query } from '@nestjs/common';
 import { CreateAntipixelDto, CreateAntipixelDuplicateHashException, CreateAntipixelMaxUploadSize, ECreateAntipixelStatus } from './dto/create-antipixel.dto';
 import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
 import { AntipixelsControllerService } from './antipixelsController.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConflictResponse, ApiConsumes } from '@nestjs/swagger';
+import { ApiAcceptedResponse, ApiBody, ApiConflictResponse, ApiConsumes, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
 import { FileHashPipe, FileWithHash } from './antipixel-validation-pipe.pipe';
 import { AuthUser } from '@auth/auth/auth-user/auth-user.decorator';
+import { AntiNotFound, GetAntiAllDto, AntipixelResponseEntity, GetAntiByIdDto } from './dto/get-antipixel.dto';
 
 @Controller('antipixel')
 export class AntipixelsController {
@@ -52,14 +53,30 @@ export class AntipixelsController {
     //     return this.antipixelsControllerService.create(createAntipixelDto);
     // }
 
+    @ApiOkResponse({
+        description: 'Array of Antipixels',
+        type: AntipixelResponseEntity,
+        isArray: true,
+    })
     @Get()
-    findAll() {
-        return this.antipixelsControllerService.findAll();
+    async getAll(@Query() getAntipixelPaginationDto: GetAntiAllDto): Promise<AntipixelResponseEntity[]> {
+        return await this.antipixelsControllerService.findAll(
+            getAntipixelPaginationDto.limit,
+            getAntipixelPaginationDto.offset,
+        );
     }
 
+    @ApiOkResponse({
+        description: 'Array of Antipixels',
+        type: AntipixelResponseEntity,
+    })
+    @ApiNotFoundResponse({
+        description: 'Antipixel not found',
+        type: AntiNotFound,
+    })
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.antipixelsControllerService.findOne(+id);
+    async findOne(@Param() getAntiByIdDto: GetAntiByIdDto): Promise<AntipixelResponseEntity> {
+        return await this.antipixelsControllerService.findOne(getAntiByIdDto.id);
     }
 
     @Patch(':id')

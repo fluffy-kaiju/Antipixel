@@ -3,6 +3,7 @@ import { CreateAntipixelDto, CreateAntipixelEntity } from './dto/create-antipixe
 import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
 import { FileWithHash } from './antipixel-validation-pipe.pipe';
 import { AntipixelsModelService } from '@db/db/antipixels-model/antipixels-model.service';
+import { AntiNotFound, AntipixelResponseEntity } from './dto/get-antipixel.dto';
 
 @Injectable()
 export class AntipixelsControllerService {
@@ -30,12 +31,19 @@ export class AntipixelsControllerService {
         return new CreateAntipixelEntity(antipixel);
     }
 
-    findAll() {
-        return `This action returns all antipixels`;
+    async findAll(limit?: number, offset?: number) {
+        const res = await this.antiModel.getAll(
+            offset, limit
+        );
+        return res.map((p) => new AntipixelResponseEntity(p));
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} antipixel`;
+    async findOne(id: number) {
+        const res = await this.antiModel.getById(id);
+        if (res === null) {
+            throw new AntiNotFound();
+        }
+        return new AntipixelResponseEntity(res);
     }
 
     update(id: number, updateAntipixelDto: UpdateAntipixelDto) {

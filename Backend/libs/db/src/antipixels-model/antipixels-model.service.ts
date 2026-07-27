@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { S3AntipixelsModelService } from '@bucket/bucket/s3-antipixels-model/s3-antipixels-model.service';
 import { S3ServiceException } from '@aws-sdk/client-s3';
 import { CreateAntipixelDuplicateHashException } from 'src/antipixels/dto/create-antipixel.dto';
+import { overridePrismaFilter } from '../prisma/prisma.filter';
 
 @Injectable()
 export class AntipixelsModelService {
@@ -15,9 +16,9 @@ export class AntipixelsModelService {
 
     async getIdFromSha256(sha256: string) {
         return this.prisma.hashToAntipixel.findUnique({
-           where: {
-             hash: sha256,
-           },
+            where: {
+                hash: sha256,
+            },
             select: {
                 id: true,
             },
@@ -36,7 +37,7 @@ export class AntipixelsModelService {
 
         const check_dupe = await this.getIdFromSha256(data.fileShasum256);
         if (check_dupe !== null) {
-            throw new CreateAntipixelDuplicateHashException({duplicateOfId: check_dupe});
+            throw new CreateAntipixelDuplicateHashException({ duplicateOfId: check_dupe });
         }
 
         const s3key = `${data.fileShasum256}/${data.originalFileName}`;
@@ -81,5 +82,45 @@ export class AntipixelsModelService {
             }
 
         });
-    }
+    };
+
+
+    private defaultGetLimit = 50;
+
+    async getAll(offset?: number, limit: number = this.defaultGetLimit) {
+        return await this.prisma.antipixel.findMany({
+            include: {
+                hashToAntipixel: {
+                    select: {
+                        hash: true,
+                    }
+                },
+            },
+            take: limit,
+            skip: offset,
+        });
+    };
+
+    async getById(id: number) {
+        return await this.prisma.antipixel.findFirstOrThrow({
+            where: {
+                id: id,
+            },
+            include: {
+                hashToAntipixel: {
+                    select: {
+                        hash: true,
+                    }
+                }
+            }
+        }).catch((e) =>
+            overridePrismaFilter<null>(e, (err) => {
+                if (err.code === 'P2025') {
+                    this.logger.verbose(`Antipixel with ${id} id not found`);
+                    return null;
+                }
+                throw e;
+            })
+        );
+    };
 }
