@@ -17,12 +17,8 @@ export class AntipixelsModelService {
 
     async getIdFromSha256(sha256: string) {
         return this.prisma.hashToAntipixel.findUnique({
-            where: {
-                hash: sha256,
-            },
-            select: {
-                id: true,
-            },
+            where: { hash: sha256 },
+            select: { id: true },
         }).then((val) => val?.id ?? null);
     }
 
@@ -68,26 +64,18 @@ export class AntipixelsModelService {
                 path: s3key,
                 hashToAntipixel: {
                     connectOrCreate: {
-                        create: {
-                            hash: data.fileShasum256,
-                        },
-                        where: {
-                            hash: data.fileShasum256,
-                        }
+                        create: { hash: data.fileShasum256 },
+                        where: { hash: data.fileShasum256 },
                     }
                 },
                 submittedBy: {
-                    connect: {
-                        id: data.submitterId,
-                    }
+                    connect: { id: data.submitterId },
                 },
                 statusHistory: {
                     create: {
                         reason: `Antipixel submitted by ${data.submitterUserName}`,
                         changeMadeBy: {
-                            connect: {
-                                id: data.submitterId,
-                            }
+                            connect: { id: data.submitterId },
                         },
                         status: EAntipixelStatus.OPEN,
                     }
@@ -103,11 +91,7 @@ export class AntipixelsModelService {
     async getAll(offset?: number, limit: number = this.defaultGetLimit) {
         return await this.prisma.antipixel.findMany({
             include: {
-                hashToAntipixel: {
-                    select: {
-                        hash: true,
-                    }
-                },
+                hashToAntipixel: { select: { hash: true } },
             },
             take: limit,
             skip: offset,
@@ -116,15 +100,9 @@ export class AntipixelsModelService {
 
     async getById(id: number) {
         return await this.prisma.antipixel.findFirstOrThrow({
-            where: {
-                id: id,
-            },
+            where: { id: id },
             include: {
-                hashToAntipixel: {
-                    select: {
-                        hash: true,
-                    }
-                }
+                hashToAntipixel: { select: { hash: true } }
             }
         }).catch((e) =>
             overridePrismaFilter<null>(e, (err) => {
