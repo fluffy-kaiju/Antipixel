@@ -238,17 +238,17 @@ export type TagOrderByWithRelationInput = {
 
 export type TagWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  name?: string
   AND?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
   OR?: Prisma.TagWhereInput[]
   NOT?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
-  name?: Prisma.StringFilter<"Tag"> | string
   description?: Prisma.StringFilter<"Tag"> | string
   status?: Prisma.EnumETagsStatusFilter<"Tag"> | $Enums.ETagsStatus
   userId?: Prisma.IntFilter<"Tag"> | number
   statusHistory?: Prisma.TagsStatusHistoryListRelationFilter
   antipixels?: Prisma.TagOnAntipixelListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "name">
 
 export type TagOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

@@ -142,7 +142,7 @@ enum ETagsStatus {
 model Tag {
   id Int @id @default(autoincrement())
 
-  name        String
+  name        String @unique
   description String
 
   status        ETagsStatus         @default(PENDING)
@@ -183,6 +183,8 @@ model TagOnAntipixel {
 
   @@id([tagId, antipixelId])
 }
+
+// TODO Tag assignation history (decide if it's on tag or anti part)
 
 // #########################################################################
 // #                                                                       #
