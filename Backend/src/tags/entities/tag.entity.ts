@@ -1,6 +1,8 @@
 import { ETagsStatus } from "@db/db/prisma/generated/enums";
-import { Expose } from "class-transformer";
-import { IsEnum, IsPositive, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { Expose, Type } from "class-transformer";
+import { IsDate, IsEnum, IsPositive, IsString } from "class-validator";
+
 
 export class TagEntity {
 
@@ -21,14 +23,46 @@ export class TagEntity {
     status: ETagsStatus
 
     @Expose()
-    @IsString()
-    createByUserId: string;
+    @IsPositive()
+    createByUserId: number;
 
     @Expose()
-    @IsPositive()
-    createByUserName: number;
+    @IsString()
+    createByUserName: string;
 
-    constructor(p: Partial<TagEntity>) {
+    @ApiProperty({ description: "Tag creation date" })
+    @IsDate()
+    @Expose()
+    createdAt: Date;
+
+    constructor(p: Partial<TagEntity> & { createdBy: { id: number, userName: string } }) {
+        Object.assign(this, p);
+        this.createByUserId = p?.createdBy?.id;
+        this.createByUserName = p?.createdBy?.userName;
+    }
+}
+
+export class GetAllTagsEntity {
+
+    @ApiProperty({ type: [TagEntity], description: 'List of antipixels.' })
+    @Expose()
+    @Type(() => TagEntity)
+    tags: TagEntity[];
+
+    @ApiProperty({ example: 25, description: 'Current cursor id.' })
+    @Expose()
+    cursor: number;
+
+    @ApiProperty({ example: 50, description: 'Number of items per page.' })
+    @Expose()
+    pageSize: number;
+
+    @ApiProperty({ example: 50, description: 'Total number of antipixels.' })
+    @Expose()
+    numberOfAntipixels: number;
+
+    constructor(p: Partial<GetAllTagsEntity>) {
         Object.assign(this, p);
     }
+
 }

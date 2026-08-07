@@ -4,10 +4,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AntipixelsModule } from './antipixels/antipixels.module';
 import { UsersModule } from './users/users.module';
 import { AuthUserModule } from '@auth/auth/auth-user/auth-user.module';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
     imports: [
-        AntipixelsModule,
         ConfigModule.forRoot({
             validationSchema: Joi.object({
                 NODE_ENV: Joi.string()
@@ -18,8 +18,10 @@ import { AuthUserModule } from '@auth/auth/auth-user/auth-user.module';
                     .default(3000),
             })
         }),
+        AuthUserModule,
         UsersModule,
-        AuthUserModule
+        AntipixelsModule,
+        TagsModule,
     ],
 })
 export class AppModule { }

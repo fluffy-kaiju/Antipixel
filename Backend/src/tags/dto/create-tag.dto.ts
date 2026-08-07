@@ -1,5 +1,7 @@
+import { ConflictException } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsPositive, IsString, Length } from "class-validator";
+import { Expose } from "class-transformer";
+import { IsNumber, IsOptional, IsPositive, IsString, Length } from "class-validator";
 
 export class CreateTagDto {
 
@@ -20,33 +22,17 @@ export class CreateTagDto {
 
 }
 
-// export class CreateTagDto {
+export class CreateTagDuplicateException extends ConflictException {
 
-//     @ApiProperty({
-//         description: "id of the antipixel",
-//     })
-//     @IsPositive()
-//     antipixelId: number
+    @Expose()
+    @IsString()
+    duplicateOfName: string;
 
-//     @ApiProperty({
-//         description: "id of the tag",
-//     })
-//     @IsOptional()
-//     @IsPositive()
-//     tagId: number
+    constructor(p: { duplicateOfName: string }) {
+        super({
+            duplicateOfName: p.duplicateOfName,
+        });
+        Object.assign(this, p);
+    }
+}
 
-//     @ApiProperty({
-//         description: "name of the tag",
-//     })
-//     @IsOptional()
-//     @IsString()
-//     @Length(3, 24)
-//     tagName: string
-
-//     @ApiProperty({
-//         description: "Tag description"
-//     })
-//     @IsString()
-//     description: string,
-
-// }

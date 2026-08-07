@@ -3,6 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Length, Min } from "class-validator";
 import { Expose, Type } from "class-transformer";
 import { NotFoundException } from "@nestjs/common";
+
 export class GetAntiAllDto {
 
     @ApiProperty({
@@ -49,7 +50,7 @@ export class AntiNotFound extends NotFoundException {
 
 export class AntipixelResponseEntity {
 
-    @ApiProperty({ description: "Antipixel id"})
+    @ApiProperty({ description: "Antipixel id" })
     @IsNumber()
     @Expose()
     id: number;
@@ -80,7 +81,7 @@ export class AntipixelResponseEntity {
     @Expose()
     createdAt: Date;
 
-    @ApiProperty({ description: "Antipixel creation date" })
+    @ApiProperty({ description: "Antipixel sha256sum" })
     @IsString()
     @Expose()
     hash: string;

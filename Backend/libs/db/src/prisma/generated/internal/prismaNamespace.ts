@@ -1243,6 +1243,7 @@ export const TagScalarFieldEnum = {
   name: 'name',
   description: 'description',
   status: 'status',
+  createdAt: 'createdAt',
   userId: 'userId'
 } as const
 
