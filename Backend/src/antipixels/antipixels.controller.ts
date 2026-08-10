@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, Query } from '@nestjs/common';
 import { CreateAntipixelDto, CreateAntipixelDuplicateHashException, CreateAntipixelMaxUploadSize, ECreateAntipixelStatus } from './dto/create-antipixel.dto';
-import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
+import { AddTagsToAntiResponseEntity, AddTagToAntiIdDTO, AddTagToAntiTagsDTO, UpdateAntipixelDto } from './dto/update-antipixel.dto';
 import { AntipixelsControllerService } from './antipixelsController.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiAcceptedResponse, ApiBody, ApiConflictResponse, ApiConsumes, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiAcceptedResponse, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
 import { FileHashPipe, FileWithHash } from './antipixel-validation-pipe.pipe';
 import { AuthUser, Public } from '@auth/auth/auth-user/auth-user.decorator';
 import { AntiNotFound, GetAntiAllDto, AntipixelResponseEntity, GetAntiByIdDto } from './dto/get-antipixel.dto';
@@ -90,4 +90,22 @@ export class AntipixelsController {
     remove(@Param('id') id: string) {
         return this.antipixelsControllerService.remove(+id);
     }
+
+    @ApiCreatedResponse({
+        description: 'Bulk tags assignation',
+        type: AddTagsToAntiResponseEntity,
+    })
+    @Post(':id/tags')
+    async addTags(
+        @AuthUser() userData: AuthUserTokenEntity,
+        @Param() antiIdDto: AddTagToAntiIdDTO,
+        @Body() tagsIdsDto: AddTagToAntiTagsDTO,
+    ): Promise<AddTagsToAntiResponseEntity> {
+        return await this.antipixelsControllerService
+            .addTags(antiIdDto.id,
+                tagsIdsDto.ids,
+                userData.id,
+                userData.userName)
+    }
+
 }

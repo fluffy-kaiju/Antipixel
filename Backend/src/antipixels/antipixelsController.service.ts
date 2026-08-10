@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CreateAntipixelDto, CreateAntipixelEntity } from './dto/create-antipixel.dto';
-import { UpdateAntipixelDto } from './dto/update-antipixel.dto';
+import { AddTagsToAntiResponseEntity, AddTagToAntiTagsDTO, UpdateAntipixelDto } from './dto/update-antipixel.dto';
 import { FileWithHash } from './antipixel-validation-pipe.pipe';
 import { AntipixelsModelService } from '@db/db/antipixels-model/antipixels-model.service';
 import { AntiNotFound, AntipixelResponseEntity } from './dto/get-antipixel.dto';
@@ -55,5 +55,19 @@ export class AntipixelsControllerService {
 
     remove(id: number) {
         return `This action removes a #${id} antipixel`;
+    }
+
+    async addTags(antiId: number, tagsIds: number[], assignedById: number, assignedByUserName: string) {
+        const data = new Map(tagsIds.map(
+            (tagId) => ([tagId, {
+                antipixelId: antiId,
+                userId: assignedById,
+            }])));
+
+        this.logger.verbose(data);
+        const res = await this.antiModel.addTagsBulk(data);
+        this.logger.debug(res);
+        return new AddTagsToAntiResponseEntity({ failed: res.failed, successfully: res.ok });
+
     }
 }
