@@ -2,7 +2,7 @@ import { PartialType } from '@nestjs/mapped-types';
 import { CreateAntipixelDto } from './create-antipixel.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { IsNumber, IsPositive } from 'class-validator';
+import { IsNumber, IsPositive, IsString } from 'class-validator';
 
 export class UpdateAntipixelDto extends PartialType(CreateAntipixelDto) { }
 
@@ -28,13 +28,8 @@ export class AddTagToAntiTagsDTO {
     ids: number[];
 }
 
-export class AddTagsToAntiFailed {
 
-    @ApiProperty({
-        description: "Tag id of assignation",
-    })
-    @Expose()
-    tagId: number;
+export class RemoveTagToAntiIdDTO {
 
     @ApiProperty({
         description: "Antipixel id"
@@ -42,65 +37,17 @@ export class AddTagsToAntiFailed {
     @Type(() => Number)
     @IsNumber()
     @IsPositive()
-    @Expose()
-    antipixelId: number;
-
-    @ApiProperty({
-        description: "Reason",
-    })
-    @Expose()
-    reason: string;
-
-    constructor(p: Partial<AddTagsToAntiFailed>) {
-        Object.assign(this, p);
-    }
+    id: number;
 
 }
 
-export class AddTagsToAntiSuccess {
+export class RemoveTagToAntiTagsDTO {
 
     @ApiProperty({
-        description: "Tag id of assignation",
+        description: "Tag id",
     })
-    @Expose()
-    tagId: number;
-
-    @ApiProperty({
-        description: "Antipixel id"
-    })
-    @Type(() => Number)
-    @IsNumber()
-    @IsPositive()
-    @Expose()
-    antipixelId: number;
-
-    constructor(p: Partial<AddTagsToAntiSuccess>) {
-        Object.assign(this, p);
-    }
+    @IsNumber({}, { each: true })
+    @IsPositive({ each: true })
+    ids: number[];
 }
 
-export class AddTagsToAntiResponseEntity {
-
-    @ApiProperty({
-        description: "Successfully applied",
-        isArray: true,
-        type: AddTagsToAntiSuccess,
-    })
-    @Expose()
-    @Type(() => AddTagsToAntiSuccess)
-    successfully: AddTagsToAntiSuccess[];
-
-
-    @ApiProperty({
-        description: "Failed assignation",
-        isArray: true,
-        type: AddTagsToAntiFailed
-    })
-    @Expose()
-    @Type(() => AddTagsToAntiFailed)
-    failed: AddTagsToAntiFailed[];
-
-    constructor(p: Partial<AddTagsToAntiResponseEntity>) {
-        Object.assign(this, p);
-    }
-}
