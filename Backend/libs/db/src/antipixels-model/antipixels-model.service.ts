@@ -5,6 +5,7 @@ import { S3ServiceException } from '@aws-sdk/client-s3';
 import { CreateAntipixelDuplicateHashException } from 'src/antipixels/dto/create-antipixel.dto';
 import { overridePrismaFilter } from '../prisma/prisma.filter';
 import { EAntipixelStatus } from '../prisma/generated/enums';
+import { AntipixelAffectedByOperation, TagAffectedByOperation } from 'src/antipixels/entities/antipixel.entity';
 
 @Injectable()
 export class AntipixelsModelService {
@@ -129,6 +130,21 @@ export class AntipixelsModelService {
         });
     }
 
+    // TODO #14 create db services and use only model for the logic part.
+    // Here we could have checkForIdIfExist in both tags/antipixel model, but it introduce
+    // circular injection if made in model.
+    private async _bulkTags_checkIfIdsExist(ids: number[]) {
+        return await this.prisma.tag.findMany({
+            where: { id: { in: ids } },
+            select: { id: true },
+        }).then((res) => res.map(e => e.id));
+    }
+    private async _bulkAntis_checkIfIdsExist(ids: number[]) {
+        return await this.prisma.antipixel.findMany({
+            where: { id: { in: ids } },
+            select: { id: true },
+        }).then((res) => res.map(e => e.id));
+    }
 
     async addTagsBulk(data: Map<number, {
         antipixelId: number,
@@ -136,7 +152,7 @@ export class AntipixelsModelService {
     }>) {
 
         const res = {
-            ok: new Array<{ tagId: number, antipixelId: number }>(),
+            ok: new Array<{ tagId: number, antipixelId: number, antipixel: AntipixelAffectedByOperation, tag: TagAffectedByOperation}>(),
             failed: new Array<{ tagId: number, antipixelId: number, reason: string }>(),
         };
 
@@ -145,17 +161,10 @@ export class AntipixelsModelService {
         const uniqueAntisId = tagsToAnti.map(([, e]) => e.antipixelId);
 
         // Get all existing tags
-        const checkTagsIds = await this.prisma.tag.findMany({
-            where: { id: { in: uniqueTagsId } },
-            select: { id: true },
-        }).then((res) => res.map(e => e.id));
+        const checkTagsIds = await this._bulkTags_checkIfIdsExist(uniqueTagsId);
 
         // Get all existing tags
-        const checkAntisIds = await this.prisma.antipixel.findMany({
-            where: { id: { in: uniqueAntisId } },
-            select: { id: true },
-        }).then((res) => res.map(e => e.id));
-
+        const checkAntisIds = await this._bulkAntis_checkIfIdsExist(uniqueAntisId);
         // If not using Postgres, we need to check for duplicate on tag
         // const checkTagsOnAnti = await this.prisma.tagOnAntipixel.findMany({
         //     where: { antipixelId: { in: {  } } }
@@ -180,17 +189,85 @@ export class AntipixelsModelService {
 
         const created = await this.prisma.tagOnAntipixel.createManyAndReturn({
             data: toCreate,
+            include: { antipixel: true, tag: true },
             // skipDuplicates is not supported on MongoDB, SQLServer, or SQLite.
             // https://www.prisma.io/docs/orm/prisma-client/queries/crud#create-multiple-records
             skipDuplicates: true,
         });
 
         created.forEach((e) => {
-            res.ok.push({ tagId: e.tagId, antipixelId: e.antipixelId });
+            res.ok.push({ tagId: e.tagId, antipixelId: e.antipixelId, antipixel: e.antipixel, tag: e.tag });
         });
 
         return res;
+    }
 
+    async removeTagsBulk(data: Map<number, {
+        antipixelId: number,
+        userId: number,
+    }>) {
+
+        const res = {
+            deleted: new Array<{ tagId: number, antipixelId: number, antipixel: AntipixelAffectedByOperation, tag: TagAffectedByOperation}>(),
+            deleted_nb: 0,
+            failed: new Array<{ tagId: number, antipixelId: number, reason: string }>(),
+        };
+
+        const tagsToAnti = Array.from(data.entries());
+        const uniqueTagsId = tagsToAnti.map(([e,]) => e);
+        const uniqueAntisId = tagsToAnti.map(([, e]) => e.antipixelId);
+
+        // Get all existing tags
+        const checkTagsIds = await this._bulkTags_checkIfIdsExist(uniqueTagsId);
+        // Get all existing tags
+        const checkAntisIds = await this._bulkAntis_checkIfIdsExist(uniqueAntisId);
+
+        const tagsToAntiToDelete = await this.prisma.tagOnAntipixel.findMany({
+            where: {
+                AND: [
+                    { antipixelId: { in: checkAntisIds } },
+                    { tagId: { in: checkTagsIds } },
+                ],
+            },
+            include: { antipixel: true, tag: true },
+        });
+
+        // Check for non existant tag ID
+        for (const [tagId, { antipixelId, userId }] of tagsToAnti) {
+            if (!checkTagsIds.includes(tagId)) {
+                res.failed.push({ tagId, antipixelId, reason: `Tag id ${tagId} doesn't exist!` });
+                continue;
+            }
+            if (!checkAntisIds.includes(antipixelId)) {
+                res.failed.push({ tagId, antipixelId, reason: `Antipixel id ${antipixelId} doesn't exist!` });
+                continue;
+            }
+        }
+
+        const tagsToAntiDeleted = await this.prisma.tagOnAntipixel.deleteMany({
+            where: {
+                AND: [
+                    { antipixelId: { in: checkAntisIds } },
+                    { tagId: { in: checkTagsIds } },
+                ],
+            },
+        });
+
+        res.deleted_nb = tagsToAntiDeleted.count;
+        tagsToAntiToDelete.forEach((e) => {
+            res.deleted.push({ tagId: e.tagId, antipixelId: e.antipixelId, antipixel: e.antipixel, tag: e.tag});
+        });
+        this.logger.debug(tagsToAntiToDelete);
+        this.logger.debug(tagsToAntiDeleted);
+        this.logger.debug(res);
+        return res;
     }
 
 }
+
+
+
+
+
+
+

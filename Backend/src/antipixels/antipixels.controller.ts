@@ -1,13 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, Query } from '@nestjs/common';
-import { CreateAntipixelDto, CreateAntipixelDuplicateHashException, CreateAntipixelMaxUploadSize, ECreateAntipixelStatus } from './dto/create-antipixel.dto';
-import { AddTagsToAntiResponseEntity, AddTagToAntiIdDTO, AddTagToAntiTagsDTO, UpdateAntipixelDto } from './dto/update-antipixel.dto';
+import { CreateAntipixelDto, CreateAntipixelDuplicateHashException, CreateAntipixelMaxUploadSize } from './dto/create-antipixel.dto';
+import {  AddTagToAntiIdDTO, AddTagToAntiTagsDTO, RemoveTagToAntiIdDTO, RemoveTagToAntiTagsDTO, UpdateAntipixelDto } from './dto/update-antipixel.dto';
 import { AntipixelsControllerService } from './antipixelsController.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiAcceptedResponse, ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiBody, ApiConflictResponse, ApiConsumes, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse } from '@nestjs/swagger';
 import { FileHashPipe, FileWithHash } from './antipixel-validation-pipe.pipe';
 import { AuthUser, Public } from '@auth/auth/auth-user/auth-user.decorator';
-import { AntiNotFound, GetAntiAllDto, AntipixelResponseEntity, GetAntiByIdDto } from './dto/get-antipixel.dto';
+import { AntiNotFound, GetAntiAllDto, GetAntiByIdDto } from './dto/get-antipixel.dto';
 import { AuthUserTokenEntity } from '@auth/auth/auth-user/dto/AuthUser.dto';
+import { AddTagsToAntiResponseEntity, AntipixelResponseEntity, RemoveTagsToAntiResponseEntity } from './entities/antipixel.entity';
 
 @Controller('antipixel')
 export class AntipixelsController {
@@ -108,4 +109,20 @@ export class AntipixelsController {
                 userData.userName)
     }
 
+    @ApiOkResponse({
+        description: 'Bulk remove tags',
+        type: AddTagsToAntiResponseEntity,
+    })
+    @Delete(':id/tags')
+    async removeTags(
+        @AuthUser() userData: AuthUserTokenEntity,
+        @Param() antiIdDto: RemoveTagToAntiIdDTO,
+        @Body() tagsIdsDto: RemoveTagToAntiTagsDTO,
+    ): Promise<RemoveTagsToAntiResponseEntity> {
+        return await this.antipixelsControllerService
+            .removeTags(antiIdDto.id,
+                tagsIdsDto.ids,
+                userData.id,
+                userData.userName)
+    }
 }
