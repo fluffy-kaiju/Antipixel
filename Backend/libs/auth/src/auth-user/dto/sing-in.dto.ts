@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsBase64, IsJWT, IsString, Length } from "class-validator";
+import { IsAlphanumeric, IsAscii, IsBase64, IsJWT, IsString, Length } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
 import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
@@ -6,7 +6,7 @@ import { ForbiddenException, UnauthorizedException } from "@nestjs/common";
 export class LoginDto {
 
     @ApiProperty({ description: "Unique user name", example: "Keven" })
-    @IsAlphanumeric()
+    @IsAscii()
     @Length(3, 24)
     userName: string;
 

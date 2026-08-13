@@ -2,7 +2,7 @@ import { TooManyParts } from "@aws-sdk/client-s3";
 import { ConflictException, HttpException, HttpStatus, UnauthorizedException } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
-import { IsAlphanumeric, IsEmail, IsEnum, IsJSON, IsJWT, IsString, IsUUID, Length } from "class-validator";
+import { IsAlphanumeric, IsAscii, IsEmail, IsEnum, IsJSON, IsJWT, IsString, IsUUID, Length } from "class-validator";
 
 export enum ERegisterError {
     UserNameTaken = 'Username already taken',
@@ -15,7 +15,7 @@ export enum ERegisterError {
 export class RegisterDto {
 
     @ApiProperty({ description: "Unique user name", example: "Keven" })
-    @IsAlphanumeric()
+    @IsAscii()
     @Length(3, 24)
     userName: string;
 
@@ -33,7 +33,7 @@ export class RegisterDto {
 export class RegisterCreatedResponseEntity {
 
     @ApiProperty({ description: "Unique user name", })
-    @IsString()
+    @IsAscii()
     @Length(3, 24)
     @Expose()
     userName: string;
