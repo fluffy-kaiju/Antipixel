@@ -6,6 +6,7 @@
     <input v-model="password" type="password" placeholder="Password" required />
     <button type="submit">Register</button>
   </form>
+  <p v-if="error" style="color: red;">{{ error }}</p>
 </template>
 
 <script setup lang="ts">
@@ -15,6 +16,7 @@ import { ref } from "vue";
 const userName = ref("");
 const email = ref("");
 const password = ref("");
+const error = ref("");
 
 const router = useRouter();
 
@@ -29,8 +31,9 @@ async function register() {
       },
     });
     await router.push("/login");
-  } catch (err) {
+  } catch (err: any) {
     console.error("Registration failed:", err);
+    error.value = err?.data?.message ?? 'Login failed. Please try again.'
   }
 }
 

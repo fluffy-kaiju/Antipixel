@@ -4,4 +4,5 @@
   <NuxtLink to="/login">Go to Login</NuxtLink>
   <NuxtLink to="/register">Go to Register</NuxtLink>
   <NuxtLink to="/verify/mail">Go to Verify Email</NuxtLink>
+  <NuxtLink to="/me">Go to Me</NuxtLink>
 </template>
