@@ -5,6 +5,7 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ..:/workplaces:cached
+      #- /run/user/1000/discord-ipc-0:/tmp/discord-ipc-0
     ports:
       - 3000:3000
       - 8080:8080
