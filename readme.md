@@ -1,4 +1,9 @@
+Work in Progress
+
 Antipixel Recovery aims to archive and preserve antipixel art by allowing users to upload and share their own antipixel creations or existing ones.
+
+Stack: NestJS, TypeScript, Prisma, Vue.js, Nuxt.js, S3 (SeaweedFS), PostgreSQL, Docker.
+
 
 <div style="display: grid;">
   <img src="https://gitlab.com/the-reformed-church-of-gnu/antipixel-recovery/-/raw/main/raw_artefact/cyber.dabamos.de/linux_powered.gif" />
